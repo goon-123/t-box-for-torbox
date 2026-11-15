@@ -48,9 +48,13 @@ TorBox es un servicio en la nube que descarga torrents, archivos de sitios como 
 - **Descargar todo como .zip** y **descomprimir** automáticamente o a pedido.
 - Copiar o compartir el enlace temporal (no expone tu API key).
 
+### Compartir
+- **T-Box en el menú Compartir** de cualquier app: envía magnets y enlaces a TorBox sin salir de donde estás. [Detalles](#compartir-desde-otras-apps)
+
 ### Avisos
 - Aviso dentro de la app cuando algo termina.
 - **Notificaciones** cuando termina una descarga al iPhone o algo queda listo en TorBox.
+- Botón **Probar notificación** en Cuenta.
 - Opcional: **avisos instantáneos con [ntfy](https://ntfy.sh)** (experimental), configurados con un toque.
 
 ## Qué funciona en cada plan de TorBox
@@ -73,13 +77,27 @@ TorBox es un servicio en la nube que descarga torrents, archivos de sitios como 
 
 Las versiones nuevas aparecen en [Releases](https://github.com/maniac75/t-box-for-torbox/releases) con su lista de cambios.
 
-## Mandar enlaces desde otras apps
+## Compartir desde otras apps
 
-Con un Atajo de iOS, T-Box aparece en el menú **Compartir** de Instagram, YouTube, Safari, etc.:
+Desde la versión 0.2.1, **T-Box aparece en el menú Compartir** de Safari, Instagram, YouTube, X, Scribd y cualquier app que comparta enlaces. Lo que pasa al tocarlo depende de cómo firmaste la app:
 
-1. Atajos › nuevo atajo › activa **Mostrar en hoja de compartir** y que reciba **URL**.
+| Tu caso | Qué hace "T-Box" en Compartir |
+|---|---|
+| Tu firma permite compartir el llavero entre la app y su extensión (lo habitual con certificados de sideload) | **Envía a TorBox ahí mismo**, sin salir de la app donde estás, y muestra el resultado |
+| Tu firma no lo permite | **Abre T-Box** con el enlace ya pegado: un toque más |
+| T-Box no aparece en Compartir | Tu app de firma quitó la extensión: revisa que **"Eliminar extensiones / Remove PlugIns"** esté desactivado y vuelve a firmar. O usa el Atajo de abajo |
+
+- La primera vez, T-Box puede no estar entre los íconos principales: desliza la fila hasta **Más** y actívalo.
+- Para que envíe directo, abre T-Box una vez con tu sesión iniciada después de instalar.
+- Con SideStore/AltStore y Apple ID gratuito, la extensión ocupa un identificador más de los 10 semanales que permite Apple.
+
+### Alternativa: Atajo
+
+Si la extensión no te funciona, un Atajo de iOS hace lo mismo:
+
+1. Atajos › nuevo atajo › activa **Mostrar en hoja de compartir** y que reciba **URL** y **Texto**.
 2. Acción **Codificar URL** sobre la entrada del atajo.
-3. Acción **Abrir URL**: `tbox://add?url=` seguido del resultado codificado.
+3. Acción **Abrir URL**: `tbox://add?text=` seguido del resultado codificado.
 
 ## Privacidad
 

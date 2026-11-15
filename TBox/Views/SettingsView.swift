@@ -72,6 +72,16 @@ struct SettingsView: View {
                             Notifier.enabled = v
                             if v { Task { await Notifier.requestPermission() } }
                         }
+                    Button("Probar notificación") {
+                        Task {
+                            if await Notifier.requestPermission() {
+                                Notifier.post(L("T-Box"), detail: L("Las notificaciones funcionan."), id: "test-\(Date().timeIntervalSince1970)")
+                            } else {
+                                notice = L("iOS tiene bloqueadas las notificaciones de T-Box. Actívalas en Ajustes › Apps › T-Box › Notificaciones.")
+                            }
+                        }
+                    }
+                    .disabled(!notificationsOn)
                 } header: {
                     Text("Avisos")
                 } footer: {

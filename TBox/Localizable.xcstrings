@@ -42,6 +42,16 @@
         }
       }
     },
+    "%d enlaces para TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d links for TorBox"
+          }
+        }
+      }
+    },
     "%d/%d hoy": {
       "localizations": {
         "en": {
@@ -88,6 +98,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Open in Infuse"
+          }
+        }
+      }
+    },
+    "Abrir en T-Box": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open in T-Box"
           }
         }
       }
@@ -952,6 +972,16 @@
         }
       }
     },
+    "Enviar a TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send to TorBox"
+          }
+        }
+      }
+    },
     "Enviar aviso de prueba": {
       "localizations": {
         "en": {
@@ -1202,6 +1232,16 @@
         }
       }
     },
+    "Las notificaciones funcionan.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications are working."
+          }
+        }
+      }
+    },
     "Limpiar": {
       "localizations": {
         "en": {
@@ -1302,6 +1342,16 @@
         }
       }
     },
+    "Mostrar sitios +18 (%d)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show 18+ sites (%d)"
+          }
+        }
+      }
+    },
     "Nada todavía. Lo que descargues queda también en la app Archivos › En mi iPhone › T-Box.": {
       "localizations": {
         "en": {
@@ -1322,6 +1372,16 @@
         }
       }
     },
+    "No encontré un magnet ni un enlace para TorBox en lo que compartiste.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I couldn't find a magnet or a link for TorBox in what you shared."
+          }
+        }
+      }
+    },
     "No hay nada en curso.": {
       "localizations": {
         "en": {
@@ -1338,6 +1398,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Not recognized: "
+          }
+        }
+      }
+    },
+    "No se pudo abrir T-Box. Copié el enlace: abre T-Box y toca +.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't open T-Box. I copied the link: open T-Box and tap +."
           }
         }
       }
@@ -1442,6 +1512,26 @@
         }
       }
     },
+    "Para TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For TorBox"
+          }
+        }
+      }
+    },
+    "Para enviar directo desde aquí, abre T-Box una vez con tu sesión iniciada. Si tu firma no lo permite, este botón abre T-Box con el enlace.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To send directly from here, open T-Box once while signed in. If your signing method doesn't allow it, this button opens T-Box with the link."
+          }
+        }
+      }
+    },
     "Pasa a un plan pagado": {
       "localizations": {
         "en": {
@@ -1518,6 +1608,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Preparing preview…"
+          }
+        }
+      }
+    },
+    "Probar notificación": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Test notification"
           }
         }
       }
@@ -1678,6 +1778,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Only if already cached"
+          }
+        }
+      }
+    },
+    "T-Box": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "T-Box"
           }
         }
       }
@@ -1958,6 +2068,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "https://…"
+          }
+        }
+      }
+    },
+    "iOS tiene bloqueadas las notificaciones de T-Box. Actívalas en Ajustes › Apps › T-Box › Notificaciones.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS is blocking T-Box notifications. Turn them on in Settings › Apps › T-Box › Notifications."
           }
         }
       }

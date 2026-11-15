@@ -393,9 +393,10 @@ private struct EntryRow: View {
 struct HostersView: View {
     let hosters: [Hoster]
     @State private var search = ""
+    @AppStorage("hosters.showAdult") private var showAdult = false
 
     private var visible: [Hoster] {
-        hosters.filter { !$0.nsfw }
+        hosters.filter { showAdult || !$0.nsfw }
             .filter { search.isEmpty || $0.name.localizedCaseInsensitiveContains(search)
                 || $0.domains.contains { $0.localizedCaseInsensitiveContains(search) } }
             .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
@@ -420,6 +421,13 @@ struct HostersView: View {
                     }
                 }
             }
+        }
+        .safeAreaInset(edge: .top) {
+            Toggle(isOn: $showAdult) {
+                Text(String(format: L("Mostrar sitios +18 (%d)"), hosters.filter(\.nsfw).count)).font(.footnote)
+            }
+            .padding(.horizontal).padding(.vertical, 8)
+            .background(.bar)
         }
         .searchable(text: $search, prompt: "Buscar sitio")
         .navigationTitle("Sitios compatibles")

@@ -3,6 +3,16 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Versiones: [SemVer](https://semver.org/lang/es/).
 Cada versión publicada trae su `T-Box.ipa` en [Releases](https://github.com/maniac75/t-box-for-torbox/releases).
 
+## [0.2.1] - 2026-11-15
+
+### Agregado
+- **T-Box en el menú Compartir** de cualquier app (extensión de Compartir). Si la firma permite compartir el llavero, envía los enlaces a TorBox ahí mismo; si no, abre T-Box con el enlace pegado. No depende de App Groups, así que no rompe la instalación con ningún certificado.
+- Botón **Probar notificación** en Cuenta › Avisos.
+- Interruptor **Mostrar sitios +18** en la lista de sitios compatibles.
+
+### Cambiado
+- El Atajo de iOS acepta también texto (`tbox://add?text=`), para compartir magnets.
+
 ## [0.2.0] - 2026-11-15
 
 ### Agregado
@@ -37,6 +47,7 @@ Cada versión publicada trae su `T-Box.ipa` en [Releases](https://github.com/man
 - Detección de sitios compatibles al pegar enlaces web.
 - Español e inglés, diagnóstico exportable con la API key censurada, enlace de referido opcional.
 
+[0.2.1]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.1
 [0.2.0]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.0
 [0.1.1]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.1.1
 [0.1.0]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.1.0

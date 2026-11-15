@@ -27,6 +27,14 @@ final class AppState: ObservableObject {
         apiKey = stored
         api = TorBoxAPI(apiKey: stored)
         Diagnostics.shared.setSecret(stored)
+        if let stored, !stored.isEmpty { shareKeyWithExtension(stored) }
+    }
+
+    /// Copia la key al llavero compartido para que la extensión de Compartir pueda enviar directo.
+    private func shareKeyWithExtension(_ key: String) {
+        let ok = SharedKeychain.save(key)
+        UserDefaults.standard.set(ok, forKey: "share.keychainOK")
+        if !ok { Diagnostics.log("SHARE keychain group not available; the share extension will open T-Box instead") }
     }
 
     var isLoggedIn: Bool { !(apiKey ?? "").isEmpty }
@@ -41,6 +49,7 @@ final class AppState: ObservableObject {
         do {
             user = try await api.me()
             Keychain.save(trimmed, account: Self.keyAccount)
+            shareKeyWithExtension(trimmed)
             apiKey = trimmed
             errorMessage = nil
             await refresh()
@@ -57,6 +66,7 @@ final class AppState: ObservableObject {
     func logout() {
         stopPolling()
         Keychain.delete(account: Self.keyAccount)
+        SharedKeychain.delete()
         apiKey = nil
         api.apiKey = nil
         torrents = []
