@@ -87,6 +87,10 @@ No account yet? **[Create one with the author's referral code](https://torbox.ap
 2. Sign and install it with your sideloading method:
    - **Your own certificate**: Feather, ESign, KSign or another signing app.
    - **Free Apple ID**: SideStore or AltStore. The signature expires every 7 days and renews itself.
+   - **Or add the T-Box source** to Feather, ESign, SideStore or AltStore to install it and get update notices right there:
+     ```
+     https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/docs/source.json
+     ```
 3. Open T-Box and tap **Get access code**: approve it on torbox.app and the app receives your API key by itself. You can also paste the key manually.
 
 New versions appear in [Releases](https://github.com/maniac75/t-box-for-torbox/releases) with their changes. Each one includes `T-Box-X.Y.Z.ipa` (version in the name) and `T-Box.ipa` (same file, fixed name, for the direct download button). Versions marked **Pre-release** are test builds.

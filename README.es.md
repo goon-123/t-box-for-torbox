@@ -82,6 +82,10 @@ TorBox es un servicio en la nube que descarga torrents, archivos de sitios como 
 2. Fírmala e instálala con tu método de sideload:
    - **Con certificado propio**: Feather, ESign, KSign u otra app de firma.
    - **Con Apple ID gratuito**: SideStore o AltStore. La firma vence cada 7 días y se renueva sola.
+   - **O agrega la fuente de T-Box** en Feather, ESign, SideStore o AltStore para instalarla y recibir los avisos de actualización ahí mismo:
+     ```
+     https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/docs/source.json
+     ```
 3. Abre T-Box y toca **Obtener código de acceso**: lo apruebas en torbox.app y la app recibe tu API key sola. También puedes pegar la key a mano.
 
 Las versiones nuevas aparecen en [Releases](https://github.com/maniac75/t-box-for-torbox/releases). Cada una trae `T-Box-X.Y.Z.ipa` (con la versión en el nombre) y `T-Box.ipa` (el mismo archivo con nombre fijo, para el botón de descarga directa). Las marcadas **Pre-release** son versiones de prueba.

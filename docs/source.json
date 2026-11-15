@@ -1,0 +1,59 @@
+{
+  "name": "T-Box",
+  "identifier": "io.github.maniac75.tbox.source",
+  "subtitle": "Unofficial TorBox client for iPhone",
+  "description": "Unofficial TorBox client for iPhone. Add magnets, .torrent files and web links (YouTube, Mega, Mediafire…), share links from any app, manage torrents, web downloads and the queue (AirLock, rename, delete), download in the background to Files or Photos, play MP4 or open in Infuse/VLC, and get notified when something is ready. Works on every TorBox plan, including Free. English and Spanish. No servers, no analytics.",
+  "iconURL": "https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/TBox/Assets.xcassets/AppIcon.appiconset/icon.png",
+  "website": "https://github.com/maniac75/t-box-for-torbox",
+  "tintColor": "#30D158",
+  "featuredApps": [
+    "io.github.maniac75.tbox"
+  ],
+  "apps": [
+    {
+      "name": "T-Box",
+      "bundleIdentifier": "io.github.maniac75.tbox",
+      "developerName": "maniac75",
+      "subtitle": "Unofficial TorBox client for iPhone",
+      "localizedDescription": "Unofficial TorBox client for iPhone. Add magnets, .torrent files and web links (YouTube, Mega, Mediafire…), share links from any app, manage torrents, web downloads and the queue (AirLock, rename, delete), download in the background to Files or Photos, play MP4 or open in Infuse/VLC, and get notified when something is ready. Works on every TorBox plan, including Free. English and Spanish. No servers, no analytics.\n\nNot affiliated with TorBox. Privacy policy: https://github.com/maniac75/t-box-for-torbox/blob/main/PRIVACY.md",
+      "iconURL": "https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/TBox/Assets.xcassets/AppIcon.appiconset/icon.png",
+      "tintColor": "#30D158",
+      "category": "utilities",
+      "screenshotURLs": [
+        "https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/docs/screenshots/en-torrents.png",
+        "https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/docs/screenshots/en-web.png",
+        "https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/docs/screenshots/en-share-add.png",
+        "https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/docs/screenshots/en-file-menu.png"
+      ],
+      "screenshots": [
+        "https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/docs/screenshots/en-torrents.png",
+        "https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/docs/screenshots/en-web.png",
+        "https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/docs/screenshots/en-share-add.png",
+        "https://raw.githubusercontent.com/maniac75/t-box-for-torbox/main/docs/screenshots/en-file-menu.png"
+      ],
+      "versions": [
+        {
+          "version": "0.3.0",
+          "buildVersion": "20",
+          "date": "2026-11-15",
+          "localizedDescription": "### Added\n- AirLock: keep ready torrents and web downloads out of TorBox's 30-day inactivity cleanup. Toggle in the item's detail, swipe right in the lists, and a 🔒 on protected items. Requires a paid plan.\n- Queue: downloads TorBox left queued (no free slots) now appear at the top of Torrents and Web. Swipe to start them now or delete them.\n- Rename a ready torrent or web download.\n- Invite your friends: your own TorBox referral code and link, to copy or share (Account).\n- Copy API key (Account), with a warning; it's cleared from the clipboard after 2 minutes.\n- Support T-Box section in Account: Ko-fi, GitHub Sponsors and the TorBox referral code. A small card suggests it only once, after your 10th completed download, and never again.\n- Feedback section in Account: report a bug (with app version, iOS and device prefilled), suggest an improvement, or join the discussions on GitHub.\n- ♥ Sponsor button, issue forms (bug report and feature request) and Discussions on the GitHub repository.\n\n### Changed\n- Downloads are saved to Files › On My iPhone › T-Box, which is now visible. \"Choose folder…\" was removed because the iOS folder picker didn't respond. To move a file elsewhere: swipe › Save to… (Share sheet › Save to Files).\n- Brief network drops during automatic refresh are no longer shown as errors, only if they happen three times in a row.\n- The repository is now in English, with a Spanish README.\n- Share › T-Box opens T-Box right away with the Add sheet filled in, so you review and confirm there (like sharing to WhatsApp). The extension's own screen only shows up if T-Box can't be opened.\n\n### Fixed\n- Share extension can send directly to TorBox on certificates that sign with a wildcard keychain group (`TEAMID.*`, common with sideloading): the key is now stored in the group iOS actually assigns to the app, instead of a custom one that iOS rejected (error -34018).",
+          "downloadURL": "https://github.com/maniac75/t-box-for-torbox/releases/download/v0.3.0/T-Box-0.3.0.ipa",
+          "size": 941353,
+          "minOSVersion": "17.0"
+        }
+      ],
+      "appPermissions": {
+        "entitlements": [],
+        "privacy": {
+          "NSPhotoLibraryAddUsageDescription": "To save images and videos you download from TorBox to Photos."
+        }
+      },
+      "version": "0.3.0",
+      "versionDate": "2026-11-15",
+      "versionDescription": "### Added\n- AirLock: keep ready torrents and web downloads out of TorBox's 30-day inactivity cleanup. Toggle in the item's detail, swipe right in the lists, and a 🔒 on protected items. Requires a paid plan.\n- Queue: downloads TorBox left queued (no free slots) now appear at the top of Torrents and Web. Swipe to start them now or delete them.\n- Rename a ready torrent or web download.\n- Invite your friends: your own TorBox referral code and link, to copy or share (Account).\n- Copy API key (Account), with a warning; it's cleared from the clipboard after 2 minutes.\n- Support T-Box section in Account: Ko-fi, GitHub Sponsors and the TorBox referral code. A small card suggests it only once, after your 10th completed download, and never again.\n- Feedback section in Account: report a bug (with app version, iOS and device prefilled), suggest an improvement, or join the discussions on GitHub.\n- ♥ Sponsor button, issue forms (bug report and feature request) and Discussions on the GitHub repository.\n\n### Changed\n- Downloads are saved to Files › On My iPhone › T-Box, which is now visible. \"Choose folder…\" was removed because the iOS folder picker didn't respond. To move a file elsewhere: swipe › Save to… (Share sheet › Save to Files).\n- Brief network drops during automatic refresh are no longer shown as errors, only if they happen three times in a row.\n- The repository is now in English, with a Spanish README.\n- Share › T-Box opens T-Box right away with the Add sheet filled in, so you review and confirm there (like sharing to WhatsApp). The extension's own screen only shows up if T-Box can't be opened.\n\n### Fixed\n- Share extension can send directly to TorBox on certificates that sign with a wildcard keychain group (`TEAMID.*`, common with sideloading): the key is now stored in the group iOS actually assigns to the app, instead of a custom one that iOS rejected (error -34018).",
+      "downloadURL": "https://github.com/maniac75/t-box-for-torbox/releases/download/v0.3.0/T-Box-0.3.0.ipa",
+      "size": 941353
+    }
+  ],
+  "news": []
+}
