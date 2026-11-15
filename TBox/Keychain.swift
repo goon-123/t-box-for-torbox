@@ -38,15 +38,15 @@ enum Keychain {
 }
 
 /// Llavero compartido entre T-Box y su extensión de Compartir.
-/// No requiere App Groups: usa un grupo de llavero con el prefijo del equipo que firmó la app.
-/// Funciona si el perfil de firma permite grupos de llavero comodín (lo habitual en certificados de sideload);
-/// si no, `load()` devuelve nil y la extensión abre T-Box con el enlace en vez de enviarlo directo.
+/// No usa App Groups ni inventa un grupo: guarda la key en el grupo de llavero que iOS le asignó a la app
+/// al firmarla. Con certificados de sideload suele ser el comodín literal "TEAMID.*", el mismo para la app
+/// y la extensión, así que ambas lo comparten. Si no, la extensión no encuentra la key y abre T-Box.
 enum SharedKeychain {
     private static let account = "torbox_api_key_shared"
-    private static let suffix = "io.github.maniac75.tbox.shared"
+    private static let service = "io.github.maniac75.tbox.shared"
 
-    /// Prefijo del equipo (TEAMID) leído del grupo por defecto de un ítem de prueba.
-    static var teamPrefix: String? {
+    /// Grupo de llavero por defecto de este proceso, leído de un ítem de prueba.
+    static var defaultGroup: String? {
         let probe: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: "io.github.maniac75.tbox.probe",
@@ -64,42 +64,40 @@ enum SharedKeychain {
             status = SecItemCopyMatching(probe as CFDictionary, &result)
         }
         guard status == errSecSuccess, let attrs = result as? [String: Any],
-              let group = attrs[kSecAttrAccessGroup as String] as? String,
-              let dot = group.firstIndex(of: ".") else {
+              let group = attrs[kSecAttrAccessGroup as String] as? String else {
             Diagnostics.log("SHARE probe failed: status \(status)")
             return nil
         }
         Diagnostics.log("SHARE default keychain group: \(group)")
-        return String(group[..<dot])
+        return group
     }
 
-    static var group: String? { teamPrefix.map { "\($0).\(suffix)" } }
-
-    private static func query(_ group: String) -> [String: Any] {
+    private static var baseQuery: [String: Any] {
         [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: suffix,
-            kSecAttrAccount as String: account,
-            kSecAttrAccessGroup as String: group
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: account
         ]
     }
 
+    /// Lo llama la app: guarda la key en su grupo por defecto.
     @discardableResult
     static func save(_ value: String) -> Bool {
-        guard let group else { return false }
-        let q = query(group)
-        SecItemDelete(q as CFDictionary)
-        var add = q
+        guard let group = defaultGroup else { return false }
+        SecItemDelete(baseQuery as CFDictionary)
+        var add = baseQuery
+        add[kSecAttrAccessGroup as String] = group
         add[kSecValueData as String] = Data(value.utf8)
         add[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         let status = SecItemAdd(add as CFDictionary, nil)
         if status != errSecSuccess { Diagnostics.log("SHARE save to \(group) failed: status \(status)") }
+        else { Diagnostics.log("SHARE key saved to \(group)") }
         return status == errSecSuccess
     }
 
+    /// Lo llama la extensión: busca en todos los grupos a los que tiene acceso.
     static func load() -> String? {
-        guard let group else { return nil }
-        var q = query(group)
+        var q = baseQuery
         q[kSecReturnData as String] = true
         q[kSecMatchLimit as String] = kSecMatchLimitOne
         var item: CFTypeRef?
@@ -108,7 +106,6 @@ enum SharedKeychain {
     }
 
     static func delete() {
-        guard let group else { return }
-        SecItemDelete(query(group) as CFDictionary)
+        SecItemDelete(baseQuery as CFDictionary)
     }
 }

@@ -18,7 +18,7 @@ Each release ships `T-Box-X.Y.Z.ipa` and `T-Box.ipa` in [Releases](https://githu
 - The repository is now in English, with a Spanish README.
 
 ### Fixed
-- More detailed diagnostics for the Share extension's shared keychain.
+- **Share extension can send directly to TorBox** on certificates that sign with a wildcard keychain group (`TEAMID.*`, common with sideloading): the key is now stored in the group iOS actually assigns to the app, instead of a custom one that iOS rejected (error -34018).
 
 ## [0.2.3] - 2026-11-15
 
