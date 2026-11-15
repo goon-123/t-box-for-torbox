@@ -52,12 +52,14 @@ jobs:
           mkdir -p Payload
           cp -R build/Build/Products/Release-iphoneos/TBox.app Payload/
           zip -qry T-Box.ipa Payload
-          ls -lh T-Box.ipa
+          VER=$(grep -m1 MARKETING_VERSION project.yml | sed -E 's/.*"(.*)".*/\1/')
+          cp T-Box.ipa "T-Box-$VER.ipa"
+          ls -lh *.ipa
 
       - uses: actions/upload-artifact@v4
         with:
           name: T-Box-ipa
-          path: T-Box.ipa
+          path: T-Box-*.ipa
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -80,10 +82,10 @@ jobs:
           printf '\n---\nBuild %s · %s\n\nFírmala con tu propio certificado (Feather, ESign, SideStore…) antes de instalar.\n' "${{ github.run_number }}" "${GITHUB_SHA::7}" >> notes.md
           if gh release view "$TAG" >/dev/null 2>&1; then
             # Misma versión, nueva compilación: se reemplaza el .ipa y se actualizan las notas.
-            gh release upload "$TAG" T-Box.ipa --clobber
+            gh release upload "$TAG" "T-Box-$VER.ipa" T-Box.ipa --clobber
             gh release edit "$TAG" --notes-file notes.md --title "T-Box $VER"
           else
-            gh release create "$TAG" T-Box.ipa --target "$GITHUB_SHA" --title "T-Box $VER" --notes-file notes.md --latest
+            gh release create "$TAG" "T-Box-$VER.ipa" T-Box.ipa --target "$GITHUB_SHA" --title "T-Box $VER" --notes-file notes.md --latest
           fi
           # La antigua publicación móvil "latest" ya no se usa.
           gh release delete latest --yes --cleanup-tag 2>/dev/null || true
