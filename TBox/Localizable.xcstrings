@@ -1,0 +1,1496 @@
+{
+  "sourceLanguage": "es",
+  "version": "1.0",
+  "strings": {
+    "%@ de %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of %@"
+          }
+        }
+      }
+    },
+    "%d archivos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d files"
+          }
+        }
+      }
+    },
+    "%d/%d hoy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d/%d today"
+          }
+        }
+      }
+    },
+    "A Fotos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To Photos"
+          }
+        }
+      }
+    },
+    "API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API key"
+          }
+        }
+      }
+    },
+    "Abres torbox.app, apruebas el acceso y la app recibe tu API key sola. El código dura 10 minutos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open torbox.app, approve access and the app receives your API key on its own. The code lasts 10 minutes."
+          }
+        }
+      }
+    },
+    "Abrir en Infuse": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open in Infuse"
+          }
+        }
+      }
+    },
+    "Abrir en VLC": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open in VLC"
+          }
+        }
+      }
+    },
+    "Abrir torbox.app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open torbox.app"
+          }
+        }
+      }
+    },
+    "Agregado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Added"
+          }
+        }
+      }
+    },
+    "Agregar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add"
+          }
+        }
+      }
+    },
+    "Agregar %d": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add %d"
+          }
+        }
+      }
+    },
+    "Agregar código": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add code"
+          }
+        }
+      }
+    },
+    "Agregar código de referido de T-Box": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add T-Box referral code"
+          }
+        }
+      }
+    },
+    "Agregar torrent": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add torrent"
+          }
+        }
+      }
+    },
+    "Archivos (%d)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files (%d)"
+          }
+        }
+      }
+    },
+    "Autorizado. Entrando…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Authorized. Signing in…"
+          }
+        }
+      }
+    },
+    "Autorizar en torbox.app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Authorize on torbox.app"
+          }
+        }
+      }
+    },
+    "Bajando a Fotos…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloading to Photos…"
+          }
+        }
+      }
+    },
+    "Borrar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        }
+      }
+    },
+    "Borrar registro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear log"
+          }
+        }
+      }
+    },
+    "Buscar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search"
+          }
+        }
+      }
+    },
+    "Buscar más peers": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find more peers"
+          }
+        }
+      }
+    },
+    "Buscar sitio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search site"
+          }
+        }
+      }
+    },
+    "Cancelar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "Cerrar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        }
+      }
+    },
+    "Cerrar sesión": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign out"
+          }
+        }
+      }
+    },
+    "Cliente no oficial para TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unofficial client for TorBox"
+          }
+        }
+      }
+    },
+    "Cliente no oficial para TorBox, sin relación con TorBox. Si vuelves a firmar la app con otro certificado, puede que tengas que iniciar sesión de nuevo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unofficial client for TorBox, not affiliated with TorBox. If you re-sign the app with another certificate, you may need to sign in again."
+          }
+        }
+      }
+    },
+    "Compartir": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share"
+          }
+        }
+      }
+    },
+    "Compartir enlace…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share link…"
+          }
+        }
+      }
+    },
+    "Completada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completed"
+          }
+        }
+      }
+    },
+    "Completado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completed"
+          }
+        }
+      }
+    },
+    "Con un plan pagado tienes descargas web (YouTube, Instagram, Mega…) y más descargas simultáneas. Usando el código de referido de T-Box recibes días extra al comprar.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A paid plan gives you web downloads (YouTube, Instagram, Mega…) and more simultaneous downloads. Using the T-Box referral code you get extra days when you buy."
+          }
+        }
+      }
+    },
+    "Contraseña del enlace (opcional)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link password (optional)"
+          }
+        }
+      }
+    },
+    "Copiar enlace": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy link"
+          }
+        }
+      }
+    },
+    "Copiar hash": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy hash"
+          }
+        }
+      }
+    },
+    "Correo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Email"
+          }
+        }
+      }
+    },
+    "Crear cuenta en TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a TorBox account"
+          }
+        }
+      }
+    },
+    "Cuenta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Account"
+          }
+        }
+      }
+    },
+    "Cuenta TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TorBox account"
+          }
+        }
+      }
+    },
+    "Código": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code"
+          }
+        }
+      }
+    },
+    "Código agregado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code added"
+          }
+        }
+      }
+    },
+    "Código fuente en GitHub": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source code on GitHub"
+          }
+        }
+      }
+    },
+    "Descarga iniciada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download started"
+          }
+        }
+      }
+    },
+    "Descarga web": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Web download"
+          }
+        }
+      }
+    },
+    "Descargando": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloading"
+          }
+        }
+      }
+    },
+    "Descargar a Archivos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download to Files"
+          }
+        }
+      }
+    },
+    "Descargar todo (.zip)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download all (.zip)"
+          }
+        }
+      }
+    },
+    "Descargas web": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Web downloads"
+          }
+        }
+      }
+    },
+    "Detectado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detected"
+          }
+        }
+      }
+    },
+    "Detenido (sin seeds)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stalled (no seeds)"
+          }
+        }
+      }
+    },
+    "Diagnóstico": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diagnostics"
+          }
+        }
+      }
+    },
+    "El código expiró. Pide uno nuevo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The code expired. Request a new one."
+          }
+        }
+      }
+    },
+    "Elegir archivo…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose file…"
+          }
+        }
+      }
+    },
+    "Eliminar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        }
+      }
+    },
+    "Eliminar de TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete from TorBox"
+          }
+        }
+      }
+    },
+    "En caché": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cached"
+          }
+        }
+      }
+    },
+    "En cola": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Queued"
+          }
+        }
+      }
+    },
+    "En curso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active"
+          }
+        }
+      }
+    },
+    "En el iPhone": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On iPhone"
+          }
+        }
+      }
+    },
+    "Enlace copiado (válido ~3 h)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link copied (valid ~3 h)"
+          }
+        }
+      }
+    },
+    "Enlaces": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Links"
+          }
+        }
+      }
+    },
+    "Entrar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in"
+          }
+        }
+      }
+    },
+    "Error": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error"
+          }
+        }
+      }
+    },
+    "Error HTTP %d.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HTTP error %d."
+          }
+        }
+      }
+    },
+    "Error desconocido de TorBox.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unknown TorBox error."
+          }
+        }
+      }
+    },
+    "Esa app no está instalada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That app isn't installed"
+          }
+        }
+      }
+    },
+    "Ese código ya se usó. Pide uno nuevo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That code was already used. Request a new one."
+          }
+        }
+      }
+    },
+    "Esperando autorización…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for authorization…"
+          }
+        }
+      }
+    },
+    "Este enlace incluye el código de referido del autor de T-Box: al comprar un plan pagado, tú y él reciben días extra (según TorBox, 7 días por cada mes comprado). Crear una cuenta gratis no entrega bono.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This link includes the T-Box author's referral code: when you buy a paid plan, both of you get extra days (per TorBox, 7 days for each month purchased). Creating a free account gives no bonus."
+          }
+        }
+      }
+    },
+    "Está en torbox.app › Settings › API Key. Se guarda en el llavero del iPhone.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It's at torbox.app › Settings › API Key. It's stored in the iPhone keychain."
+          }
+        }
+      }
+    },
+    "Exportar diagnóstico": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export diagnostics"
+          }
+        }
+      }
+    },
+    "Falta la API key de TorBox.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TorBox API key is missing."
+          }
+        }
+      }
+    },
+    "Filtro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filter"
+          }
+        }
+      }
+    },
+    "Formato no compatible con Fotos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Format not supported by Photos."
+          }
+        }
+      }
+    },
+    "Guardada en Fotos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved to Photos"
+          }
+        }
+      }
+    },
+    "Guardado en Fotos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved to Photos"
+          }
+        }
+      }
+    },
+    "Guardado en el iPhone": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved on iPhone"
+          }
+        }
+      }
+    },
+    "Guardando en Fotos…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saving to Photos…"
+          }
+        }
+      }
+    },
+    "Guardar en Fotos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save to Photos"
+          }
+        }
+      }
+    },
+    "Hash copiado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hash copied"
+          }
+        }
+      }
+    },
+    "Iniciando…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starting…"
+          }
+        }
+      }
+    },
+    "Iniciar sesión con TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in with TorBox"
+          }
+        }
+      }
+    },
+    "La contraseña es para enlaces protegidos (por ejemplo, algunos de Mega).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The password is for protected links (for example, some Mega links)."
+          }
+        }
+      }
+    },
+    "Limpiar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear"
+          }
+        }
+      }
+    },
+    "Listo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready"
+          }
+        }
+      }
+    },
+    "Listo · subiendo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready · seeding"
+          }
+        }
+      }
+    },
+    "Listos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready"
+          }
+        }
+      }
+    },
+    "Los archivos estarán disponibles cuando TorBox termine de descargar.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files will be available when TorBox finishes downloading."
+          }
+        }
+      }
+    },
+    "Magnet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Magnet"
+          }
+        }
+      }
+    },
+    "Nada todavía. Lo que descargues queda también en la app Archivos › En mi iPhone › T-Box.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing yet. What you download also appears in the Files app › On My iPhone › T-Box."
+          }
+        }
+      }
+    },
+    "No encontrado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not found"
+          }
+        }
+      }
+    },
+    "No se pudo agregar el código.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't add the code."
+          }
+        }
+      }
+    },
+    "No se pudo agregar el enlace.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't add the link."
+          }
+        }
+      }
+    },
+    "No se pudo agregar.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't add it."
+          }
+        }
+      }
+    },
+    "O pega tu API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Or paste your API key"
+          }
+        }
+      }
+    },
+    "O un archivo .torrent": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Or a .torrent file"
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "Obtener código de acceso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get access code"
+          }
+        }
+      }
+    },
+    "Obteniendo metadatos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fetching metadata"
+          }
+        }
+      }
+    },
+    "Opcional. Asocia tu cuenta al código del autor de la app: ambos reciben días extra en tus próximas compras. Solo se envía si lo confirmas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional. Links your account to the app author's code: both of you get extra days on your next purchases. Only sent if you confirm."
+          }
+        }
+      }
+    },
+    "Pasa a un plan pagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upgrade to a paid plan"
+          }
+        }
+      }
+    },
+    "Pausado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paused"
+          }
+        }
+      }
+    },
+    "Pegar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        }
+      }
+    },
+    "Pegar del portapapeles": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste from clipboard"
+          }
+        }
+      }
+    },
+    "Pidiendo enlace a TorBox…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requesting link from TorBox…"
+          }
+        }
+      }
+    },
+    "Plan": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan"
+          }
+        }
+      }
+    },
+    "Puedes pegar varios, uno por línea.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can paste several, one per line."
+          }
+        }
+      }
+    },
+    "Quedó en Archivos, pero no en Fotos: ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved in Files, but not in Photos: "
+          }
+        }
+      }
+    },
+    "Registro borrado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log cleared"
+          }
+        }
+      }
+    },
+    "Reproducir aquí": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Play here"
+          }
+        }
+      }
+    },
+    "Respuesta inesperada de TorBox: ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unexpected response from TorBox: "
+          }
+        }
+      }
+    },
+    "Respuesta inesperada.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unexpected response."
+          }
+        }
+      }
+    },
+    "Resultado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Result"
+          }
+        }
+      }
+    },
+    "Seeds / peers": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seeds / peers"
+          }
+        }
+      }
+    },
+    "Si lo activas, TorBox no lo agrega cuando tendría que descargarlo desde cero.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If enabled, TorBox won't add it when it would have to download it from scratch."
+          }
+        }
+      }
+    },
+    "Sin descargas web": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No web downloads"
+          }
+        }
+      }
+    },
+    "Sin nombre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Untitled"
+          }
+        }
+      }
+    },
+    "Sin permiso para agregar a Fotos (Ajustes › T-Box › Fotos).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No permission to add to Photos (Settings › T-Box › Photos)."
+          }
+        }
+      }
+    },
+    "Sin torrents": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No torrents"
+          }
+        }
+      }
+    },
+    "Sitio no listado: TorBox lo intentará como enlace directo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Site not listed: TorBox will try it as a direct link."
+          }
+        }
+      }
+    },
+    "Sitios compatibles": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supported sites"
+          }
+        }
+      }
+    },
+    "Solo si ya está en caché": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only if already cached"
+          }
+        }
+      }
+    },
+    "Tiempo restante": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time remaining"
+          }
+        }
+      }
+    },
+    "Toca + o abre un magnet desde Safari.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap + or open a magnet link from Safari."
+          }
+        }
+      }
+    },
+    "Toca + y pega un enlace de YouTube, Instagram, X, Mega u otro sitio.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap + and paste a link from YouTube, Instagram, X, Mega or another site."
+          }
+        }
+      }
+    },
+    "Tocar un magnet en Safari abre la app. Para mandar enlaces desde Instagram, YouTube o Safari, crea un Atajo que abra tbox://add?url=[URL compartida] y actívalo en el menú Compartir.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tapping a magnet in Safari opens the app. To send links from Instagram, YouTube or Safari, create a Shortcut that opens tbox://add?url=[shared URL] and enable it in the Share sheet."
+          }
+        }
+      }
+    },
+    "Todos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        }
+      }
+    },
+    "TorBox decidirá si se puede aplicar a tu cuenta.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TorBox will decide whether it can be applied to your account."
+          }
+        }
+      }
+    },
+    "TorBox entregó una credencial que no funcionó. Usa la API key manual.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TorBox returned a credential that didn't work. Use the API key manually."
+          }
+        }
+      }
+    },
+    "TorBox no devolvió un enlace válido.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TorBox didn't return a valid link."
+          }
+        }
+      }
+    },
+    "TorBox rechazó la autenticación (%d). Revisa tu API key.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TorBox rejected authentication (%d). Check your API key."
+          }
+        }
+      }
+    },
+    "Torrents": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Torrents"
+          }
+        }
+      }
+    },
+    "Tu cuenta de TorBox, cómoda en el iPhone.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your TorBox account, comfortably on iPhone."
+          }
+        }
+      }
+    },
+    "Velocidad": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speed"
+          }
+        }
+      }
+    },
+    "Vence": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expires"
+          }
+        }
+      }
+    },
+    "Ver planes con código de referido": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See plans with referral code"
+          }
+        }
+      }
+    },
+    "Ver sitios compatibles": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See supported sites"
+          }
+        }
+      }
+    },
+    "Verificando": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checking"
+          }
+        }
+      }
+    },
+    "Web": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Web"
+          }
+        }
+      }
+    },
+    "https://…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "https://…"
+          }
+        }
+      }
+    },
+    "magnet:?xt=urn:btih:…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "magnet:?xt=urn:btih:…"
+          }
+        }
+      }
+    },
+    "· ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "· "
+          }
+        }
+      }
+    },
+    "¿Asociar tu cuenta al código de referido de T-Box?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link your account to the T-Box referral code?"
+          }
+        }
+      }
+    },
+    "¿Cerrar sesión? Se borra la API key del iPhone.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign out? The API key will be removed from the iPhone."
+          }
+        }
+      }
+    },
+    "¿Eliminar de TorBox?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete from TorBox?"
+          }
+        }
+      }
+    },
+    "¿No tienes cuenta de TorBox?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Don't have a TorBox account?"
+          }
+        }
+      }
+    },
+    "↓ ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↓ "
+          }
+        }
+      }
+    }
+  }
+}
