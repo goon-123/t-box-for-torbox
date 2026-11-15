@@ -3,12 +3,7 @@ import SwiftUI
 
 @MainActor
 final class AppState: ObservableObject {
-    private static let keyAccount = "torbox_api_key"
-
-    enum AddMode: String, Identifiable {
-        case torrent, web
-        var id: String { rawValue }
-    }
+    nonisolated static let keyAccount = "torbox_api_key"
 
     @Published private(set) var apiKey: String?
     @Published var torrents: [Torrent] = []
@@ -17,11 +12,12 @@ final class AppState: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
 
-    /// Entradas desde Safari, Archivos o un Atajo; abren la hoja de "Agregar".
-    @Published var incomingMagnet: String?
+    /// Entradas desde Safari, Archivos o un Atajo; abren la hoja única de "Agregar".
+    @Published var showAdd = false
+    @Published var incomingText: String?
     @Published var incomingTorrentFile: URL?
-    @Published var incomingWebLink: String?
-    @Published var addMode: AddMode?
+
+    private var tracker = ReadyTracker()
 
     let api: TorBoxAPI
     private var pollTask: Task<Void, Never>?
@@ -70,6 +66,11 @@ final class AppState: ObservableObject {
 
     // MARK: Datos
 
+    /// Lo que TorBox está procesando ahora (sin contar los que fallaron).
+    var activeInTorBox: [Torrent] {
+        (torrents + webDownloads).filter { !$0.isReady && $0.errorText == nil }
+    }
+
     func items(_ kind: ItemKind) -> [Torrent] {
         kind == .torrent ? torrents : webDownloads
     }
@@ -101,15 +102,21 @@ final class AppState: ObservableObject {
         isLoading = true
         defer { isLoading = false }
         var errors: [String] = []
+        var loaded: Set<ItemKind> = []
         async let t = api.items(.torrent)
         async let w = api.items(.web)
-        do { torrents = Self.sorted(try await t) }
+        do { torrents = Self.sorted(try await t); loaded.insert(.torrent) }
         catch where !TorBoxAPI.isCancellation(error) { errors.append("Torrents: " + error.localizedDescription) }
         catch {}
-        do { webDownloads = Self.sorted(try await w) }
+        do { webDownloads = Self.sorted(try await w); loaded.insert(.web) }
         catch where !TorBoxAPI.isCancellation(error) { errors.append("Web: " + error.localizedDescription) }
         catch {}
         errorMessage = errors.isEmpty ? nil : errors.joined(separator: "\n")
+        if !loaded.isEmpty {
+            for item in tracker.process(torrents + webDownloads, kinds: loaded) {
+                Notifier.announce(L("Listo en TorBox"), detail: item.name, id: "ready-\(item.kind.rawValue)-\(item.id)")
+            }
+        }
         if user == nil { user = try? await api.me() }
     }
 
@@ -152,34 +159,24 @@ final class AppState: ObservableObject {
 
     // MARK: Entradas externas
 
-    func openAdd(_ mode: AddMode) {
-        incomingMagnet = nil
-        incomingTorrentFile = nil
-        incomingWebLink = nil
-        addMode = mode
+    func openAdd(text: String? = nil, file: URL? = nil) {
+        incomingText = text
+        incomingTorrentFile = file
+        showAdd = true
     }
 
-    /// magnet:…            → agregar torrent
+    /// magnet:…            → agregar (se detecta solo)
     /// archivo .torrent     → agregar torrent
-    /// tbox://add?url=… → magnet o enlace web (para usar desde un Atajo en el menú Compartir)
+    /// tbox://add?url=…     → magnet o enlace web (para usar desde un Atajo en el menú Compartir)
     func handle(url: URL) {
         if url.scheme?.lowercased() == "magnet" {
-            openAdd(.torrent)
-            incomingMagnet = url.absoluteString
+            openAdd(text: url.absoluteString)
         } else if url.isFileURL, url.pathExtension.lowercased() == "torrent" {
-            openAdd(.torrent)
-            incomingTorrentFile = url
+            openAdd(file: url)
         } else if url.scheme?.lowercased() == "tbox",
                   let value = URLComponents(url: url, resolvingAgainstBaseURL: false)?
-                    .queryItems?.first(where: { $0.name == "url" || $0.name == "link" })?.value {
-            let link = value.trimmingCharacters(in: .whitespacesAndNewlines)
-            if link.lowercased().hasPrefix("magnet:") {
-                openAdd(.torrent)
-                incomingMagnet = link
-            } else {
-                openAdd(.web)
-                incomingWebLink = link
-            }
+                    .queryItems?.first(where: { $0.name == "url" || $0.name == "link" || $0.name == "text" })?.value {
+            openAdd(text: value.trimmingCharacters(in: .whitespacesAndNewlines))
         }
     }
 }

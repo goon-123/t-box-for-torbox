@@ -63,7 +63,7 @@ struct TorrentListView: View {
             .refreshable { await state.refresh() }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button { state.openAdd(kind == .torrent ? .torrent : .web) } label: { Image(systemName: "plus") }
+                    Button { state.openAdd() } label: { Image(systemName: "plus") }
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     if state.isLoading { ProgressView() }

@@ -12,12 +12,32 @@
         }
       }
     },
+    "%d al iPhone": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d to iPhone"
+          }
+        }
+      }
+    },
     "%d archivos": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%d files"
+          }
+        }
+      }
+    },
+    "%d en TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d in TorBox"
           }
         }
       }
@@ -82,12 +102,52 @@
         }
       }
     },
+    "Abrir en ntfy.sh": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open on ntfy.sh"
+          }
+        }
+      }
+    },
     "Abrir torbox.app": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Open torbox.app"
+          }
+        }
+      }
+    },
+    "Activar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable"
+          }
+        }
+      }
+    },
+    "Activar avisos instantáneos con ntfy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable instant alerts with ntfy"
+          }
+        }
+      }
+    },
+    "Actividad": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activity"
           }
         }
       }
@@ -152,12 +212,32 @@
         }
       }
     },
+    "Archivo .torrent": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".torrent file"
+          }
+        }
+      }
+    },
     "Archivos (%d)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Files (%d)"
+          }
+        }
+      }
+    },
+    "Archivos .torrent": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".torrent files"
           }
         }
       }
@@ -182,12 +262,62 @@
         }
       }
     },
+    "Avisa cuando termina una descarga al iPhone y cuando algo queda listo en TorBox. Con la app cerrada, iOS decide cada cuánto revisar TorBox (de minutos a horas).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alerts you when a download to iPhone finishes and when something is ready on TorBox. With the app closed, iOS decides how often to check TorBox (minutes to hours)."
+          }
+        }
+      }
+    },
+    "Aviso de prueba enviado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Test alert sent"
+          }
+        }
+      }
+    },
+    "Avisos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alerts"
+          }
+        }
+      }
+    },
+    "Avisos instantáneos (experimental)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instant alerts (experimental)"
+          }
+        }
+      }
+    },
     "Bajando a Fotos…": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Downloading to Photos…"
+          }
+        }
+      }
+    },
+    "Bajando al iPhone": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloading to iPhone"
           }
         }
       }
@@ -248,6 +378,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cancel"
+          }
+        }
+      }
+    },
+    "Carpeta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder"
+          }
+        }
+      }
+    },
+    "Carpeta · se abre en Archivos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder · opens in Files"
           }
         }
       }
@@ -342,6 +492,16 @@
         }
       }
     },
+    "Con “solo si ya está en caché”, TorBox no agrega lo que tendría que descargar desde cero.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With “only if already cached”, TorBox won't add anything it would have to download from scratch."
+          }
+        }
+      }
+    },
     "Contraseña del enlace (opcional)": {
       "localizations": {
         "en": {
@@ -368,6 +528,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copy hash"
+          }
+        }
+      }
+    },
+    "Copiar tema": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy topic"
           }
         }
       }
@@ -442,12 +612,32 @@
         }
       }
     },
+    "Desactivar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disable"
+          }
+        }
+      }
+    },
     "Descarga iniciada": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Download started"
+          }
+        }
+      }
+    },
+    "Descarga terminada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download finished"
           }
         }
       }
@@ -472,6 +662,16 @@
         }
       }
     },
+    "Descargar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download"
+          }
+        }
+      }
+    },
     "Descargar a Archivos": {
       "localizations": {
         "en": {
@@ -492,12 +692,62 @@
         }
       }
     },
+    "Descargas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloads"
+          }
+        }
+      }
+    },
     "Descargas web": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Web downloads"
+          }
+        }
+      }
+    },
+    "Descomprimido": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unzipped"
+          }
+        }
+      }
+    },
+    "Descomprimir": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unzip"
+          }
+        }
+      }
+    },
+    "Descomprimir .zip al terminar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unzip .zip when finished"
+          }
+        }
+      }
+    },
+    "Desliza a la izquierda para guardar en otra carpeta o borrar; a la derecha para Fotos, descomprimir o compartir.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swipe left to save to another folder or delete; right for Photos, unzip or share."
           }
         }
       }
@@ -552,6 +802,16 @@
         }
       }
     },
+    "Elegir carpeta…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose folder…"
+          }
+        }
+      }
+    },
     "Eliminar": {
       "localizations": {
         "en": {
@@ -572,6 +832,16 @@
         }
       }
     },
+    "En TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On TorBox"
+          }
+        }
+      }
+    },
     "En caché": {
       "localizations": {
         "en": {
@@ -588,6 +858,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Queued"
+          }
+        }
+      }
+    },
+    "En cola de TorBox: no hay cupos libres ahora": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Queued on TorBox: no free slots right now"
           }
         }
       }
@@ -622,6 +902,16 @@
         }
       }
     },
+    "Enlace corregido para TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link fixed for TorBox"
+          }
+        }
+      }
+    },
     "Enlaces": {
       "localizations": {
         "en": {
@@ -638,6 +928,36 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sign in"
+          }
+        }
+      }
+    },
+    "Enviado. Aparecerá en la lista en unos segundos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sent. It will appear in the list in a few seconds."
+          }
+        }
+      }
+    },
+    "Enviando…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sending…"
+          }
+        }
+      }
+    },
+    "Enviar aviso de prueba": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send test alert"
           }
         }
       }
@@ -772,12 +1092,32 @@
         }
       }
     },
+    "Guardado en ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved to "
+          }
+        }
+      }
+    },
     "Guardado en Fotos": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Saved to Photos"
+          }
+        }
+      }
+    },
+    "Guardado en T-Box": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved in T-Box"
           }
         }
       }
@@ -808,6 +1148,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Save to Photos"
+          }
+        }
+      }
+    },
+    "Guardar en…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save to…"
           }
         }
       }
@@ -872,6 +1222,16 @@
         }
       }
     },
+    "Listo en TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready on TorBox"
+          }
+        }
+      }
+    },
     "Listo · subiendo": {
       "localizations": {
         "en": {
@@ -882,12 +1242,32 @@
         }
       }
     },
+    "Listo. Suscríbete a este tema en la app ntfy y envía un aviso de prueba.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done. Subscribe to this topic in the ntfy app and send a test alert."
+          }
+        }
+      }
+    },
     "Listos": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Ready"
+          }
+        }
+      }
+    },
+    "Lo que bajes irá a esta carpeta, aunque la app esté cerrada. Puede ser iCloud Drive, En mi iPhone o un disco. Si una nube no acepta el archivo, queda en la carpeta de T-Box.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloads go to this folder, even with the app closed. It can be iCloud Drive, On My iPhone or a drive. If a cloud provider rejects the file, it stays in the T-Box folder."
           }
         }
       }
@@ -912,6 +1292,16 @@
         }
       }
     },
+    "Magnet o enlace (YouTube, Instagram, Mega…)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Magnet or link (YouTube, Instagram, Mega…)"
+          }
+        }
+      }
+    },
     "Nada todavía. Lo que descargues queda también en la app Archivos › En mi iPhone › T-Box.": {
       "localizations": {
         "en": {
@@ -928,6 +1318,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Not found"
+          }
+        }
+      }
+    },
+    "No hay nada en curso.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing in progress."
+          }
+        }
+      }
+    },
+    "No reconocido: ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not recognized: "
           }
         }
       }
@@ -958,6 +1368,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Couldn't add it."
+          }
+        }
+      }
+    },
+    "Notificaciones": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications"
           }
         }
       }
@@ -1042,6 +1462,16 @@
         }
       }
     },
+    "Pega magnets o enlaces": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste magnets or links"
+          }
+        }
+      }
+    },
     "Pegar": {
       "localizations": {
         "en": {
@@ -1078,6 +1508,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plan"
+          }
+        }
+      }
+    },
+    "Preparando vista previa…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparing preview…"
           }
         }
       }
@@ -1242,6 +1682,56 @@
         }
       }
     },
+    "T-Box (En mi iPhone)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "T-Box (On My iPhone)"
+          }
+        }
+      }
+    },
+    "T-Box configurará en tu cuenta de TorBox un webhook hacia ntfy.sh. Puedes desactivarlo cuando quieras.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "T-Box will set up a webhook to ntfy.sh in your TorBox account. You can disable it anytime."
+          }
+        }
+      }
+    },
+    "Tema": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Topic"
+          }
+        }
+      }
+    },
+    "Tema copiado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Topic copied"
+          }
+        }
+      }
+    },
+    "Terminado hace poco": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recently finished"
+          }
+        }
+      }
+    },
     "Tiempo restante": {
       "localizations": {
         "en": {
@@ -1312,6 +1802,16 @@
         }
       }
     },
+    "TorBox envía un aviso a ntfy apenas termina algo, aunque T-Box esté cerrada. Instala la app gratuita ntfy y suscríbete al tema que aparece aquí. El tema es aleatorio: quien no lo conozca no ve tus avisos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TorBox sends an alert to ntfy as soon as something finishes, even with T-Box closed. Install the free ntfy app and subscribe to the topic shown here. The topic is random: anyone who doesn't know it can't see your alerts."
+          }
+        }
+      }
+    },
     "TorBox no devolvió un enlace válido.": {
       "localizations": {
         "en": {
@@ -1328,6 +1828,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "TorBox rejected authentication (%d). Check your API key."
+          }
+        }
+      }
+    },
+    "Torrent": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Torrent"
           }
         }
       }
@@ -1352,6 +1862,16 @@
         }
       }
     },
+    "Uno por línea, mezclados si quieres. Los magnets van a Torrents y los enlaces a Web.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One per line, mixed if you like. Magnets go to Torrents and links to Web."
+          }
+        }
+      }
+    },
     "Velocidad": {
       "localizations": {
         "en": {
@@ -1368,6 +1888,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Expires"
+          }
+        }
+      }
+    },
+    "Ver": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View"
           }
         }
       }
@@ -1398,6 +1928,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Checking"
+          }
+        }
+      }
+    },
+    "Volver a la carpeta de T-Box": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to the T-Box folder"
           }
         }
       }
@@ -1438,6 +1978,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "· "
+          }
+        }
+      }
+    },
+    "¿Activar avisos instantáneos?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable instant alerts?"
           }
         }
       }

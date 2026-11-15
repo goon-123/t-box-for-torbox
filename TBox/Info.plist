@@ -47,6 +47,11 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
+		<string>fetch</string>
+	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>io.github.maniac75.tbox.refresh</string>
 	</array>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Para guardar en Fotos las imágenes y videos que bajas desde TorBox.</string>

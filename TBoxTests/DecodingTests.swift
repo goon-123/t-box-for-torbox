@@ -116,6 +116,50 @@ final class DecodingTests: XCTestCase {
         XCTAssertFalse(TorBoxAPI.isCancellation(URLError(.timedOut)))
     }
 
+    func testLinkParserMixed() {
+        let text = """
+        magnet:?xt=urn:btih:dd8255ecdc7ca55fb0bbf81323d87062db1f6d1c&dn=Big+Buck+Bunny
+        https://www.instagram.com/p/abc/   https://www.instagram.com/p/abc/
+        hola
+        """
+        let r = LinkParser.parse(text)
+        XCTAssertEqual(r.links.count, 2)   // el enlace repetido cuenta una vez
+        XCTAssertEqual(r.links[0].kind, .magnet)
+        XCTAssertEqual(r.links[0].displayName, "Big Buck Bunny")
+        XCTAssertEqual(r.links[1].kind, .web)
+        XCTAssertEqual(r.ignored, ["hola"])
+    }
+
+    func testScribdNormalization() {
+        XCTAssertEqual(LinkParser.normalizeWeb("https://es.scribd.com/doc/x?doc=766311884&metadata=%7B%7D"),
+                       "https://www.scribd.com/document/766311884")
+        XCTAssertEqual(LinkParser.normalizeWeb("https://www.scribd.com/document/123456/Some-Title"),
+                       "https://www.scribd.com/document/123456")
+        XCTAssertEqual(LinkParser.normalizeWeb("https://mega.nz/file/x"), "https://mega.nz/file/x")
+    }
+
+    func testReadyTracker() throws {
+        let suite = "tbox.tests.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        func item(_ id: Int, ready: Bool) throws -> Torrent {
+            let json = #"{"id":\#(id),"name":"n\#(id)","download_finished":\#(ready),"download_present":\#(ready)}"#
+            return try JSONDecoder().decode(Torrent.self, from: Data(json.utf8))
+        }
+        var tracker = ReadyTracker(defaults: defaults, key: "k")
+        // Primera pasada: solo memoriza
+        XCTAssertTrue(tracker.process([try item(1, ready: false), try item(2, ready: true)], kinds: [.torrent]).isEmpty)
+        // El 1 termina: avisa una vez
+        XCTAssertEqual(tracker.process([try item(1, ready: true), try item(2, ready: true)], kinds: [.torrent]).map(\.id), [1])
+        XCTAssertTrue(tracker.process([try item(1, ready: true)], kinds: [.torrent]).isEmpty)
+    }
+
+    func testCreateResultID() throws {
+        let env = try decoder.decode(APIEnvelope<JSONValue>.self,
+                                     from: Data(#"{"success":true,"detail":"Found Cached","data":{"torrent_id":42,"hash":"x"}}"#.utf8))
+        XCTAssertEqual(env.data?["torrent_id"]?.intValue, 42)
+    }
+
     func testReferralURL() {
         XCTAssertEqual(AppConfig.referralURL.absoluteString,
                        "https://torbox.app/subscription?referral=7b4a584a-00a5-430e-aa31-809aa4934cb0")

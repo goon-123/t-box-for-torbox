@@ -129,28 +129,36 @@ final class TorBoxAPI: @unchecked Sendable {
         return list
     }
 
-    func addMagnet(_ magnet: String, onlyIfCached: Bool) async throws -> String? {
+    func addMagnet(_ magnet: String, onlyIfCached: Bool) async throws -> CreateResult {
         var form = MultipartForm()
         form.addField("magnet", magnet)
         if onlyIfCached { form.addField("add_only_if_cached", "true") }
-        return try await createTorrent(form)
+        return try await create("torrents/createtorrent", form: form, idKeys: ["torrent_id"])
     }
 
-    func addTorrentFile(_ fileData: Data, filename: String, onlyIfCached: Bool) async throws -> String? {
+    /// Los .torrent van por el endpoint asíncrono: el síncrono da 502 con archivos grandes.
+    /// TorBox responde de inmediato (data: null) y el torrent aparece en la lista al rato.
+    func addTorrentFile(_ fileData: Data, filename: String, onlyIfCached: Bool) async throws -> CreateResult {
         var form = MultipartForm()
         form.addFile("file", filename: filename, mimeType: "application/x-bittorrent", data: fileData)
         if onlyIfCached { form.addField("add_only_if_cached", "true") }
-        return try await createTorrent(form)
+        var r = try await create("torrents/asynccreatetorrent", form: form, idKeys: ["torrent_id"])
+        r.async = true
+        return r
     }
 
-    /// Devuelve el mensaje de TorBox (p. ej. "Found Cached Torrent...").
-    private func createTorrent(_ form: MultipartForm) async throws -> String? {
-        let req = try makeRequest("torrents/createtorrent", method: "POST",
-                                  body: form.finalize(), contentType: form.contentType)
-        let data = try await send(req)
+    private func create(_ path: String, form: MultipartForm, idKeys: [String]) async throws -> CreateResult {
+        let req = try makeRequest(path, method: "POST", body: form.finalize(), contentType: form.contentType)
+        return try await createResult(from: send(req), idKeys: idKeys)
+    }
+
+    private func createResult(from data: Data, idKeys: [String]) throws -> CreateResult {
         let env = try decoder.decode(APIEnvelope<JSONValue>.self, from: data)
         if env.success == false { throw APIError.api(env.detail ?? env.error ?? L("No se pudo agregar.")) }
-        return env.detail
+        var r = CreateResult(message: env.detail)
+        for k in idKeys { if let n = env.data?[k]?.intValue { r.itemID = n; break } }
+        r.queuedID = env.data?["queued_id"]?.intValue
+        return r
     }
 
     /// Operaciones documentadas: torrents → reannounce, delete, resume; web downloads → delete.
@@ -177,7 +185,7 @@ final class TorBoxAPI: @unchecked Sendable {
     // MARK: Web downloads (fotos, videos y archivos desde YouTube, Instagram, X, Mega, etc.)
 
     /// POST /webdl/createwebdownload (application/x-www-form-urlencoded).
-    func addWebDownload(link: String, password: String?, name: String?, onlyIfCached: Bool) async throws -> String? {
+    func addWebDownload(link: String, password: String?, name: String?, onlyIfCached: Bool) async throws -> CreateResult {
         var fields: [(String, String)] = [("link", link)]
         if let password, !password.isEmpty { fields.append(("password", password)) }
         if let name, !name.isEmpty { fields.append(("name", name)) }
@@ -185,10 +193,8 @@ final class TorBoxAPI: @unchecked Sendable {
         let req = try makeRequest("webdl/createwebdownload", method: "POST",
                                   body: Self.formURLEncoded(fields),
                                   contentType: "application/x-www-form-urlencoded")
-        let data = try await send(req)
-        let env = try decoder.decode(APIEnvelope<JSONValue>.self, from: data)
-        if env.success == false { throw APIError.api(env.detail ?? env.error ?? L("No se pudo agregar el enlace.")) }
-        return env.detail
+        // El nombre del campo con el id no está documentado: se prueban los habituales.
+        return try createResult(from: await send(req), idKeys: ["webdownload_id", "webdl_id", "web_id", "id"])
     }
 
     /// Lista de sitios compatibles. Con API key trae además el uso diario real.
@@ -206,6 +212,25 @@ final class TorBoxAPI: @unchecked Sendable {
             (v.addingPercentEncoding(withAllowedCharacters: allowed) ?? v)
         }.joined(separator: "&")
         return Data(s.utf8)
+    }
+
+    // MARK: Ajustes y avisos de la cuenta
+
+    /// PUT /user/settings/editsettings con cualquier subconjunto de ajustes.
+    func editSettings(_ settings: [String: Any]) async throws {
+        let body = try JSONSerialization.data(withJSONObject: settings)
+        let req = try makeRequest("user/settings/editsettings", method: "PUT", body: body, contentType: "application/json")
+        let data = try await send(req)
+        _ = try unwrap(JSONValue.self, from: data)
+    }
+
+    /// POST /notifications/test: TorBox envía un aviso de prueba por los canales activos.
+    func sendTestNotification() async throws -> String? {
+        let req = try makeRequest("notifications/test", method: "POST")
+        let data = try await send(req)
+        let env = try decoder.decode(APIEnvelope<JSONValue>.self, from: data)
+        if env.success == false { throw APIError.api(env.detail ?? env.error ?? L("Respuesta inesperada.")) }
+        return env.detail
     }
 
     // MARK: Login por código de dispositivo

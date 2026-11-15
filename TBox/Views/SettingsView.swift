@@ -8,6 +8,12 @@ struct SettingsView: View {
     @State private var notice: String?
     @State private var shareURL: URL?
     @State private var busy = false
+    @State private var pickFolder = false
+    @State private var folderName = AppSettings.destinationName
+    @State private var unzip = AppSettings.unzipAfterDownload
+    @State private var notificationsOn = Notifier.enabled
+    @State private var ntfyTopic = AppSettings.ntfyTopic
+    @State private var confirmNtfy = false
 
     var body: some View {
         NavigationStack {
@@ -41,6 +47,54 @@ struct SettingsView: View {
                     LabeledContent("Descargas web", value: "\(state.webDownloads.count)")
                 } footer: {
                     Text("Tocar un magnet en Safari abre la app. Para mandar enlaces desde Instagram, YouTube o Safari, crea un Atajo que abra tbox://add?url=[URL compartida] y actívalo en el menú Compartir.")
+                }
+
+                Section {
+                    LabeledContent("Carpeta", value: folderName ?? L("T-Box (En mi iPhone)"))
+                    Button("Elegir carpeta…") { pickFolder = true }
+                    if folderName != nil {
+                        Button("Volver a la carpeta de T-Box", role: .destructive) {
+                            AppSettings.setDestination(nil)
+                            folderName = nil
+                        }
+                    }
+                    Toggle("Descomprimir .zip al terminar", isOn: $unzip)
+                        .onChange(of: unzip) { _, v in AppSettings.unzipAfterDownload = v }
+                } header: {
+                    Text("Descargas")
+                } footer: {
+                    Text("Lo que bajes irá a esta carpeta, aunque la app esté cerrada. Puede ser iCloud Drive, En mi iPhone o un disco. Si una nube no acepta el archivo, queda en la carpeta de T-Box.")
+                }
+
+                Section {
+                    Toggle("Notificaciones", isOn: $notificationsOn)
+                        .onChange(of: notificationsOn) { _, v in
+                            Notifier.enabled = v
+                            if v { Task { await Notifier.requestPermission() } }
+                        }
+                } header: {
+                    Text("Avisos")
+                } footer: {
+                    Text("Avisa cuando termina una descarga al iPhone y cuando algo queda listo en TorBox. Con la app cerrada, iOS decide cada cuánto revisar TorBox (de minutos a horas).")
+                }
+
+                Section {
+                    if let topic = ntfyTopic {
+                        LabeledContent("Tema", value: topic)
+                        Button("Copiar tema") {
+                            UIPasteboard.general.string = topic
+                            notice = L("Tema copiado")
+                        }
+                        Link("Abrir en ntfy.sh", destination: URL(string: "https://ntfy.sh/\(topic)")!)
+                        Button("Enviar aviso de prueba") { Task { await ntfyTest() } }.disabled(busy)
+                        Button("Desactivar", role: .destructive) { Task { await ntfyDisable() } }.disabled(busy)
+                    } else {
+                        Button("Activar avisos instantáneos con ntfy") { confirmNtfy = true }.disabled(busy)
+                    }
+                } header: {
+                    Text("Avisos instantáneos (experimental)")
+                } footer: {
+                    Text("TorBox envía un aviso a ntfy apenas termina algo, aunque T-Box esté cerrada. Instala la app gratuita ntfy y suscríbete al tema que aparece aquí. El tema es aleatorio: quien no lo conozca no ve tus avisos.")
                 }
 
                 Section {
@@ -85,6 +139,17 @@ struct SettingsView: View {
             } message: {
                 Text("TorBox decidirá si se puede aplicar a tu cuenta.")
             }
+            .fileImporter(isPresented: $pickFolder, allowedContentTypes: [.folder]) { result in
+                if case .success(let url) = result {
+                    AppSettings.setDestination(url)
+                    folderName = AppSettings.destinationName
+                }
+            }
+            .confirmationDialog("¿Activar avisos instantáneos?", isPresented: $confirmNtfy, titleVisibility: .visible) {
+                Button("Activar") { Task { await ntfyEnable() } }
+            } message: {
+                Text("T-Box configurará en tu cuenta de TorBox un webhook hacia ntfy.sh. Puedes desactivarlo cuando quieras.")
+            }
             .alert(notice ?? "", isPresented: Binding(get: { notice != nil }, set: { if !$0 { notice = nil } })) {
                 Button("OK", role: .cancel) {}
             }
@@ -97,6 +162,41 @@ struct SettingsView: View {
 
     private var appVersion: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"
+    }
+
+    private func ntfyEnable() async {
+        busy = true
+        defer { busy = false }
+        let alphabet = Array("abcdefghijkmnopqrstuvwxyz23456789")
+        let topic = "tbox-" + String((0..<18).map { _ in alphabet.randomElement()! })
+        do {
+            try await state.api.editSettings(["webhook_notifications": true,
+                                              "webhook_url": "https://ntfy.sh/\(topic)"])
+            AppSettings.ntfyTopic = topic
+            ntfyTopic = topic
+            notice = L("Listo. Suscríbete a este tema en la app ntfy y envía un aviso de prueba.")
+        } catch {
+            notice = error.localizedDescription
+        }
+    }
+
+    private func ntfyTest() async {
+        busy = true
+        defer { busy = false }
+        do { notice = try await state.api.sendTestNotification() ?? L("Aviso de prueba enviado") }
+        catch { notice = error.localizedDescription }
+    }
+
+    private func ntfyDisable() async {
+        busy = true
+        defer { busy = false }
+        do {
+            try await state.api.editSettings(["webhook_notifications": false, "webhook_url": ""])
+            AppSettings.ntfyTopic = nil
+            ntfyTopic = nil
+        } catch {
+            notice = error.localizedDescription
+        }
     }
 
     private func addReferral() async {

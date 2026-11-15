@@ -8,11 +8,13 @@
 ## Qué hace hoy
 
 - **Login con TorBox** (apruebas un código en torbox.app) o pegando tu API key. La key se guarda en el llavero.
-- **Torrents**: estado, progreso, velocidad y tiempo restante, con refresco automático; agregar magnet (tocar un magnet en Safari abre la app) o `.torrent`; opción "solo si está en caché"; eliminar y buscar más peers.
-- **Descargas web**: pega enlaces de YouTube, Instagram, X, TikTok, Mega, Mediafire y [más de 160 sitios](https://api.torbox.app/v1/api/webdl/hosters); la app detecta el sitio y avisa si está caído. Requiere plan pagado.
-- **Por archivo**: reproducir (MP4/MOV), abrir en Infuse o VLC, descargar a Archivos en segundo plano, **guardar fotos y videos directo en Fotos**, copiar o compartir el enlace.
-- **Español e inglés.**
-- **Diagnóstico exportable** (Cuenta › Exportar diagnóstico), con la API key censurada.
+- **Agregar todo desde un solo lugar**: pega magnets y enlaces web mezclados (uno por línea) o elige archivos `.torrent`. Cada línea se reconoce sola, muestra su resultado debajo y sigue su progreso en TorBox hasta que está lista. Tocar un magnet en Safari abre la app.
+- **Torrents y descargas web** ([más de 160 sitios](https://api.torbox.app/v1/api/webdl/hosters): YouTube, Instagram, X, TikTok, Mega…) con estado, progreso y refresco automático.
+- **Barra de actividad** con lo que está en curso en TorBox y bajando al iPhone, y aviso al terminar.
+- **Notificaciones**: descargas al iPhone terminadas y cosas listas en TorBox (con la app cerrada, iOS decide cada cuánto revisar). Opcional: avisos instantáneos vía [ntfy](https://ntfy.sh) (experimental).
+- **Por archivo**: reproducir (MP4/MOV), ver (PDF, imágenes, documentos), abrir en Infuse o VLC, descargar en segundo plano, guardar fotos y videos en Fotos, copiar o compartir el enlace.
+- **Descargas**: carpeta por defecto a elección (iCloud Drive, En mi iPhone, discos), "Guardar en…", descomprimir `.zip` automáticamente o a pedido.
+- **Español e inglés.** **Diagnóstico exportable** con la API key censurada.
 
 ## Instalar
 

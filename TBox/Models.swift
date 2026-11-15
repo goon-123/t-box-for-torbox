@@ -60,6 +60,14 @@ enum JSONValue: Decodable {
         return nil
     }
 
+    var intValue: Int? {
+        switch self {
+        case .number(let d): return Int(d)
+        case .string(let s): return Int(s)
+        default: return nil
+        }
+    }
+
     subscript(key: String) -> JSONValue? {
         if case .object(let o) = self { return o[key] }
         return nil
@@ -275,6 +283,14 @@ struct DeviceStart: Decodable {
     }
 }
 
+/// Resultado de agregar algo a TorBox.
+struct CreateResult: Equatable {
+    var message: String?
+    var itemID: Int?
+    var queuedID: Int?
+    var async = false
+}
+
 enum DeviceTokenResult {
     case pending, expired, alreadyUsed, token(String), failed(String)
 }
@@ -361,4 +377,107 @@ enum MediaKind {
     }
 
     static func isPhoto(_ ext: String) -> Bool { photoExtensions.contains(ext.lowercased()) }
+}
+
+
+// MARK: - Interpretar lo que el usuario pega
+
+enum AddKind: String { case magnet, web }
+
+struct ParsedLink: Hashable {
+    let kind: AddKind
+    let value: String      // lo que se envía a TorBox (ya normalizado)
+    let original: String   // lo que pegó el usuario
+
+    var displayName: String {
+        if kind == .magnet {
+            // En los magnets los espacios suelen venir como "+", que URLComponents no convierte.
+            if let dn = URLComponents(string: value)?.queryItems?.first(where: { $0.name == "dn" })?.value, !dn.isEmpty {
+                return dn.replacingOccurrences(of: "+", with: " ")
+            }
+            return "magnet"
+        }
+        return URL(string: value)?.host ?? value
+    }
+}
+
+enum LinkParser {
+    /// Separa por espacios/saltos de línea y reconoce magnets y enlaces http(s).
+    /// Devuelve también los fragmentos que no se reconocieron.
+    static func parse(_ text: String) -> (links: [ParsedLink], ignored: [String]) {
+        var links: [ParsedLink] = []
+        var ignored: [String] = []
+        var seen = Set<String>()
+        for raw in text.components(separatedBy: .whitespacesAndNewlines) {
+            let token = raw.trimmingCharacters(in: CharacterSet(charactersIn: "<>\"'"))
+            guard !token.isEmpty else { continue }
+            let lower = token.lowercased()
+            let link: ParsedLink?
+            if lower.hasPrefix("magnet:?") {
+                link = ParsedLink(kind: .magnet, value: token, original: token)
+            } else if lower.hasPrefix("http://") || lower.hasPrefix("https://") {
+                link = ParsedLink(kind: .web, value: normalizeWeb(token), original: token)
+            } else {
+                link = nil
+            }
+            if let link {
+                if seen.insert(link.value).inserted { links.append(link) }
+            } else {
+                ignored.append(token)
+            }
+        }
+        return (links, ignored)
+    }
+
+    /// Corrige enlaces conocidos que TorBox rechaza. Hoy: Scribd (enlaces internos con doc=ID).
+    static func normalizeWeb(_ link: String) -> String {
+        guard let comps = URLComponents(string: link), let host = comps.host?.lowercased(),
+              host == "scribd.com" || host.hasSuffix(".scribd.com") else { return link }
+        if let doc = comps.queryItems?.first(where: { $0.name == "doc" })?.value, Int(doc) != nil {
+            return "https://www.scribd.com/document/\(doc)"
+        }
+        let parts = comps.path.split(separator: "/").map(String.init)
+        if let i = parts.firstIndex(where: { ["document", "doc"].contains($0) }), i + 1 < parts.count,
+           Int(parts[i + 1]) != nil {
+            return "https://www.scribd.com/document/\(parts[i + 1])"
+        }
+        return link
+    }
+}
+
+// MARK: - Detectar lo que terminó en TorBox entre una revisión y otra
+
+/// Recuerda qué ítems estaban en curso; cuando uno pasa a listo, lo informa una sola vez.
+/// La primera vez solo memoriza (no avisa de lo que ya estaba listo antes).
+struct ReadyTracker {
+    private let defaults: UserDefaults
+    private let key: String
+
+    init(defaults: UserDefaults = .standard, key: String = "ready.pending") {
+        self.defaults = defaults
+        self.key = key
+    }
+
+    mutating func process(_ items: [Torrent], kinds: Set<ItemKind>) -> [Torrent] {
+        let stored = defaults.dictionary(forKey: key) as? [String: String]
+        var pending = stored ?? [:]
+        var ready: [Torrent] = []
+        for kind in kinds {
+            let prefix = kind == .torrent ? "t" : "w"
+            let ofKind = items.filter { $0.kind == kind }
+            let currentKeys = Set(ofKind.map { prefix + String($0.id) })
+            // los borrados dejan de esperarse
+            for k in pending.keys where k.hasPrefix(prefix) && !currentKeys.contains(k) { pending.removeValue(forKey: k) }
+            for item in ofKind {
+                let k = prefix + String(item.id)
+                if item.isReady {
+                    if pending.removeValue(forKey: k) != nil, stored != nil { ready.append(item) }
+                } else if item.errorText == nil {
+                    pending[k] = item.name
+                }
+            }
+        }
+        defaults.set(pending, forKey: key)
+        return ready
+    }
 }

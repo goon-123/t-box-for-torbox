@@ -1,4 +1,5 @@
 import SwiftUI
+import QuickLook
 
 struct TorrentDetailView: View {
     let ref: ItemRef
@@ -14,6 +15,8 @@ struct TorrentDetailView: View {
     @State private var shareURL: URL?
     @State private var toast: String?
     @State private var confirmDelete = false
+    @State private var previewURL: URL?
+    @State private var workingText: String?
 
     var body: some View {
         Group {
@@ -26,7 +29,7 @@ struct TorrentDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .overlay {
             if working {
-                ProgressView("Pidiendo enlace a TorBox…")
+                ProgressView(workingText ?? L("Pidiendo enlace a TorBox…"))
                     .padding(20)
                     .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
             }
@@ -45,6 +48,7 @@ struct TorrentDetailView: View {
                                        set: { playerURL = $0?.url })) { item in
             PlayerView(url: item.url)
         }
+        .quickLookPreview($previewURL)
         .sheet(item: Binding(get: { shareURL.map(IdentifiedURL.init) },
                              set: { shareURL = $0?.url })) { item in
             ShareSheet(items: [item.url])
@@ -127,6 +131,9 @@ struct TorrentDetailView: View {
         if f.isNativelyPlayable {
             Button("Reproducir aquí") { run(t, f) { url in playerURL = url } }
         }
+        if !f.isVideo {
+            Button("Ver") { preview(t, f) }
+        }
         if f.isVideo || f.isNativelyPlayable {
             Button("Abrir en Infuse") { run(t, f) { url in openExternal("infuse://x-callback-url/play?url=", url) } }
             Button("Abrir en VLC") { run(t, f) { url in openExternal("vlc-x-callback://x-callback-url/stream?url=", url) } }
@@ -148,6 +155,28 @@ struct TorrentDetailView: View {
         Button("Copiar enlace") { run(t, f) { url in UIPasteboard.general.string = url.absoluteString; flash(L("Enlace copiado (válido ~3 h)")) } }
         Button("Compartir enlace…") { run(t, f) { url in shareURL = url } }
         Button("Cancelar", role: .cancel) {}
+    }
+
+    /// Vista previa (PDF, imágenes, documentos, audio): baja el archivo a una carpeta temporal y lo abre.
+    private func preview(_ t: Torrent, _ f: TorrentFile) {
+        Task {
+            working = true
+            workingText = L("Preparando vista previa…")
+            defer { working = false; workingText = nil }
+            do {
+                let remote = try await state.api.downloadLink(t.kind, id: t.id, fileID: f.id)
+                let (tmp, _) = try await URLSession.shared.download(from: remote)
+                let dir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+                    .appendingPathComponent("preview", isDirectory: true)
+                try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+                let dest = dir.appendingPathComponent(f.displayName)
+                try? FileManager.default.removeItem(at: dest)
+                try FileManager.default.moveItem(at: tmp, to: dest)
+                previewURL = dest
+            } catch {
+                flash(error.localizedDescription)
+            }
+        }
     }
 
     private func run(_ t: Torrent, _ f: TorrentFile, _ then: @escaping (URL) -> Void) {

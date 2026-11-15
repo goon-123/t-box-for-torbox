@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Photos
+import ZIPFoundation
 
 /// Descargas al iPhone con una sesión en segundo plano: siguen aunque cierres la app.
 /// Los archivos quedan en Archivos › En mi iPhone › T-Box › Descargas.
@@ -28,6 +29,7 @@ final class DownloadManager: NSObject, ObservableObject, URLSessionDownloadDeleg
         var expected: Int64
         var status: Status
         var toPhotos: Bool = false
+        var savedTo: String?
         var task: URLSessionDownloadTask?
     }
 
@@ -182,20 +184,90 @@ final class DownloadManager: NSObject, ObservableObject, URLSessionDownloadDeleg
             update(id) { $0.status = .failed(error.localizedDescription) }
             return
         }
-        update(id) { $0.progress = 1; $0.status = .done }
-        reloadLocalFiles()
+        update(id) { $0.progress = 1 }
         if info.toPhotos {
             Self.saveToPhotos(dest) { [weak self] result in
                 switch result {
                 case .success:
                     try? FileManager.default.removeItem(at: dest)   // ya quedó en Fotos; no duplicar espacio
                     self?.update(id) { $0.status = .savedToPhotos }
+                    Notifier.announce(L("Guardado en Fotos"), detail: info.name, id: "dl-\(id)")
                 case .failure(let err):
                     self?.update(id) { $0.status = .failed(L("Quedó en Archivos, pero no en Fotos: ") + err.localizedDescription) }
                 }
                 self?.reloadLocalFiles()
             }
+            return
         }
+        // Descomprimir (si está activado) y llevar a la carpeta elegida, fuera del hilo de la sesión.
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            guard let self else { return }
+            var result = dest
+            if AppSettings.unzipAfterDownload, dest.pathExtension.lowercased() == "zip",
+               let folder = try? Self.unzip(dest) {
+                try? FileManager.default.removeItem(at: dest)
+                result = folder
+            }
+            let saved = Self.moveToChosenFolder(result)
+            self.update(id) { $0.status = .done; $0.savedTo = saved }
+            self.reloadLocalFiles()
+            Notifier.announce(L("Descarga terminada"), detail: info.name, id: "dl-\(id)")
+        }
+    }
+
+    // MARK: Carpeta elegida y descompresión
+
+    /// Mueve el archivo a la carpeta que eligió el usuario. Devuelve el nombre de esa carpeta,
+    /// o nil si no hay una elegida o no se pudo (en ese caso el archivo queda en la carpeta de T-Box).
+    @discardableResult
+    static func moveToChosenFolder(_ url: URL) -> String? {
+        guard let folder = AppSettings.resolveDestination() else { return nil }
+        let scoped = folder.startAccessingSecurityScopedResource()
+        defer { if scoped { folder.stopAccessingSecurityScopedResource() } }
+        var target = folder.appendingPathComponent(url.lastPathComponent)
+        var n = 1
+        let base = url.deletingPathExtension().lastPathComponent
+        let ext = url.pathExtension
+        while FileManager.default.fileExists(atPath: target.path) {
+            target = folder.appendingPathComponent(ext.isEmpty ? "\(base) (\(n))" : "\(base) (\(n)).\(ext)")
+            n += 1
+        }
+        var moveError: NSError?
+        var coordError: NSError?
+        NSFileCoordinator().coordinate(writingItemAt: target, options: .forReplacing, error: &coordError) { dst in
+            do { try FileManager.default.moveItem(at: url, to: dst) } catch { moveError = error as NSError }
+        }
+        if let e = moveError ?? coordError {
+            Diagnostics.log("MOVE to chosen folder failed: \(e.localizedDescription)")
+            return nil
+        }
+        return AppSettings.destinationName ?? folder.lastPathComponent
+    }
+
+    /// Descomprime un .zip en una carpeta con su mismo nombre, junto al archivo.
+    static func unzip(_ zip: URL) throws -> URL {
+        var folder = zip.deletingPathExtension()
+        var n = 1
+        while FileManager.default.fileExists(atPath: folder.path) {
+            folder = zip.deletingLastPathComponent().appendingPathComponent(zip.deletingPathExtension().lastPathComponent + " (\(n))")
+            n += 1
+        }
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        do {
+            try FileManager.default.unzipItem(at: zip, to: folder)
+        } catch {
+            try? FileManager.default.removeItem(at: folder)
+            Diagnostics.log("UNZIP failed: \(error.localizedDescription)")
+            throw error
+        }
+        return folder
+    }
+
+    /// Descomprimir a pedido desde la lista de archivos.
+    func unzipLocal(_ zip: URL) throws {
+        _ = try Self.unzip(zip)
+        try? FileManager.default.removeItem(at: zip)
+        reloadLocalFiles()
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

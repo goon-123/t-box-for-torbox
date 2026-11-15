@@ -1,17 +1,26 @@
 import SwiftUI
 import AVFoundation
+import UserNotifications
 
-final class AppDelegate: NSObject, UIApplicationDelegate {
+final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
         _ = DownloadManager.shared
+        UNUserNotificationCenter.current().delegate = self
+        BackgroundCheck.register()
         return true
     }
 
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String,
                      completionHandler: @escaping () -> Void) {
         DownloadManager.shared.backgroundCompletion = completionHandler
+    }
+
+    // Con la app abierta se usa el aviso interno; esto cubre notificaciones que llegan justo al volver.
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound])
     }
 }
 
@@ -40,26 +49,25 @@ struct RootView: View {
             if state.isLoggedIn {
                 TabView {
                     TorrentListView(kind: .torrent)
+                        .withActivityBar()
                         .tabItem { Label("Torrents", systemImage: "tray.full") }
                     TorrentListView(kind: .web)
+                        .withActivityBar()
                         .tabItem { Label("Web", systemImage: "link") }
                     DownloadsView()
+                        .withActivityBar()
                         .tabItem { Label("En el iPhone", systemImage: "arrow.down.circle") }
                     SettingsView()
                         .tabItem { Label("Cuenta", systemImage: "person.crop.circle") }
                 }
-                .sheet(item: $state.addMode) { mode in
-                    switch mode {
-                    case .torrent:
-                        AddTorrentView(initialMagnet: state.incomingMagnet, initialFile: state.incomingTorrentFile)
-                    case .web:
-                        AddWebDownloadView(initialLink: state.incomingWebLink)
-                    }
+                .sheet(isPresented: $state.showAdd) {
+                    AddView(initialText: state.incomingText, initialFile: state.incomingTorrentFile)
                 }
             } else {
                 LoginView()
             }
         }
+        .overlay(alignment: .top) { ToastView().animation(.spring, value: Toaster.shared.current) }
         .tint(.green)
         .onChange(of: scenePhase) { _, phase in
             if phase == .active, state.isLoggedIn {
@@ -67,6 +75,7 @@ struct RootView: View {
                 state.startPolling()
             } else if phase == .background {
                 state.stopPolling()
+                if state.isLoggedIn { BackgroundCheck.schedule() }
             }
         }
     }
