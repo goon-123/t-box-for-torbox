@@ -2,7 +2,7 @@
 """Genera docs/SITIOS.md con los sitios compatibles de las descargas web de TorBox.
 
 Fuente: https://api.torbox.app/v1/api/webdl/hosters (pública, sin API key).
-Se omiten los sitios para adultos. Lo ejecuta GitHub Actions cada semana.
+Los sitios para adultos van en una sección aparte, plegada. Lo ejecuta GitHub Actions cada semana.
 """
 import json
 import sys
@@ -17,7 +17,7 @@ def main(out_path: str) -> None:
     with urllib.request.urlopen(req, timeout=30) as r:
         data = json.load(r).get("data") or []
     visible = [h for h in data if not h.get("nsfw")]
-    hidden = len(data) - len(visible)
+    adult = [h for h in data if h.get("nsfw")]
     groups = {
         "stream": ("Videos, audio y redes sociales", "Videos, audio y redes"),
         "hoster": ("Servicios de archivos", "Archivos"),
@@ -32,7 +32,7 @@ def main(out_path: str) -> None:
         "- ✅ disponible · ⚠️ con problemas o caído en este momento",
         "- **Límite diario**: enlaces por día y por cuenta (— = sin límite).",
         "- La disponibilidad cambia; T-Box revisa el estado en vivo al pegar un enlace.",
-        f"- Se omiten {hidden} sitios para adultos.",
+        f"- Los {len(adult)} sitios para adultos (+18) están al final, en una sección plegada.",
         "",
     ]
     for key, (title, _) in groups.items():
@@ -49,9 +49,21 @@ def main(out_path: str) -> None:
             note = (h.get("note") or "").replace("|", "/")
             lines.append(f"| {h.get('name','?')} | {domains} | {status} | {limit if limit else '—'} | {note} |")
         lines.append("")
+    if adult:
+        rows = sorted(adult, key=lambda h: h.get("name", "").lower())
+        lines += [f"## Sitios para adultos +18 ({len(rows)})", "", "<details>",
+                  "<summary>Mostrar lista</summary>", "",
+                  "| Sitio | Dominios | Estado | Límite diario | Nota |", "|---|---|:-:|:-:|---|"]
+        for h in rows:
+            domains = ", ".join((h.get("domains") or [])[:4])
+            status = "✅" if h.get("status") else "⚠️"
+            limit = h.get("daily_link_limit") or 0
+            note = (h.get("note") or "").replace("|", "/")
+            lines.append(f"| {h.get('name','?')} | {domains} | {status} | {limit if limit else '—'} | {note} |")
+        lines += ["", "</details>", ""]
     with open(out_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
-    print(f"{len(visible)} sitios escritos en {out_path}")
+    print(f"{len(visible)} + {len(adult)} (+18) sitios escritos en {out_path}")
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ Actualizada automáticamente desde la API de TorBox: 15-11-2026.
 - ✅ disponible · ⚠️ con problemas o caído en este momento
 - **Límite diario**: enlaces por día y por cuenta (— = sin límite).
 - La disponibilidad cambia; T-Box revisa el estado en vivo al pegar un enlace.
-- Se omiten 28 sitios para adultos.
+- Los 28 sitios para adultos (+18) están al final, en una sección plegada.
 
 ## Videos, audio y redes sociales (51)
 
@@ -153,3 +153,41 @@ Actualizada automáticamente desde la API de TorBox: 15-11-2026.
 | Wupfile | wupfile.com, salefiles.com | ✅ | 5 |  |
 | Yandex Disk | disk.yandex.com, disk.yandex.net, disk.yandex.ru | ✅ | 100 |  |
 | ZeroFS | zerofs.link | ✅ | 100 |  |
+
+## Sitios para adultos +18 (28)
+
+<details>
+<summary>Mostrar lista</summary>
+
+| Sitio | Dominios | Estado | Límite diario | Nota |
+|---|---|:-:|:-:|---|
+| 4Chan | 4chan.org, 4chanarchives.com, 4archive.org | ✅ | 100 | Supports Boards and Threads. Also supports archive sites. |
+| 4Tube | 4tube.com | ✅ | 100 |  |
+| Beeg | beeg.com | ✅ | 100 |  |
+| Bunkr | bunkr.cr, bunkr.ph, bunkr.fi, bunkr.site | ✅ | 100 |  |
+| Coomer | coomer.party, coomer.su, coomer.st | ✅ | 100 | Only posts are supported. |
+| DrTuber | drtuber.com | ✅ | 100 |  |
+| E-Hentai | e-hentai.org | ✅ | 100 |  |
+| EPorner | eporner.com | ✅ | 100 | Gallery only, video is not supported. |
+| Fansly | fansly.com | ✅ | 100 | Supports Creator Media, Creator Posts, Home Feed, Lists, Account Lists, Posts |
+| Furry34 | furry34.com | ✅ | 100 |  |
+| Gelbooru | gelbooru.com | ✅ | 100 |  |
+| HAnime | hanime.tv | ✅ | 100 |  |
+| Hentai Foundry | hentai-foundry.com | ✅ | 100 |  |
+| Hitomi | hitomi.la | ✅ | 100 |  |
+| NHentai | nhentai.net | ✅ | 100 |  |
+| Pornhub | pornhub.com, pornhub.net, pornhub.org, pornhubpremium.com | ✅ | 100 |  |
+| RedGifs | redgifs.com | ✅ | 100 |  |
+| RedTube | redtube.com | ✅ | 100 |  |
+| Rule34 | rule34.xxx | ✅ | 100 |  |
+| SpankBang | spankbang.com | ✅ | 100 |  |
+| StripChat | stripchat.com | ✅ | 100 |  |
+| SunPorNo | sunporno.com | ✅ | 100 |  |
+| XHamster | xhamster.com, xhamster.desi, xhamster.one, xhms.pro | ✅ | 100 |  |
+| XNXX | xnxx.com | ✅ | 100 |  |
+| XVideos | xvideos.com | ✅ | 100 |  |
+| XXXYMovies | xxxymovies.com | ✅ | 100 |  |
+| YouJizz | youjizz.com | ✅ | 100 |  |
+| YouPorn | youporn.com | ✅ | 100 |  |
+
+</details>
