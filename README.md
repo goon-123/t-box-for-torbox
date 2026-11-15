@@ -75,7 +75,7 @@ TorBox es un servicio en la nube que descarga torrents, archivos de sitios como 
    - **Con Apple ID gratuito**: SideStore o AltStore. La firma vence cada 7 días y se renueva sola.
 3. Abre T-Box y toca **Obtener código de acceso**: lo apruebas en torbox.app y la app recibe tu API key sola. También puedes pegar la key a mano.
 
-Las versiones nuevas aparecen en [Releases](https://github.com/maniac75/t-box-for-torbox/releases) con su lista de cambios.
+Las versiones nuevas aparecen en [Releases](https://github.com/maniac75/t-box-for-torbox/releases) con su lista de cambios. Cada una trae `T-Box-X.Y.Z.ipa` (con la versión en el nombre) y `T-Box.ipa` (el mismo archivo con nombre fijo, para el botón de descarga directa).
 
 ## Compartir desde otras apps
 
