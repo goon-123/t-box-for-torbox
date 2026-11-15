@@ -1,10 +1,12 @@
 import SwiftUI
+import UniformTypeIdentifiers
 import UIKit
 
 struct SettingsView: View {
     @EnvironmentObject private var state: AppState
     @Environment(\.openURL) private var openURL
     @State private var confirmLogout = false
+    @State private var confirmCopyKey = false
     @State private var confirmReferral = false
     @State private var notice: String?
     @State private var shareURL: URL?
@@ -25,6 +27,22 @@ struct SettingsView: View {
                     }
                     Button("Abrir torbox.app") {
                         if let url = URL(string: "https://torbox.app/dashboard") { openURL(url) }
+                    }
+                    Button("Copiar API key") { confirmCopyKey = true }
+                }
+
+                if let code = state.referral?.code, let link = state.referral?.shareURL {
+                    Section {
+                        LabeledContent("Tu código", value: code)
+                        if let n = state.referral?.count {
+                            LabeledContent("Cuentas referidas", value: "\(n)")
+                        }
+                        ShareLink(item: link) { Label("Compartir tu enlace de referido", systemImage: "square.and.arrow.up") }
+                        Button("Copiar código") { UIPasteboard.general.string = code; notice = L("Código copiado") }
+                    } header: {
+                        Text("Invita a tus amigos")
+                    } footer: {
+                        Text("Si alguien compra un plan con tu enlace, TorBox les da días extra a ambos.")
                     }
                 }
 
@@ -154,7 +172,19 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Cuenta")
-            .task { if state.user == nil { await state.refresh() } }
+            .task {
+                if state.user == nil { await state.refresh() }
+                if state.referral == nil { await state.loadReferral() }
+            }
+            .confirmationDialog("¿Copiar tu API key?", isPresented: $confirmCopyKey, titleVisibility: .visible) {
+                Button("Copiar") {
+                    UIPasteboard.general.setItems([[UTType.plainText.identifier: state.currentAPIKey ?? ""]],
+                                                  options: [.expirationDate: Date().addingTimeInterval(120)])
+                    notice = L("API key copiada. Se borra del portapapeles en 2 minutos.")
+                }
+            } message: {
+                Text("Quien tenga tu API key puede usar tu cuenta de TorBox. Pégala solo en apps de confianza.")
+            }
             .confirmationDialog("¿Cerrar sesión? Se borra la API key del iPhone.",
                                 isPresented: $confirmLogout, titleVisibility: .visible) {
                 Button("Cerrar sesión", role: .destructive) { state.logout() }

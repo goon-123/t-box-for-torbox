@@ -11,6 +11,11 @@ final class AppState: ObservableObject {
     @Published var user: UserInfo?
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var queuedTorrents: [QueuedItem] = []
+    @Published var queuedWeb: [QueuedItem] = []
+    @Published var referral: ReferralInfo?
+
+    func queued(_ kind: ItemKind) -> [QueuedItem] { kind == .torrent ? queuedTorrents : queuedWeb }
     private var transientFailures = 0
 
     /// Entradas desde Safari, Archivos o un Atajo; abren la hoja única de "Agregar".
@@ -115,6 +120,9 @@ final class AppState: ObservableObject {
         var errors: [String] = []
         var transientOnly = true
         var loaded: Set<ItemKind> = []
+        // La cola se consulta aparte y sin mostrar errores: es información complementaria.
+        async let qt = try? api.queued(.torrent)
+        async let qw = try? api.queued(.web)
         async let t = api.items(.torrent)
         async let w = api.items(.web)
         do { torrents = Self.sorted(try await t); loaded.insert(.torrent) }
@@ -129,6 +137,8 @@ final class AppState: ObservableObject {
             if !TorBoxAPI.isTransient(error) { transientOnly = false }
         }
         catch {}
+        if let q = await qt { queuedTorrents = q }
+        if let q = await qw { queuedWeb = q }
         // Un corte de red aislado (app en segundo plano, cambio de wifi) no se muestra: se reintenta en la siguiente vuelta.
         if !errors.isEmpty && transientOnly {
             transientFailures += 1
@@ -175,6 +185,27 @@ final class AppState: ObservableObject {
             else { webDownloads.removeAll { $0.id == t.id } }
         } catch { errorMessage = error.localizedDescription }
     }
+
+    func rename(_ t: Torrent, to name: String) async -> String? {
+        let clean = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !clean.isEmpty else { return nil }
+        do { try await api.rename(t.kind, id: t.id, name: clean); await refresh(); return nil }
+        catch { return error.localizedDescription }
+    }
+
+    func controlQueued(_ q: QueuedItem, kind: ItemKind, operation: String) async {
+        do {
+            try await api.controlQueued(id: q.id, operation: operation)
+            if kind == .torrent { queuedTorrents.removeAll { $0.id == q.id } } else { queuedWeb.removeAll { $0.id == q.id } }
+            await refresh()
+        } catch { errorMessage = error.localizedDescription }
+    }
+
+    func loadReferral() async {
+        referral = try? await api.referralData()
+    }
+
+    var currentAPIKey: String? { apiKey }
 
     /// Activa o quita AirLock. Devuelve el error para mostrarlo junto al control.
     @discardableResult

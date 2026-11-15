@@ -38,6 +38,34 @@ struct TorrentListView: View {
                         .foregroundStyle(.orange).font(.footnote)
                 }
 
+                let queue = state.queued(kind)
+                if !queue.isEmpty {
+                    Section {
+                        ForEach(queue) { q in
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(q.name).font(.subheadline.weight(.semibold)).lineLimit(2)
+                                Text("En cola de TorBox: empieza cuando haya un cupo libre.")
+                                    .font(.caption).foregroundStyle(.secondary)
+                            }
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    Task { await state.controlQueued(q, kind: kind, operation: "delete") }
+                                } label: { Label("Eliminar", systemImage: "trash") }
+                            }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    Task { await state.controlQueued(q, kind: kind, operation: "start") }
+                                } label: { Label("Iniciar", systemImage: "play.fill") }
+                                .tint(.green)
+                            }
+                        }
+                    } header: {
+                        Text(String(format: L("En cola (%d)"), queue.count))
+                    } footer: {
+                        Text("Desliza a la derecha para intentar iniciarla ahora, o a la izquierda para borrarla.")
+                    }
+                }
+
                 ForEach(visible) { t in
                     NavigationLink(value: t.ref) { TorrentRow(torrent: t) }
                         .swipeActions {

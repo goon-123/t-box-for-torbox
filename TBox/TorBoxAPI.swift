@@ -175,6 +175,41 @@ final class TorBoxAPI: @unchecked Sendable {
         _ = try unwrap(JSONValue.self, from: data)
     }
 
+    /// Renombra un torrent o una descarga web (el ítem debe estar listo).
+    func rename(_ kind: ItemKind, id: Int, name: String) async throws {
+        let body = try JSONSerialization.data(withJSONObject: [kind.controlIDKey: id, "name": name])
+        let req = try makeRequest(kind.editPath, method: "PUT", body: body, contentType: "application/json")
+        let data = try await send(req)
+        _ = try unwrap(JSONValue.self, from: data)
+    }
+
+    /// Descargas en cola de TorBox (type: torrent o webdl).
+    func queued(_ kind: ItemKind) async throws -> [QueuedItem] {
+        let req = try makeRequest("queued/getqueued", query: [
+            URLQueryItem(name: "type", value: kind == .torrent ? "torrent" : "webdl"),
+            URLQueryItem(name: "bypass_cache", value: "true")
+        ])
+        let data = try await send(req)
+        return try unwrap([QueuedItem].self, from: data) ?? []
+    }
+
+    /// Operaciones sobre la cola: "start" o "delete".
+    func controlQueued(id: Int, operation: String) async throws {
+        let body = try JSONSerialization.data(withJSONObject: ["queued_id": id, "operation": operation])
+        let req = try makeRequest("queued/controlqueued", method: "POST", body: body, contentType: "application/json")
+        let data = try await send(req)
+        _ = try unwrap(JSONValue.self, from: data)
+    }
+
+    /// Datos de referido del propio usuario.
+    func referralData() async throws -> ReferralInfo {
+        let data = try await send(makeRequest("user/referraldata"))
+        let json = try unwrap(JSONValue.self, from: data)
+        let info = ReferralInfo(json)
+        if info.code == nil { Diagnostics.log("REFERRAL no code found in referraldata") }
+        return info
+    }
+
     /// PUT edittorrent / editwebdownload con solo el ID y "airlocked". El ítem debe estar listo (en caché).
     func setAirlock(_ kind: ItemKind, id: Int, on: Bool) async throws {
         let body = try JSONSerialization.data(withJSONObject: [kind.controlIDKey: id, "airlocked": on])

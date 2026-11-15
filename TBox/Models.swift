@@ -152,6 +152,55 @@ enum ItemKind: String, Hashable, CaseIterable {
     var title: String { self == .torrent ? "Torrents" : "Web" }
 }
 
+/// Descarga que TorBox dejó en cola por falta de cupos. Aún no tiene ID de torrent ni de web download.
+struct QueuedItem: Decodable, Identifiable, Hashable {
+    let id: Int
+    let name: String
+    let createdAt: String?
+
+    enum CodingKeys: String, CodingKey { case id, name, created_at, magnet, hash }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.flexInt(.id) ?? 0
+        var n = c.flexString(.name)
+        if n == nil || n?.isEmpty == true, let m = c.flexString(.magnet) {
+            n = LinkParser.magnetName(m)
+        }
+        name = n ?? c.flexString(.hash) ?? L("Sin nombre")
+        createdAt = c.flexString(.created_at)
+    }
+}
+
+/// Código de referido propio del usuario, leído de forma tolerante (la API no documenta los campos).
+struct ReferralInfo {
+    let code: String?
+    let count: Int?
+
+    init(_ json: JSONValue?) {
+        var code: String?
+        var count: Int?
+        func walk(_ v: JSONValue, key: String) {
+            switch v {
+            case .object(let o): for (k, x) in o { walk(x, key: k.lowercased()) }
+            case .array(let a): if key.contains("referr") && count == nil { count = a.count }
+            case .string(let s):
+                if code == nil, key.contains("code") || key == "referral", s.count >= 6, !s.contains(" ") { code = s }
+            case .number(let d):
+                if count == nil, key.contains("count") || key.contains("referred") || key.contains("referrals") { count = Int(d) }
+            default: break
+            }
+        }
+        if let json { walk(json, key: "") }
+        self.code = code
+        self.count = count
+    }
+
+    var shareURL: URL? {
+        code.flatMap { URL(string: "https://torbox.app/subscription?referral=\($0)") }
+    }
+}
+
 /// Referencia para navegación: los IDs de torrents y de web downloads pueden coincidir.
 struct ItemRef: Hashable {
     let kind: ItemKind
@@ -406,6 +455,13 @@ struct ParsedLink: Hashable {
 }
 
 enum LinkParser {
+    /// Nombre legible de un magnet (parámetro dn), si lo trae.
+    static func magnetName(_ magnet: String) -> String? {
+        guard let dn = URLComponents(string: magnet)?.queryItems?.first(where: { $0.name == "dn" })?.value,
+              !dn.isEmpty else { return nil }
+        return dn.replacingOccurrences(of: "+", with: " ")
+    }
+
     /// Separa por espacios/saltos de línea y reconoce magnets y enlaces http(s).
     /// Devuelve también los fragmentos que no se reconocieron.
     static func parse(_ text: String) -> (links: [ParsedLink], ignored: [String]) {

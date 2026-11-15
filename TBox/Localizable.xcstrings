@@ -82,6 +82,16 @@
         }
       }
     },
+    "API key copiada. Se borra del portapapeles en 2 minutos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API key copied. It's cleared from the clipboard in 2 minutes."
+          }
+        }
+      }
+    },
     "Abres torbox.app, apruebas el acceso y la app recibe tu API key sola. El código dura 10 minutos.": {
       "localizations": {
         "en": {
@@ -432,6 +442,16 @@
         }
       }
     },
+    "Cambia el nombre en tu cuenta de TorBox.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changes the name in your TorBox account."
+          }
+        }
+      }
+    },
     "Cancelar": {
       "localizations": {
         "en": {
@@ -532,6 +552,16 @@
         }
       }
     },
+    "Compartir tu enlace de referido": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share your referral link"
+          }
+        }
+      }
+    },
     "Completada": {
       "localizations": {
         "en": {
@@ -578,6 +608,36 @@
           "stringUnit": {
             "state": "translated",
             "value": "Link password (optional)"
+          }
+        }
+      }
+    },
+    "Copiar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy"
+          }
+        }
+      }
+    },
+    "Copiar API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy API key"
+          }
+        }
+      }
+    },
+    "Copiar código": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy code"
           }
         }
       }
@@ -652,6 +712,16 @@
         }
       }
     },
+    "Cuentas referidas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Referred accounts"
+          }
+        }
+      }
+    },
     "Código": {
       "localizations": {
         "en": {
@@ -668,6 +738,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Code added"
+          }
+        }
+      }
+    },
+    "Código copiado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code copied"
           }
         }
       }
@@ -808,6 +888,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Unzip .zip when finished"
+          }
+        }
+      }
+    },
+    "Desliza a la derecha para intentar iniciarla ahora, o a la izquierda para borrarla.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swipe right to try starting it now, or left to delete it."
           }
         }
       }
@@ -958,6 +1048,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Queued"
+          }
+        }
+      }
+    },
+    "En cola (%d)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Queued (%d)"
+          }
+        }
+      }
+    },
+    "En cola de TorBox: empieza cuando haya un cupo libre.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Queued in TorBox: starts when a slot is free."
           }
         }
       }
@@ -1262,6 +1372,16 @@
         }
       }
     },
+    "Guardar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        }
+      }
+    },
     "Guardar en AirLock": {
       "localizations": {
         "en": {
@@ -1312,12 +1432,32 @@
         }
       }
     },
+    "Iniciar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        }
+      }
+    },
     "Iniciar sesión con TorBox": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Sign in with TorBox"
+          }
+        }
+      }
+    },
+    "Invita a tus amigos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invite your friends"
           }
         }
       }
@@ -1582,6 +1722,16 @@
         }
       }
     },
+    "Nombre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name"
+          }
+        }
+      }
+    },
     "Notificaciones": {
       "localizations": {
         "en": {
@@ -1822,6 +1972,16 @@
         }
       }
     },
+    "Quien tenga tu API key puede usar tu cuenta de TorBox. Pégala solo en apps de confianza.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anyone with your API key can use your TorBox account. Only paste it into apps you trust."
+          }
+        }
+      }
+    },
     "Quitar AirLock": {
       "localizations": {
         "en": {
@@ -1838,6 +1998,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Log cleared"
+          }
+        }
+      }
+    },
+    "Renombrado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renamed"
+          }
+        }
+      }
+    },
+    "Renombrar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rename"
           }
         }
       }
@@ -1908,6 +2088,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seeds / peers"
+          }
+        }
+      }
+    },
+    "Si alguien compra un plan con tu enlace, TorBox les da días extra a ambos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If someone buys a plan with your link, TorBox gives you both extra days."
           }
         }
       }
@@ -2222,6 +2412,16 @@
         }
       }
     },
+    "Tu código": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your code"
+          }
+        }
+      }
+    },
     "Uno por línea, mezclados si quieres. Los magnets van a Torrents y los enlaces a Web.": {
       "localizations": {
         "en": {
@@ -2398,6 +2598,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sign out? The API key will be removed from the iPhone."
+          }
+        }
+      }
+    },
+    "¿Copiar tu API key?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy your API key?"
           }
         }
       }

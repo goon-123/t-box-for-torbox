@@ -9,6 +9,10 @@ Each release ships `T-Box-X.Y.Z.ipa` and `T-Box.ipa` in [Releases](https://githu
 
 ### Added
 - **AirLock**: keep ready torrents and web downloads out of TorBox's 30-day inactivity cleanup. Toggle in the item's detail, swipe right in the lists, and a 🔒 on protected items. Requires a paid plan.
+- **Queue**: downloads TorBox left queued (no free slots) now appear at the top of Torrents and Web. Swipe to start them now or delete them.
+- **Rename** a ready torrent or web download.
+- **Invite your friends**: your own TorBox referral code and link, to copy or share (Account).
+- **Copy API key** (Account), with a warning; it's cleared from the clipboard after 2 minutes.
 - **Support T-Box** section in Account: Ko-fi, GitHub Sponsors and the TorBox referral code. A small card suggests it only once, after your 10th completed download, and never again.
 - **Feedback** section in Account: report a bug (with app version, iOS and device prefilled), suggest an improvement, or join the discussions on GitHub.
 - ♥ Sponsor button, issue forms (bug report and feature request) and Discussions on the GitHub repository.

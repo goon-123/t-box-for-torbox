@@ -18,6 +18,8 @@ struct TorrentDetailView: View {
     @State private var previewURL: URL?
     @State private var workingText: String?
     @State private var airlockBusy = false
+    @State private var renaming = false
+    @State private var newName = ""
     @State private var airlockError: String?
 
     var body: some View {
@@ -123,6 +125,11 @@ struct TorrentDetailView: View {
                             Label("Buscar más peers", systemImage: "arrow.triangle.2.circlepath")
                         }
                     }
+                    if t.isReady {
+                        Button { newName = t.name; renaming = true } label: {
+                            Label("Renombrar", systemImage: "pencil")
+                        }
+                    }
                     if let hash = t.hash {
                         Button { UIPasteboard.general.string = hash; flash(L("Hash copiado")) } label: {
                             Label("Copiar hash", systemImage: "number")
@@ -140,6 +147,16 @@ struct TorrentDetailView: View {
                             titleVisibility: .visible,
                             presenting: selectedFile) { f in
             fileActions(t, f)
+        }
+        .alert("Renombrar", isPresented: $renaming) {
+            TextField("Nombre", text: $newName)
+            Button("Cancelar", role: .cancel) {}
+            Button("Guardar") {
+                let name = newName
+                Task { if let e = await state.rename(t, to: name) { flash(e) } else { flash(L("Renombrado")) } }
+            }
+        } message: {
+            Text("Cambia el nombre en tu cuenta de TorBox.")
         }
         .confirmationDialog("¿Eliminar de TorBox?", isPresented: $confirmDelete, titleVisibility: .visible) {
             Button("Eliminar", role: .destructive) {

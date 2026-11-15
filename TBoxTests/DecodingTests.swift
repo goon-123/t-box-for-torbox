@@ -55,6 +55,16 @@ final class DecodingTests: XCTestCase {
         XCTAssertEqual(ItemKind.web.editPath, "webdl/editwebdownload")
     }
 
+    func testQueuedAndReferral() throws {
+        let q = try JSONDecoder().decode([QueuedItem].self, from: Data(#"[{"id":7,"magnet":"magnet:?xt=urn:btih:abc&dn=Big+Buck+Bunny"}]"#.utf8))
+        XCTAssertEqual(q.first?.name, "Big Buck Bunny")
+        let json = try JSONDecoder().decode(JSONValue.self, from: Data(#"{"referral_code":"7b4a584a-00a5","referred_accounts":3}"#.utf8))
+        let r = ReferralInfo(json)
+        XCTAssertEqual(r.code, "7b4a584a-00a5")
+        XCTAssertEqual(r.count, 3)
+        XCTAssertNil(ReferralInfo(nil).shareURL)
+    }
+
     func testFailureEnvelope() throws {
         let json = #"{"success":false,"error":"ITEM_NOT_FOUND","detail":"Expired","data":null}"#
         let env = try decoder.decode(APIEnvelope<JSONValue>.self, from: Data(json.utf8))
