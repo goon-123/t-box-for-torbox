@@ -1,0 +1,5 @@
+• AirLock: keep items from being auto-deleted
+• See and manage TorBox's queue
+• Share › T-Box opens the Add sheet directly
+• Rename items, copy your API key, share your referral code
+• Downloads now in Files › On My iPhone › T-Box

@@ -2,7 +2,7 @@
 """Updates docs/source.json (AltStore/Feather/ESign/SideStore source) for a published version.
 
 Usage: python3 tools/update_source.py VERSION BUILD DATE SIZE_BYTES
-The release notes come from the matching CHANGELOG.md section. The new version goes first;
+The notes come from docs/release-notes/VERSION.txt if it exists, else a short digest of the CHANGELOG section. The new version goes first;
 older versions are kept so sources can offer them.
 """
 import json, re, sys
@@ -14,14 +14,23 @@ REPO = "https://github.com/maniac75/t-box-for-torbox"
 
 
 def notes_for(version: str) -> str:
+    short = ROOT / "docs" / "release-notes" / f"{version}.txt"
+    if short.exists():                       # hand-written summary wins
+        return short.read_text().strip()
     text = (ROOT / "CHANGELOG.md").read_text()
     m = re.search(rf"^## \[{re.escape(version)}\].*?$(.*?)(?=^## \[|^\[\d)", text, re.S | re.M)
     if not m:
         return f"T-Box {version}"
-    body = m.group(1).strip()
-    body = re.sub(r"\*\*(.+?)\*\*", r"\1", body)          # drop bold
+    body = re.sub(r"\*\*(.+?)\*\*", r"\1", m.group(1))   # drop bold
     body = re.sub(r"\[(.+?)\]\(.+?\)", r"\1", body)       # drop links
-    return body
+    # Short version for sources: one line per bullet, only its headline (text before ":" or the first sentence).
+    lines = []
+    for line in body.splitlines():
+        if not line.startswith("- "):
+            continue
+        head = re.split(r":\s|\.\s|\s\(", line[2:], maxsplit=1)[0].strip().rstrip(".")
+        lines.append("• " + head)
+    return "\n".join(lines[:8]) or f"T-Box {version}"
 
 
 def main():
