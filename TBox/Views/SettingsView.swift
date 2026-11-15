@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct SettingsView: View {
     @EnvironmentObject private var state: AppState
@@ -149,11 +150,17 @@ struct SettingsView: View {
             } message: {
                 Text("TorBox decidirá si se puede aplicar a tu cuenta.")
             }
-            .fileImporter(isPresented: $pickFolder, allowedContentTypes: [.folder]) { result in
-                if case .success(let url) = result {
-                    AppSettings.setDestination(url)
-                    folderName = AppSettings.destinationName
+            .sheet(isPresented: $pickFolder) {
+                FolderPicker { url in
+                    pickFolder = false
+                    guard let url else { return }
+                    if AppSettings.setDestination(url) {
+                        folderName = AppSettings.destinationName
+                    } else {
+                        notice = L("No pude guardar el acceso a esa carpeta. Prueba con otra o deja la carpeta de T-Box.")
+                    }
                 }
+                .ignoresSafeArea()
             }
             .confirmationDialog("¿Activar avisos instantáneos?", isPresented: $confirmNtfy, titleVisibility: .visible) {
                 Button("Activar") { Task { await ntfyEnable() } }
@@ -229,5 +236,35 @@ struct SettingsView: View {
         }()
         guard let d else { return iso }
         return d.formatted(date: .abbreviated, time: .omitted)
+    }
+}
+
+
+/// Selector de carpetas con UIKit. El `.fileImporter` de SwiftUI a veces no responde al tocar "Abrir"
+/// cuando se elige una carpeta; UIDocumentPickerViewController es el camino estable.
+struct FolderPicker: UIViewControllerRepresentable {
+    let onPick: (URL?) -> Void
+
+    func makeCoordinator() -> Coordinator { Coordinator(onPick: onPick) }
+
+    func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.folder], asCopy: false)
+        picker.allowsMultipleSelection = false
+        picker.delegate = context.coordinator
+        return picker
+    }
+
+    func updateUIViewController(_ controller: UIDocumentPickerViewController, context: Context) {}
+
+    final class Coordinator: NSObject, UIDocumentPickerDelegate {
+        let onPick: (URL?) -> Void
+        init(onPick: @escaping (URL?) -> Void) { self.onPick = onPick }
+
+        func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+            Diagnostics.log("FOLDER picked \(urls.first?.lastPathComponent ?? "-")")
+            onPick(urls.first)
+        }
+
+        func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) { onPick(nil) }
     }
 }

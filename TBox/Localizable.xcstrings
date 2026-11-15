@@ -1422,6 +1422,16 @@
         }
       }
     },
+    "No pude guardar el acceso a esa carpeta. Prueba con otra o deja la carpeta de T-Box.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I couldn't save access to that folder. Try another one or keep the T-Box folder."
+          }
+        }
+      }
+    },
     "No reconocido: ": {
       "localizations": {
         "en": {

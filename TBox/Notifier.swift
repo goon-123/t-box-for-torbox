@@ -108,15 +108,22 @@ enum AppSettings {
         return url
     }
 
-    static func setDestination(_ url: URL?) {
+    @discardableResult
+    static func setDestination(_ url: URL?) -> Bool {
         guard let url else {
             destinationBookmark = nil
             destinationName = nil
-            return
+            return true
         }
         let scoped = url.startAccessingSecurityScopedResource()
         defer { if scoped { url.stopAccessingSecurityScopedResource() } }
-        destinationBookmark = try? url.bookmarkData()
-        destinationName = url.lastPathComponent
+        do {
+            destinationBookmark = try url.bookmarkData(options: [], includingResourceValuesForKeys: nil, relativeTo: nil)
+            destinationName = url.lastPathComponent
+            return true
+        } catch {
+            Diagnostics.log("FOLDER bookmark failed: \(error.localizedDescription)")
+            return false
+        }
     }
 }
