@@ -100,6 +100,22 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    Link(destination: AppConfig.bugReportURL) {
+                        Label("Reportar un error", systemImage: "ladybug")
+                    }
+                    Link(destination: AppConfig.featureRequestURL) {
+                        Label("Sugerir una mejora", systemImage: "lightbulb")
+                    }
+                    Link(destination: AppConfig.discussionsURL) {
+                        Label("Preguntas y comunidad", systemImage: "bubble.left.and.bubble.right")
+                    }
+                } header: {
+                    Text("Opina")
+                } footer: {
+                    Text("Se abre GitHub (necesitas una cuenta gratuita). Al reportar un error, la versión de la app y de iOS ya van completadas. Ayuda mucho adjuntar el diagnóstico de más abajo: la API key va censurada.")
+                }
+
+                Section {
                     Link(destination: AppConfig.koFiURL) {
                         Label("Invítame un café", systemImage: "cup.and.saucer")
                     }

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Genera docs/SITIOS.md con los sitios compatibles de las descargas web de TorBox.
+"""Generates docs/SITES.md with the sites supported by TorBox web downloads.
 
-Fuente: https://api.torbox.app/v1/api/webdl/hosters (pública, sin API key).
-Los sitios para adultos van en una sección aparte, plegada. Lo ejecuta GitHub Actions cada semana.
+Source: https://api.torbox.app/v1/api/webdl/hosters (public, no API key).
+Adult sites go in a separate, collapsed section. Run weekly by GitHub Actions.
 """
 import json
 import sys
@@ -19,20 +19,20 @@ def main(out_path: str) -> None:
     visible = [h for h in data if not h.get("nsfw")]
     adult = [h for h in data if h.get("nsfw")]
     groups = {
-        "stream": ("Videos, audio y redes sociales", "Videos, audio y redes"),
-        "hoster": ("Servicios de archivos", "Archivos"),
+        "stream": ("Video, audio and social networks", "Video"),
+        "hoster": ("File hosts", "Files"),
     }
-    today = datetime.now(timezone.utc).strftime("%d-%m-%Y")
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     lines = [
-        "# Sitios compatibles con descargas web",
+        "# Sites supported by web downloads",
         "",
-        "Lista de sitios desde los que TorBox puede bajar archivos (pestaña **Web** de T-Box).",
-        f"Actualizada automáticamente desde la API de TorBox: {today}.",
+        "Sites TorBox can download from (the **Web** tab in T-Box). *Sitios desde los que TorBox puede descargar (pestaña **Web**).*",
+        f"Updated automatically from the TorBox API: {today}.",
         "",
-        "- ✅ disponible · ⚠️ con problemas o caído en este momento",
-        "- **Límite diario**: enlaces por día y por cuenta (— = sin límite).",
-        "- La disponibilidad cambia; T-Box revisa el estado en vivo al pegar un enlace.",
-        f"- Los {len(adult)} sitios para adultos (+18) están al final, en una sección plegada.",
+        "- ✅ available · ⚠️ having issues or down right now",
+        "- **Daily limit**: links per day per account (— = no limit).",
+        "- Availability changes; T-Box checks the live status when you paste a link.",
+        f"- The {len(adult)} adult (18+) sites are at the end, in a collapsed section.",
         "",
     ]
     for key, (title, _) in groups.items():
@@ -40,7 +40,7 @@ def main(out_path: str) -> None:
                       key=lambda h: h.get("name", "").lower())
         if not rows:
             continue
-        lines += [f"## {title} ({len(rows)})", "", "| Sitio | Dominios | Estado | Límite diario | Nota |",
+        lines += [f"## {title} ({len(rows)})", "", "| Site | Domains | Status | Daily limit | Note |",
                   "|---|---|:-:|:-:|---|"]
         for h in rows:
             domains = ", ".join((h.get("domains") or [])[:4])
@@ -51,9 +51,9 @@ def main(out_path: str) -> None:
         lines.append("")
     if adult:
         rows = sorted(adult, key=lambda h: h.get("name", "").lower())
-        lines += [f"## Sitios para adultos +18 ({len(rows)})", "", "<details>",
-                  "<summary>Mostrar lista</summary>", "",
-                  "| Sitio | Dominios | Estado | Límite diario | Nota |", "|---|---|:-:|:-:|---|"]
+        lines += [f"## Adult sites 18+ ({len(rows)})", "", "<details>",
+                  "<summary>Show list</summary>", "",
+                  "| Site | Domains | Status | Daily limit | Note |", "|---|---|:-:|:-:|---|"]
         for h in rows:
             domains = ", ".join((h.get("domains") or [])[:4])
             status = "✅" if h.get("status") else "⚠️"
@@ -63,8 +63,8 @@ def main(out_path: str) -> None:
         lines += ["", "</details>", ""]
     with open(out_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
-    print(f"{len(visible)} + {len(adult)} (+18) sitios escritos en {out_path}")
+    print(f"{len(visible)} + {len(adult)} (18+) sites written to {out_path}")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "docs/SITIOS.md")
+    main(sys.argv[1] if len(sys.argv) > 1 else "docs/SITES.md")

@@ -1,75 +1,79 @@
-# Cambios
+# Changelog
 
-Formato: [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Versiones: [SemVer](https://semver.org/lang/es/).
-Cada versión publicada trae su `T-Box.ipa` en [Releases](https://github.com/maniac75/t-box-for-torbox/releases).
+Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [SemVer](https://semver.org/).
+Each release ships `T-Box-X.Y.Z.ipa` and `T-Box.ipa` in [Releases](https://github.com/maniac75/t-box-for-torbox/releases). Versions before 0.3.0 are marked as pre-releases (early development).
+
+*Registro de cambios en inglés. La app está en español e inglés.*
 
 ## [0.3.0] - 2026-11-15
 
-### Agregado
-- **Apoyar T-Box** en Cuenta: Ko-fi, GitHub Sponsors y el código de referido. Una tarjeta lo propone una sola vez, después de la décima descarga, y no vuelve a aparecer.
-- Botón ♥ Sponsor en el repositorio.
+### Added
+- **Support T-Box** section in Account: Ko-fi, GitHub Sponsors and the TorBox referral code. A small card suggests it only once, after your 10th completed download, and never again.
+- **Feedback** section in Account: report a bug (with app version, iOS and device prefilled), suggest an improvement, or join the discussions on GitHub.
+- ♥ Sponsor button, issue forms (bug report and feature request) and Discussions on the GitHub repository.
 
-### Cambiado
-- Las descargas quedan en **Archivos › En mi iPhone › T-Box**, que ahora es visible. Se quitó "Elegir carpeta…": el selector de carpetas de iOS no respondía. Para mover un archivo: desliza › Guardar en… (hoja Compartir › Guardar en Archivos).
-- Los cortes de red pasajeros del refresco automático ya no se muestran como error; solo si se repiten tres veces seguidas.
+### Changed
+- Downloads are saved to **Files › On My iPhone › T-Box**, which is now visible. "Choose folder…" was removed because the iOS folder picker didn't respond. To move a file elsewhere: swipe › Save to… (Share sheet › Save to Files).
+- Brief network drops during automatic refresh are no longer shown as errors, only if they happen three times in a row.
+- The repository is now in English, with a Spanish README.
 
-### Corregido
-- Diagnóstico más detallado del llavero compartido de la extensión de Compartir.
+### Fixed
+- More detailed diagnostics for the Share extension's shared keychain.
 
 ## [0.2.3] - 2026-11-15
 
-### Corregido
-- **Elegir carpeta para descargas**: al tocar "Abrir" no pasaba nada. Ahora usa el selector de carpetas nativo de iOS y avisa si no puede guardar el acceso.
+### Fixed
+- **Choose download folder**: tapping "Open" did nothing. Switched to the native UIKit folder picker. *(Didn't solve it; replaced in 0.3.0.)*
 
 ## [0.2.2] - 2026-11-15
 
-### Agregado
-- **Actividad**: desliza para eliminar de TorBox lo que no avanza, botón **Eliminar detenidos** (sin seeds o sin progreso) y **Cancelar todas** las descargas al iPhone, incluidas las que quedaron colgadas.
-- **Limpiar** la lista "Terminado hace poco".
+### Added
+- **Activity**: swipe to delete stalled items from TorBox, **Delete stalled** button (no seeds or no progress) and **Cancel all** downloads to iPhone, including stuck ones.
+- **Clear** the "Recently finished" list.
 
 ## [0.2.1] - 2026-11-15
 
-### Agregado
-- **T-Box en el menú Compartir** de cualquier app (extensión de Compartir). Si la firma permite compartir el llavero, envía los enlaces a TorBox ahí mismo; si no, abre T-Box con el enlace pegado. No depende de App Groups, así que no rompe la instalación con ningún certificado.
-- Botón **Probar notificación** en Cuenta › Avisos.
-- Interruptor **Mostrar sitios +18** en la lista de sitios compatibles.
+### Added
+- **T-Box in the Share sheet** of any app (Share extension). If the signing allows a shared keychain, it sends links to TorBox right there; otherwise it opens T-Box with the link filled in. It doesn't rely on App Groups, so it can't break installation with any certificate.
+- **Test notification** button in Account › Notifications.
+- **Show 18+ sites** toggle in the supported sites list.
 
-### Cambiado
-- El Atajo de iOS acepta también texto (`tbox://add?text=`), para compartir magnets.
+### Changed
+- The iOS Shortcut also accepts text (`tbox://add?text=`), to share magnets.
 
 ## [0.2.0] - 2026-11-15
 
-### Agregado
-- **Hoja única para agregar**: un solo **+** en cualquier pestaña. Pegas magnets y enlaces web mezclados (uno por línea) y cada uno se reconoce solo y va a Torrents o a Web. También acepta varios archivos `.torrent` a la vez.
-- **Resultado en vivo** debajo del cuadro: enviando, agregado, en caché, en cola o error con su motivo; luego el progreso en TorBox y, al terminar, botones **Descargar** y **A Fotos** ahí mismo.
-- **Barra de actividad** flotante con lo que está en curso en TorBox y bajando al iPhone, y panel de detalle al tocarla.
-- **Avisos al terminar** dentro de la app y **notificaciones** con la app en segundo plano (descargas al iPhone y cosas listas en TorBox).
-- **Revisión en segundo plano** de TorBox (iOS decide la frecuencia).
-- **Carpeta de descargas a elección** (iCloud Drive, En mi iPhone, discos), **Guardar en…** y **descomprimir .zip** automáticamente o a pedido.
-- **Ver**: vista previa de PDF, imágenes, documentos y audio.
-- **Avisos instantáneos con ntfy** (experimental): configura el webhook de TorBox hacia un tema privado de ntfy.
+### Added
+- **Single add sheet**: one **+** on every tab. Paste magnets and web links mixed together (one per line); each is recognized and sent to Torrents or Web. Also accepts several `.torrent` files at once.
+- **Live result** under the box: sending, added, cached, queued or error with its reason; then the progress in TorBox and, when done, **Download** and **To Photos** buttons right there.
+- Floating **activity bar** with what's in progress in TorBox and downloading to the iPhone, with a detail panel.
+- **In-app alerts** and **notifications** in the background (downloads to iPhone and items ready in TorBox).
+- **Background check** of TorBox (iOS decides how often).
+- **Download folder of your choice**, **Save to…** and **unzip .zip** automatically or on demand.
+- **Preview** PDFs, images, documents and audio.
+- **Instant alerts with ntfy** (experimental): sets TorBox's webhook to a private ntfy topic.
 
-### Cambiado
-- El botón **Agregar** ahora es grande, está abajo y sube con el teclado.
-- Los enlaces que entran bien se borran del cuadro; los que fallan quedan para corregirlos. Botón ✕ para limpiar.
-- Los `.torrent` se envían por el endpoint asíncrono de TorBox (evita errores 502 con archivos grandes).
+### Changed
+- The **Add** button is now large, at the bottom, and rises with the keyboard.
+- Links that are added are cleared from the box; failed ones stay so you can fix them. ✕ button to clear.
+- `.torrent` files use TorBox's asynchronous endpoint (avoids 502 errors with large files).
 
-### Corregido
-- Los enlaces internos de **Scribd** (`…?doc=ID`) se convierten al formato que acepta TorBox.
-- El campo de contraseña ya no ofrece contraseñas guardadas de otros sitios.
-- Los nombres de magnets con `+` se muestran con espacios.
+### Fixed
+- Internal **Scribd** links (`…?doc=ID`) are converted to the format TorBox accepts.
+- The password field no longer offers saved passwords from other sites.
+- Magnet names with `+` are shown with spaces.
 
 ## [0.1.1] - 2026-11-15
 
-### Corregido
-- El aviso intermitente **"Operación cancelada"** en Torrents y Web: había refrescos que se cancelaban entre sí. Ahora hay un solo refresco a la vez y las cancelaciones no se muestran como error.
+### Fixed
+- The intermittent **"Operation cancelled"** message in Torrents and Web: refreshes were cancelling each other. Now only one refresh runs at a time and cancellations aren't shown as errors.
 
 ## [0.1.0] - 2026-11-15
 
-### Agregado
-- Primera versión: login con código de TorBox o API key, lista de torrents y descargas web con progreso, agregar magnets y `.torrent`, reproducir MP4/MOV, abrir en Infuse o VLC, descargas en segundo plano a Archivos, guardar en Fotos, copiar y compartir enlaces.
-- Detección de sitios compatibles al pegar enlaces web.
-- Español e inglés, diagnóstico exportable con la API key censurada, enlace de referido opcional.
+### Added
+- First version: sign in with a TorBox code or API key, torrent and web download lists with progress, add magnets and `.torrent` files, play MP4/MOV, open in Infuse or VLC, background downloads to Files, save to Photos, copy and share links.
+- Supported site detection when pasting web links.
+- Spanish and English, exportable diagnostics with the API key redacted, optional referral link.
 
 [0.3.0]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.3.0
 [0.2.3]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.3

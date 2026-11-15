@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Questions and conversation / Preguntas y conversación
+    url: https://github.com/maniac75/t-box-for-torbox/discussions
+    about: For questions or ideas that aren't a bug yet. / Para preguntas o ideas que todavía no son un error.
+  - name: 📖 TorBox help / Ayuda de TorBox
+    url: https://support.torbox.app
+    about: Account, billing or TorBox service issues. / Cuenta, pagos o problemas del servicio TorBox.

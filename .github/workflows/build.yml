@@ -3,13 +3,21 @@ name: Build
 on:
   push:
     branches: [main]
+    # Docs-only changes don't need a build.
+    paths-ignore: ["**.md", "docs/**", ".github/ISSUE_TEMPLATE/**", ".github/FUNDING.yml", "tools/**", ".github/workflows/sites.yml"]
   workflow_dispatch:
+    inputs:
+      publish:
+        description: "Promote the current version from pre-release to stable (no build)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 jobs:
   build:
+    if: ${{ !inputs.publish }}
     runs-on: macos-latest
     timeout-minutes: 40
     steps:
@@ -70,7 +78,7 @@ jobs:
             test.log
           if-no-files-found: ignore
 
-      - name: Publicar versión (cada push a main)
+      - name: Publish pre-release (every push to main)
         if: github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -79,13 +87,24 @@ jobs:
           TAG="v$VER"
           # Notas: la sección de esta versión en CHANGELOG.md
           awk -v v="$VER" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} /^\[[0-9]/ {f=0} f' CHANGELOG.md > notes.md
-          printf '\n---\nBuild %s · %s\n\nFírmala con tu propio certificado (Feather, ESign, SideStore…) antes de instalar.\n' "${{ github.run_number }}" "${GITHUB_SHA::7}" >> notes.md
+          printf '\n---\nBuild %s · %s\n\nSign it with your own certificate (Feather, ESign, SideStore…) before installing. / Fírmala con tu propio certificado antes de instalar.\n' "${{ github.run_number }}" "${GITHUB_SHA::7}" >> notes.md
           if gh release view "$TAG" >/dev/null 2>&1; then
             # Misma versión, nueva compilación: se reemplaza el .ipa y se actualizan las notas.
             gh release upload "$TAG" "T-Box-$VER.ipa" T-Box.ipa --clobber
             gh release edit "$TAG" --notes-file notes.md --title "T-Box $VER"
           else
-            gh release create "$TAG" "T-Box-$VER.ipa" T-Box.ipa --target "$GITHUB_SHA" --title "T-Box $VER" --notes-file notes.md --latest
+            gh release create "$TAG" "T-Box-$VER.ipa" T-Box.ipa --target "$GITHUB_SHA" --title "T-Box $VER" --notes-file notes.md --prerelease
           fi
-          # La antigua publicación móvil "latest" ya no se usa.
           gh release delete latest --yes --cleanup-tag 2>/dev/null || true
+
+  publish:
+    if: ${{ inputs.publish }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Promote to stable
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VER=$(grep -m1 MARKETING_VERSION project.yml | sed -E 's/.*"(.*)".*/\1/')
+          gh release edit "v$VER" --prerelease=false --latest

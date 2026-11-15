@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 /// Todo lo que alguien que compile su propia versión querría cambiar está aquí.
 enum AppConfig {
@@ -13,6 +14,19 @@ enum AppConfig {
 
     static let koFiURL = URL(string: "https://ko-fi.com/supermaniac")!
     static let sponsorsURL = URL(string: "https://github.com/sponsors/maniac75")!
+    static var bugReportURL: URL {
+        let app = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "?"
+        var c = URLComponents(string: "https://github.com/maniac75/t-box-for-torbox/issues/new")!
+        c.queryItems = [
+            URLQueryItem(name: "template", value: "bug_report.yml"),
+            URLQueryItem(name: "version", value: "\(app) (\(build))"),
+            URLQueryItem(name: "ios", value: "iOS \(UIDevice.current.systemVersion), \(Diagnostics.deviceModel)")
+        ]
+        return c.url!
+    }
+    static let featureRequestURL = URL(string: "https://github.com/maniac75/t-box-for-torbox/issues/new?template=feature_request.yml")!
+    static let discussionsURL = URL(string: "https://github.com/maniac75/t-box-for-torbox/discussions")!
     static let repoURL = URL(string: "https://github.com/maniac75/t-box-for-torbox")!
 }
 

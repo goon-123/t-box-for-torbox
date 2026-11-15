@@ -1,16 +1,16 @@
-# Sitios compatibles con descargas web
+# Sites supported by web downloads
 
-Lista de sitios desde los que TorBox puede bajar archivos (pestaña **Web** de T-Box).
-Actualizada automáticamente desde la API de TorBox: 15-11-2026.
+Sites TorBox can download from (the **Web** tab in T-Box). *Sitios desde los que TorBox puede descargar (pestaña **Web**).*
+Updated automatically from the TorBox API: 2026-11-15.
 
-- ✅ disponible · ⚠️ con problemas o caído en este momento
-- **Límite diario**: enlaces por día y por cuenta (— = sin límite).
-- La disponibilidad cambia; T-Box revisa el estado en vivo al pegar un enlace.
-- Los 28 sitios para adultos (+18) están al final, en una sección plegada.
+- ✅ available · ⚠️ having issues or down right now
+- **Daily limit**: links per day per account (— = no limit).
+- Availability changes; T-Box checks the live status when you paste a link.
+- The 28 adult (18+) sites are at the end, in a collapsed section.
 
-## Videos, audio y redes sociales (51)
+## Video, audio and social networks (51)
 
-| Sitio | Dominios | Estado | Límite diario | Nota |
+| Site | Domains | Status | Daily limit | Note |
 |---|---|:-:|:-:|---|
 | ABCNews | abcnews.go.com | ✅ | 100 |  |
 | Acast | acast.com | ✅ | 100 |  |
@@ -64,9 +64,9 @@ Actualizada automáticamente desde la API de TorBox: 15-11-2026.
 | Yandex Video | video.yandex.ru, yandex.ru, yandex.com | ✅ | 100 |  |
 | YouTube | youtube.com, youtu.be | ✅ | 100 |  |
 
-## Servicios de archivos (85)
+## File hosts (85)
 
-| Sitio | Dominios | Estado | Límite diario | Nota |
+| Site | Domains | Status | Daily limit | Note |
 |---|---|:-:|:-:|---|
 | 123Pan | 123684.com, 123pan.com | ⚠️ | 5 |  |
 | 1Fichier | 1fichier.com | ✅ | 50 |  |
@@ -154,12 +154,12 @@ Actualizada automáticamente desde la API de TorBox: 15-11-2026.
 | Yandex Disk | disk.yandex.com, disk.yandex.net, disk.yandex.ru | ✅ | 100 |  |
 | ZeroFS | zerofs.link | ✅ | 100 |  |
 
-## Sitios para adultos +18 (28)
+## Adult sites 18+ (28)
 
 <details>
-<summary>Mostrar lista</summary>
+<summary>Show list</summary>
 
-| Sitio | Dominios | Estado | Límite diario | Nota |
+| Site | Domains | Status | Daily limit | Note |
 |---|---|:-:|:-:|---|
 | 4Chan | 4chan.org, 4chanarchives.com, 4archive.org | ✅ | 100 | Supports Boards and Threads. Also supports archive sites. |
 | 4Tube | 4tube.com | ✅ | 100 |  |

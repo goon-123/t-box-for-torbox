@@ -1,0 +1,15 @@
+name: 💡 Feature request / Sugerir una mejora
+description: An idea to make T-Box better. / Una idea para mejorar T-Box.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like? / ¿Qué te gustaría?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What would it help you with? / ¿Para qué te serviría?
+      description: The problem behind the idea helps us find the best solution. / Saber el problema detrás de la idea ayuda a encontrar la mejor solución.

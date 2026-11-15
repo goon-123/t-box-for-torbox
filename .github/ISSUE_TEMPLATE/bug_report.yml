@@ -1,0 +1,47 @@
+name: 🐞 Bug report / Reportar un error
+description: Something doesn't work as expected. / Algo no funciona como debería.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! English or Spanish is fine. / ¡Gracias por reportar! Puedes escribir en español o en inglés.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened? / ¿Qué pasó?
+      description: Steps to reproduce, if you can. Screenshots help. / Pasos para reproducirlo, si puedes. Las capturas ayudan.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect? / ¿Qué esperabas?
+  - type: input
+    id: version
+    attributes:
+      label: T-Box version / Versión de T-Box
+      placeholder: "0.3.0 (20)"
+    validations:
+      required: true
+  - type: input
+    id: ios
+    attributes:
+      label: iOS version and device / Versión de iOS y equipo
+      placeholder: "iOS 18.2, iPhone 15"
+  - type: dropdown
+    id: plan
+    attributes:
+      label: TorBox plan / Plan de TorBox
+      options: [Free, Essential, Standard, Pro, "Don't know / No sé"]
+  - type: input
+    id: signing
+    attributes:
+      label: How did you install it? / ¿Cómo la instalaste?
+      placeholder: "Feather, ESign, SideStore, AltStore…"
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics / Diagnóstico
+      description: Account › Export diagnostics. The API key is redacted automatically. / Cuenta › Exportar diagnóstico. La API key va censurada automáticamente.
+      render: text

@@ -1612,6 +1612,16 @@
         }
       }
     },
+    "Opina": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feedback"
+          }
+        }
+      }
+    },
     "Para TorBox": {
       "localizations": {
         "en": {
@@ -1722,6 +1732,16 @@
         }
       }
     },
+    "Preguntas y comunidad": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questions and community"
+          }
+        }
+      }
+    },
     "Preparando vista previa…": {
       "localizations": {
         "en": {
@@ -1772,6 +1792,16 @@
         }
       }
     },
+    "Reportar un error": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report a bug"
+          }
+        }
+      }
+    },
     "Reproducir aquí": {
       "localizations": {
         "en": {
@@ -1808,6 +1838,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Result"
+          }
+        }
+      }
+    },
+    "Se abre GitHub (necesitas una cuenta gratuita). Al reportar un error, la versión de la app y de iOS ya van completadas. Ayuda mucho adjuntar el diagnóstico de más abajo: la API key va censurada.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens GitHub (you need a free account). When reporting a bug, the app and iOS versions are filled in for you. Attaching the diagnostics below helps a lot: the API key is redacted."
           }
         }
       }
@@ -1908,6 +1948,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "These have no seeds or haven't progressed at all. They'll be removed from your TorBox account."
+          }
+        }
+      }
+    },
+    "Sugerir una mejora": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggest an improvement"
           }
         }
       }

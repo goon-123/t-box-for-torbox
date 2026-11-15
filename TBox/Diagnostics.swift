@@ -66,6 +66,15 @@ final class Diagnostics {
 
     var count: Int { queue.sync { lines.count } }
 
+    /// Identificador del modelo, p. ej. "iPhone17,2".
+    static var deviceModel: String {
+        var sys = utsname()
+        uname(&sys)
+        return withUnsafePointer(to: &sys.machine) {
+            $0.withMemoryRebound(to: CChar.self, capacity: 1) { String(cString: $0) }
+        }
+    }
+
     /// Genera un archivo .txt para compartir.
     func exportFile(plan: String?) -> URL? {
         let info = Bundle.main.infoDictionary

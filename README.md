@@ -4,142 +4,151 @@
 
 # T-Box
 
-**Cliente no oficial de [TorBox](https://torbox.app) para iPhone.**
-Nativo, rápido y en español (e inglés). Pensado para instalar por sideload.
+**Unofficial [TorBox](https://torbox.app) client for iPhone.**
+Native, fast, in English and Spanish. Built to be sideloaded.
 
-[![Última versión](https://img.shields.io/github/v/release/maniac75/t-box-for-torbox?label=versi%C3%B3n)](https://github.com/maniac75/t-box-for-torbox/releases/latest)
+[![Latest release](https://img.shields.io/github/v/release/maniac75/t-box-for-torbox?label=release)](https://github.com/maniac75/t-box-for-torbox/releases/latest)
 [![Build](https://github.com/maniac75/t-box-for-torbox/actions/workflows/build.yml/badge.svg)](https://github.com/maniac75/t-box-for-torbox/actions/workflows/build.yml)
 ![iOS 17+](https://img.shields.io/badge/iOS-17%2B-black?logo=apple)
-![SwiftUI](https://img.shields.io/badge/SwiftUI-nativo-orange?logo=swift)
+![SwiftUI](https://img.shields.io/badge/SwiftUI-native-orange?logo=swift)
 
-**[⬇️ Descargar T-Box.ipa](https://github.com/maniac75/t-box-for-torbox/releases/latest/download/T-Box.ipa)** · [Novedades](CHANGELOG.md) · [Sitios compatibles](docs/SITIOS.md)
+**[⬇️ Download T-Box.ipa](https://github.com/maniac75/t-box-for-torbox/releases/latest/download/T-Box.ipa)** · [What's new](CHANGELOG.md) · [Supported sites](docs/SITES.md) · **[🇪🇸 Español](README.es.md)**
 
 </div>
 
-> T-Box no está afiliado a TorBox. "TorBox" es marca de sus respectivos dueños.
-> *Unofficial TorBox client for iPhone, in Spanish and English. Not affiliated with TorBox.*
+> T-Box is not affiliated with TorBox. "TorBox" is a trademark of its respective owners.
 
 ---
 
-## ¿Qué es?
+## What is it?
 
-TorBox es un servicio en la nube que descarga torrents, archivos de sitios como Mega o Mediafire y videos de YouTube, Instagram o X, y te los entrega por un enlace rápido. Su web funciona en el iPhone, pero es incómoda. **T-Box** es una app nativa que habla directo con la API de TorBox: sin servidores intermedios, sin publicidad y sin rastreo.
+TorBox is a cloud service that downloads torrents, files from hosts like Mega or Mediafire, and videos from YouTube, Instagram or X, and hands them to you through a fast link. Its website works on iPhone, but it's clunky. **T-Box** is a native app that talks directly to the TorBox API: no middleman servers, no ads, no tracking.
 
-## Funciones
+## Features
 
-### Agregar
-- **Un solo lugar para todo**: pega magnets y enlaces web mezclados, uno por línea. Cada uno se reconoce solo y va a Torrents o a Web.
-- **Archivos `.torrent`**, varios a la vez, desde Archivos o desde "Compartir".
-- **Resultado en vivo** de cada enlace (agregado, en caché, en cola o error con su motivo) y su progreso en TorBox hasta que está listo.
-- Tocar un **magnet en Safari** abre T-Box directamente.
-- Opción **"solo si ya está en caché"** para no gastar cupos en descargas desde cero.
-- Detección de **sitios compatibles** al pegar un enlace, con aviso si el sitio está caído. Corrige solo algunos enlaces problemáticos (Scribd).
+### Add
+- **One place for everything**: paste magnets and web links mixed together, one per line. Each is recognized and goes to Torrents or Web.
+- **`.torrent` files**, several at once, from Files or the Share sheet.
+- **Live result** for each link (added, cached, queued, or error with its reason) and its progress in TorBox until it's ready.
+- Tapping a **magnet in Safari** opens T-Box directly.
+- **"Only if cached"** option, so you don't spend slots on downloads from scratch.
+- **Supported site detection** when you paste a link, with a warning if the site is down. Fixes some problematic links automatically (Scribd).
 
-### Biblioteca
-- **Torrents** y **descargas web** con estado, progreso, velocidad y tiempo restante. Se refresca sola mientras hay algo en curso.
-- **Barra de actividad** flotante con lo que está bajando en TorBox y al iPhone.
-- Buscar, filtrar (todos, en curso, listos), eliminar y buscar más peers.
+### Library
+- **Torrents** and **web downloads** with status, progress, speed and time left. Refreshes itself while something is in progress.
+- Floating **activity bar** with what's downloading in TorBox and to the iPhone. Delete stalled items or cancel downloads from there.
+- Search, filter (all, active, ready), delete and reannounce.
 
-### Archivos
-- **Reproducir** MP4/MOV con Picture in Picture y AirPlay. **Abrir en Infuse o VLC** para MKV y otros formatos.
-- **Ver** PDF, imágenes, documentos y audio sin descargarlos a tu biblioteca.
-- **Descargar al iPhone** en segundo plano, aunque cierres la app, a la **carpeta que elijas**: iCloud Drive, En mi iPhone o un disco.
-- **Guardar fotos y videos directo en Fotos**, por ejemplo de Instagram o X.
-- **Descargar todo como .zip** y **descomprimir** automáticamente o a pedido.
-- Copiar o compartir el enlace temporal (no expone tu API key).
+### Files
+- **Play** MP4/MOV with Picture in Picture and AirPlay. **Open in Infuse or VLC** for MKV and other formats.
+- **Preview** PDFs, images, documents and audio without saving them.
+- **Download to iPhone** in the background, even if you close the app, to **Files › On My iPhone › T-Box**.
+- **Save photos and videos straight to Photos**, e.g. from Instagram or X.
+- **Download everything as .zip** and **unzip** automatically or on demand.
+- Copy or share the temporary link (it doesn't expose your API key).
 
-### Compartir
-- **T-Box en el menú Compartir** de cualquier app: envía magnets y enlaces a TorBox sin salir de donde estás. [Detalles](#compartir-desde-otras-apps)
+### Share
+- **T-Box in the Share sheet** of any app: send magnets and links to TorBox from wherever you are. [Details](#share-from-other-apps)
 
-### Avisos
-- Aviso dentro de la app cuando algo termina.
-- **Notificaciones** cuando termina una descarga al iPhone o algo queda listo en TorBox.
-- Botón **Probar notificación** en Cuenta.
-- Opcional: **avisos instantáneos con [ntfy](https://ntfy.sh)** (experimental), configurados con un toque.
+### Notifications
+- In-app alert when something finishes.
+- **Notifications** when a download to iPhone finishes or something is ready in TorBox. **Test notification** button in Account.
+- Optional: **instant alerts with [ntfy](https://ntfy.sh)** (experimental), set up with one tap.
 
-## Qué funciona en cada plan de TorBox
+## What works on each TorBox plan
 
 | | Free | Essential / Standard | Pro |
 |---|:-:|:-:|:-:|
-| Torrents, biblioteca, descargas al iPhone, reproducir y ver | ✅ | ✅ | ✅ |
-| Descargas web (YouTube, Instagram, Mega…) | — | ✅ | ✅ |
-| Usenet, streaming de TorBox, RSS *(próximamente en T-Box)* | — | — | ✅ |
+| Torrents, library, downloads to iPhone, play and preview | ✅ | ✅ | ✅ |
+| Web downloads (YouTube, Instagram, Mega…) | — | ✅ | ✅ |
+| Usenet, TorBox streaming, RSS *(coming to T-Box)* | — | — | ✅ |
 
-¿No tienes cuenta? **[Créala con el código de referido del autor](https://torbox.app/subscription?referral=7b4a584a-00a5-430e-aa31-809aa4934cb0)**. Según TorBox, al comprar un plan pagado ambos reciben 7 días extra por cada mes comprado.
+No account yet? **[Create one with the author's referral code](https://torbox.app/subscription?referral=7b4a584a-00a5-430e-aa31-809aa4934cb0)**. According to TorBox, when you buy a paid plan you both get 7 extra days for each month purchased.
 
-## Instalar
+## Install
 
-1. Descarga **[T-Box.ipa](https://github.com/maniac75/t-box-for-torbox/releases/latest/download/T-Box.ipa)** desde el iPhone.
-2. Fírmala e instálala con tu método de sideload:
-   - **Con certificado propio**: Feather, ESign, KSign u otra app de firma.
-   - **Con Apple ID gratuito**: SideStore o AltStore. La firma vence cada 7 días y se renueva sola.
-3. Abre T-Box y toca **Obtener código de acceso**: lo apruebas en torbox.app y la app recibe tu API key sola. También puedes pegar la key a mano.
+1. Download **[T-Box.ipa](https://github.com/maniac75/t-box-for-torbox/releases/latest/download/T-Box.ipa)** on your iPhone.
+2. Sign and install it with your sideloading method:
+   - **Your own certificate**: Feather, ESign, KSign or another signing app.
+   - **Free Apple ID**: SideStore or AltStore. The signature expires every 7 days and renews itself.
+3. Open T-Box and tap **Get access code**: approve it on torbox.app and the app receives your API key by itself. You can also paste the key manually.
 
-Las versiones nuevas aparecen en [Releases](https://github.com/maniac75/t-box-for-torbox/releases) con su lista de cambios. Cada una trae `T-Box-X.Y.Z.ipa` (con la versión en el nombre) y `T-Box.ipa` (el mismo archivo con nombre fijo, para el botón de descarga directa).
+New versions appear in [Releases](https://github.com/maniac75/t-box-for-torbox/releases) with their changes. Each one includes `T-Box-X.Y.Z.ipa` (version in the name) and `T-Box.ipa` (same file, fixed name, for the direct download button). Versions marked **Pre-release** are test builds.
 
-## Compartir desde otras apps
+## Share from other apps
 
-Desde la versión 0.2.1, **T-Box aparece en el menú Compartir** de Safari, Instagram, YouTube, X, Scribd y cualquier app que comparta enlaces. Lo que pasa al tocarlo depende de cómo firmaste la app:
+**T-Box appears in the Share sheet** of Safari, Instagram, YouTube, X, Scribd and any app that shares links. What happens when you tap it depends on how you signed the app:
 
-| Tu caso | Qué hace "T-Box" en Compartir |
+| Your case | What "T-Box" does in the Share sheet |
 |---|---|
-| Tu firma permite compartir el llavero entre la app y su extensión (lo habitual con certificados de sideload) | **Envía a TorBox ahí mismo**, sin salir de la app donde estás, y muestra el resultado |
-| Tu firma no lo permite | **Abre T-Box** con el enlace ya pegado: un toque más |
-| T-Box no aparece en Compartir | Tu app de firma quitó la extensión: revisa que **"Eliminar extensiones / Remove PlugIns"** esté desactivado y vuelve a firmar. O usa el Atajo de abajo |
+| Your signing allows a keychain shared between the app and its extension | **Sends to TorBox right there**, without leaving the app you're in, and shows the result |
+| Your signing doesn't allow it | **Opens T-Box** with the link already filled in: one more tap |
+| T-Box doesn't appear in the Share sheet | Your signing app removed the extension: make sure **"Remove PlugIns / Remove extensions"** is off and sign again. Or use the Shortcut below |
 
-- La primera vez, T-Box puede no estar entre los íconos principales: desliza la fila hasta **Más** y actívalo.
-- Para que envíe directo, abre T-Box una vez con tu sesión iniciada después de instalar.
-- Con SideStore/AltStore y Apple ID gratuito, la extensión ocupa un identificador más de los 10 semanales que permite Apple.
+- The first time, T-Box may not be among the main icons: scroll the row to **More** and enable it.
+- To send directly, open T-Box once while signed in after installing.
+- With SideStore/AltStore and a free Apple ID, the extension uses one more of the 10 weekly app IDs Apple allows.
 
-### Alternativa: Atajo
+### Alternative: Shortcut
 
-Si la extensión no te funciona, un Atajo de iOS hace lo mismo:
+If the extension doesn't work for you, an iOS Shortcut does the same:
 
-1. Atajos › nuevo atajo › activa **Mostrar en hoja de compartir** y que reciba **URL** y **Texto**.
-2. Acción **Codificar URL** sobre la entrada del atajo.
-3. Acción **Abrir URL**: `tbox://add?text=` seguido del resultado codificado.
+1. Shortcuts › new shortcut › turn on **Show in Share Sheet**, receiving **URLs** and **Text**.
+2. **URL Encode** action on the shortcut input.
+3. **Open URLs** action: `tbox://add?text=` followed by the encoded result.
 
-## Apoyar el proyecto
+## Found a bug or have an idea?
 
-T-Box es gratis y siempre lo será. Si te sirve y quieres apoyarlo:
+- 🐞 **[Report a bug](https://github.com/maniac75/t-box-for-torbox/issues/new?template=bug_report.yml)**. Attach the diagnostics from Account › Export diagnostics: the API key is redacted automatically.
+- 💡 **[Suggest an improvement](https://github.com/maniac75/t-box-for-torbox/issues/new?template=feature_request.yml)**
+- 💬 **[Questions and conversation](https://github.com/maniac75/t-box-for-torbox/discussions)**
 
-- ☕ [Invítame un café en Ko-fi](https://ko-fi.com/supermaniac) (tarjeta o PayPal, sin cuenta)
-- ♥ [Patrocinar en GitHub](https://github.com/sponsors/maniac75)
-- 🎁 [Crear o mejorar tu cuenta de TorBox con el código de referido](https://torbox.app/subscription?referral=7b4a584a-00a5-430e-aa31-809aa4934cb0): no te cuesta nada y ambos reciben días extra.
+You can also do it from the app: Account › Feedback. Writing in English or Spanish is fine.
 
-## Privacidad
+## Support the project
 
-- La API key se guarda en el **llavero del iPhone** y solo se envía a `api.torbox.app`.
-- Sin analítica, sin anuncios, sin servidores propios.
-- Los enlaces que compartes con otras apps son temporales y no contienen tu key.
-- El diagnóstico exportable (Cuenta › Exportar diagnóstico) **censura la API key** automáticamente.
+T-Box is free and always will be. If it's useful to you and you'd like to support it:
 
-## Preguntas frecuentes
+- ☕ [Buy me a coffee on Ko-fi](https://ko-fi.com/supermaniac) (card or PayPal, no account needed)
+- ♥ [Sponsor on GitHub](https://github.com/sponsors/maniac75)
+- 🎁 [Create or upgrade your TorBox account with the referral code](https://torbox.app/subscription?referral=7b4a584a-00a5-430e-aa31-809aa4934cb0): it costs you nothing and you both get extra days.
 
-**¿Por qué no se reproduce un MKV dentro de la app?**
-El reproductor de iOS no abre MKV. Usa **Abrir en Infuse** o **Abrir en VLC**. Un reproductor propio para MKV está en la hoja de ruta.
+## Privacy
 
-**Las notificaciones de TorBox llegan tarde con la app cerrada.**
-iOS decide cuándo dejar que una app revise en segundo plano: a veces cada 15 minutos, a veces cada varias horas. Para avisos inmediatos activa **ntfy** en Cuenta.
+- The API key is stored in the **iPhone keychain** and is only sent to `api.torbox.app`.
+- No analytics, no ads, no servers of our own.
+- Links you share with other apps are temporary and don't contain your key.
+- The exportable diagnostics (Account › Export diagnostics) **redact the API key** automatically.
 
-**Volví a firmar la app y me pide iniciar sesión de nuevo.**
-Es normal si cambiaste de certificado: el llavero queda asociado a quien firmó la app.
+## FAQ
 
-**¿Puedo usarla con otra cuenta o compilar mi propia versión?**
-Sí. El código de referido y los enlaces están en [`TBox/Config.swift`](TBox/Config.swift).
+**Why won't an MKV play inside the app?**
+The iOS player doesn't open MKV. Use **Open in Infuse** or **Open in VLC**. A built-in MKV player is on the roadmap.
 
-## Hoja de ruta
+**Where are my downloads?**
+In the Files app › On My iPhone › T-Box. To move a file to iCloud or another folder, swipe it in "On iPhone" › Save to… › Save to Files.
 
-- [ ] Biblioteca unificada (Torrents, Web, Usenet, cola), orden, filtros, títulos limpios y selección múltiple
-- [ ] Etiqueta "iphone" con descarga automática, control de descargas (Wi-Fi, límite, pausa) y subida a la nube
-- [ ] Ver: catálogo con fuentes de AIOStreams/Torrentio, reproductor MKV y streaming de TorBox (Pro)
-- [ ] Estado de TorBox, estadísticas de la cuenta y RSS (Pro)
+**TorBox notifications arrive late when the app is closed.**
+iOS decides when an app can check in the background: sometimes every 15 minutes, sometimes every few hours. For instant alerts, turn on **ntfy** in Account.
 
-## Compilar
+**I re-signed the app and it asks me to sign in again.**
+That's normal if you changed certificates: the keychain is tied to whoever signed the app.
 
-Cada cambio en `main` se compila y prueba en GitHub Actions. Al cambiar la versión (`MARKETING_VERSION` en `project.yml`), se publica una versión nueva con su sección de [CHANGELOG.md](CHANGELOG.md) como notas.
+**Can I use it with another account or build my own version?**
+Yes. The referral code and links are in [`TBox/Config.swift`](TBox/Config.swift).
 
-En un Mac:
+## Roadmap
+
+- [ ] Unified library (Torrents, Web, Usenet, queue), sorting, filters, clean titles and multi-select
+- [ ] "iphone" tag with auto-download, download controls (Wi-Fi only, limit, pause) and cloud upload
+- [ ] Watch: catalog with AIOStreams/Torrentio sources, MKV player and TorBox streaming (Pro)
+- [ ] TorBox status, account stats and RSS (Pro)
+
+## Build
+
+Each change to `main` is built and tested on GitHub Actions and published as a pre-release. Stable versions are promoted manually. Release notes come from [CHANGELOG.md](CHANGELOG.md).
+
+On a Mac:
 
 ```
 brew install xcodegen
@@ -147,4 +156,4 @@ xcodegen generate
 open TBox.xcodeproj
 ```
 
-La lista de [sitios compatibles](docs/SITIOS.md) se actualiza sola cada semana desde la API de TorBox.
+The [supported sites](docs/SITES.md) list updates itself weekly from the TorBox API.
