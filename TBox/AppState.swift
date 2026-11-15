@@ -88,7 +88,10 @@ final class AppState: ObservableObject {
             await running.value
             return
         }
-        let task = Task { [weak self] in await self?.performRefresh() }
+        let task = Task { [weak self] in
+            guard let self else { return }
+            await self.performRefresh()
+        }
         refreshTask = task
         await task.value
         refreshTask = nil
