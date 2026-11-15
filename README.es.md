@@ -125,6 +125,9 @@ T-Box es diseñada, probada y mantenida por [maniac75](https://github.com/maniac
 
 ## Privacidad
 
+Todos los detalles en la **[Política de privacidad](PRIVACY.es.md)**.
+
+
 - La API key se guarda en el **llavero del iPhone** y solo se envía a `api.torbox.app`.
 - Sin analítica, sin anuncios, sin servidores propios.
 - Los enlaces que compartes con otras apps son temporales y no contienen tu key.
