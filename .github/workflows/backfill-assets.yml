@@ -1,0 +1,26 @@
+name: Adjuntar .ipa a versiones anteriores (una vez)
+
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/backfill-assets.yml"]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Subir T-Box.ipa a v0.1.0 y v0.1.1
+        env:
+          GH_TOKEN: ${{ github.token }}
+          R: ${{ github.repository }}
+        run: |
+          for pair in "v0.1.0 43718347752" "v0.1.1 43720497301"; do
+            set -- $pair
+            mkdir -p "$1"
+            gh run download "$2" -R "$R" -n T-Box-ipa -D "$1"
+            gh release upload "$1" "$1/T-Box.ipa" -R "$R" --clobber
+          done
