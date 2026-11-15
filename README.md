@@ -109,6 +109,10 @@ T-Box is free and always will be. If it's useful to you and you'd like to suppor
 - ♥ [Sponsor on GitHub](https://github.com/sponsors/maniac75)
 - 🎁 [Create or upgrade your TorBox account with the referral code](https://torbox.app/subscription?referral=7b4a584a-00a5-430e-aa31-809aa4934cb0): it costs you nothing and you both get extra days.
 
+## About
+
+T-Box is designed, tested and maintained by [maniac75](https://github.com/maniac75). The code is written with the help of Claude (AI); every feature is decided, reviewed and tested on a real iPhone before release.
+
 ## Privacy
 
 - The API key is stored in the **iPhone keychain** and is only sent to `api.torbox.app`.
