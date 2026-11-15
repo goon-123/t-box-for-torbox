@@ -60,13 +60,20 @@ struct ActivitySheet: View {
     @EnvironmentObject private var state: AppState
     @EnvironmentObject private var downloads: DownloadManager
     @Environment(\.dismiss) private var dismiss
+    @State private var toDelete: Torrent?
+    @State private var confirmDeleteStalled = false
+    @State private var confirmCancelAll = false
+
+    private var stalled: [Torrent] {
+        state.activeInTorBox.filter { $0.downloadState.lowercased().hasPrefix("stalled") || ($0.downloadSpeed == 0 && $0.progress == 0) }
+    }
 
     var body: some View {
         NavigationStack {
             List {
                 let torbox = state.activeInTorBox
                 if !torbox.isEmpty {
-                    Section("En TorBox") {
+                    Section {
                         ForEach(torbox) { t in
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(t.name).font(.subheadline).lineLimit(2)
@@ -78,12 +85,28 @@ struct ActivitySheet: View {
                                 }
                                 .font(.caption).foregroundStyle(.secondary)
                             }
+                            .swipeActions {
+                                Button(role: .destructive) { toDelete = t } label: {
+                                    Label("Eliminar", systemImage: "trash")
+                                }
+                            }
                         }
+                    } header: {
+                        HStack {
+                            Text("En TorBox")
+                            Spacer()
+                            if !stalled.isEmpty {
+                                Button(String(format: L("Eliminar detenidos (%d)"), stalled.count)) { confirmDeleteStalled = true }
+                                    .font(.caption)
+                            }
+                        }
+                    } footer: {
+                        Text("Desliza a la izquierda para eliminar de TorBox lo que no avanza.")
                     }
                 }
                 let running = downloads.items.filter { $0.status == .running }
                 if !running.isEmpty {
-                    Section("Bajando al iPhone") {
+                    Section {
                         ForEach(running) { item in
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(item.name).font(.subheadline).lineLimit(2)
@@ -99,13 +122,25 @@ struct ActivitySheet: View {
                                 }
                             }
                         }
+                    } header: {
+                        HStack {
+                            Text("Bajando al iPhone")
+                            Spacer()
+                            Button("Cancelar todas") { confirmCancelAll = true }.font(.caption)
+                        }
                     }
                 }
                 let done = downloads.items.filter { $0.status != .running }
                 if !done.isEmpty {
-                    Section("Terminado hace poco") {
+                    Section {
                         ForEach(done) { item in
                             DownloadStatusRow(item: item)
+                        }
+                    } header: {
+                        HStack {
+                            Text("Terminado hace poco")
+                            Spacer()
+                            Button("Limpiar") { downloads.clearFinished() }.font(.caption)
                         }
                     }
                 }
@@ -117,6 +152,24 @@ struct ActivitySheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Cerrar") { dismiss() } } }
             .refreshable { await state.refresh() }
+            .confirmationDialog("¿Eliminar de TorBox?",
+                                isPresented: Binding(get: { toDelete != nil }, set: { if !$0 { toDelete = nil } }),
+                                titleVisibility: .visible, presenting: toDelete) { t in
+                Button("Eliminar", role: .destructive) { Task { await state.delete(t) } }
+            } message: { t in Text(t.name) }
+            .confirmationDialog(String(format: L("¿Eliminar de TorBox %d descargas detenidas?"), stalled.count),
+                                isPresented: $confirmDeleteStalled, titleVisibility: .visible) {
+                Button("Eliminar", role: .destructive) {
+                    let list = stalled
+                    Task { for t in list { await state.delete(t) } }
+                }
+            } message: {
+                Text("Son las que no tienen seeds o no han avanzado nada. Se borran de tu cuenta de TorBox.")
+            }
+            .confirmationDialog("¿Cancelar todas las descargas al iPhone?", isPresented: $confirmCancelAll,
+                                titleVisibility: .visible) {
+                Button("Cancelar todas", role: .destructive) { downloads.cancelAll() }
+            }
         }
     }
 }

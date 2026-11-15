@@ -81,6 +81,12 @@ final class DownloadManager: NSObject, ObservableObject, URLSessionDownloadDeleg
         items.removeAll { $0.id == item.id }
     }
 
+    /// Cancela todo lo que está bajando, incluidas tareas que quedaron colgadas en la sesión de fondo.
+    func cancelAll() {
+        session.getAllTasks { tasks in tasks.forEach { $0.cancel() } }
+        DispatchQueue.main.async { self.items.removeAll { $0.status == .running } }
+    }
+
     func clearFinished() {
         items.removeAll { $0.status != .running }
     }

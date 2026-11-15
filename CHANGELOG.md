@@ -3,6 +3,12 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Versiones: [SemVer](https://semver.org/lang/es/).
 Cada versión publicada trae su `T-Box.ipa` en [Releases](https://github.com/maniac75/t-box-for-torbox/releases).
 
+## [0.2.2] - 2026-11-15
+
+### Agregado
+- **Actividad**: desliza para eliminar de TorBox lo que no avanza, botón **Eliminar detenidos** (sin seeds o sin progreso) y **Cancelar todas** las descargas al iPhone, incluidas las que quedaron colgadas.
+- **Limpiar** la lista "Terminado hace poco".
+
 ## [0.2.1] - 2026-11-15
 
 ### Agregado
@@ -47,6 +53,7 @@ Cada versión publicada trae su `T-Box.ipa` en [Releases](https://github.com/man
 - Detección de sitios compatibles al pegar enlaces web.
 - Español e inglés, diagnóstico exportable con la API key censurada, enlace de referido opcional.
 
+[0.2.2]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.2
 [0.2.1]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.1
 [0.2.0]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.0
 [0.1.1]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.1.1
