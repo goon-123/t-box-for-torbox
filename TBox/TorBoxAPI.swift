@@ -35,6 +35,14 @@ final class TorBoxAPI: @unchecked Sendable {
 
     init(apiKey: String?) { self.apiKey = apiKey }
 
+    /// Cancelar una petición no es un error que deba ver el usuario.
+    static func isCancellation(_ error: Error) -> Bool {
+        if error is CancellationError { return true }
+        if let u = error as? URLError, u.code == .cancelled { return true }
+        let ns = error as NSError
+        return ns.domain == NSURLErrorDomain && ns.code == NSURLErrorCancelled
+    }
+
     // MARK: Núcleo
 
     private func makeRequest(_ path: String,
@@ -65,7 +73,9 @@ final class TorBoxAPI: @unchecked Sendable {
         do {
             (data, resp) = try await session.data(for: req)
         } catch {
-            Diagnostics.log("NET \(req.httpMethod ?? "GET") \(path): \(error.localizedDescription)")
+            if !Self.isCancellation(error) {
+                Diagnostics.log("NET \(req.httpMethod ?? "GET") \(path): \(error.localizedDescription)")
+            }
             throw error
         }
         let status = (resp as? HTTPURLResponse)?.statusCode ?? 0

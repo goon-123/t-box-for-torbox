@@ -59,7 +59,7 @@ final class AppState: ObservableObject {
     }
 
     func logout() {
-        pollTask?.cancel()
+        stopPolling()
         Keychain.delete(account: Self.keyAccount)
         apiKey = nil
         api.apiKey = nil
@@ -78,15 +78,34 @@ final class AppState: ObservableObject {
         items(ref.kind).first { $0.id == ref.id }
     }
 
+    private var refreshTask: Task<Void, Never>?
+
+    /// Un solo refresco a la vez. Corre fuera del ciclo de vida de las vistas:
+    /// si una pantalla desaparece o la tarea que lo pidió se cancela, el refresco igual termina.
     func refresh() async {
         guard isLoggedIn else { return }
+        if let running = refreshTask {
+            await running.value
+            return
+        }
+        let task = Task { [weak self] in await self?.performRefresh() }
+        refreshTask = task
+        await task.value
+        refreshTask = nil
+    }
+
+    private func performRefresh() async {
         isLoading = true
         defer { isLoading = false }
         var errors: [String] = []
         async let t = api.items(.torrent)
         async let w = api.items(.web)
-        do { torrents = Self.sorted(try await t) } catch { errors.append("Torrents: " + error.localizedDescription) }
-        do { webDownloads = Self.sorted(try await w) } catch { errors.append("Web: " + error.localizedDescription) }
+        do { torrents = Self.sorted(try await t) }
+        catch where !TorBoxAPI.isCancellation(error) { errors.append("Torrents: " + error.localizedDescription) }
+        catch {}
+        do { webDownloads = Self.sorted(try await w) }
+        catch where !TorBoxAPI.isCancellation(error) { errors.append("Web: " + error.localizedDescription) }
+        catch {}
         errorMessage = errors.isEmpty ? nil : errors.joined(separator: "\n")
         if user == nil { user = try? await api.me() }
     }
@@ -96,8 +115,9 @@ final class AppState: ObservableObject {
     }
 
     /// Mientras haya algo descargándose en TorBox, refresca cada 5 s.
+    /// Idempotente: si ya está corriendo, no lo reinicia (reiniciarlo cancelaba refrescos a medio camino).
     func startPolling() {
-        pollTask?.cancel()
+        if let pollTask, !pollTask.isCancelled { return }
         pollTask = Task { [weak self] in
             while !Task.isCancelled {
                 try? await Task.sleep(nanoseconds: 5_000_000_000)
@@ -108,7 +128,10 @@ final class AppState: ObservableObject {
         }
     }
 
-    func stopPolling() { pollTask?.cancel() }
+    func stopPolling() {
+        pollTask?.cancel()
+        pollTask = nil
+    }
 
     func delete(_ t: Torrent) async {
         do {

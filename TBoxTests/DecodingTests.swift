@@ -110,6 +110,12 @@ final class DecodingTests: XCTestCase {
         XCTAssertTrue(out.contains("token=***"))
     }
 
+    func testCancellationIsNotAnError() {
+        XCTAssertTrue(TorBoxAPI.isCancellation(URLError(.cancelled)))
+        XCTAssertTrue(TorBoxAPI.isCancellation(CancellationError()))
+        XCTAssertFalse(TorBoxAPI.isCancellation(URLError(.timedOut)))
+    }
+
     func testReferralURL() {
         XCTAssertEqual(AppConfig.referralURL.absoluteString,
                        "https://torbox.app/subscription?referral=7b4a584a-00a5-430e-aa31-809aa4934cb0")
