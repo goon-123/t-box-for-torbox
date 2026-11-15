@@ -11,6 +11,8 @@ enum AppConfig {
         URL(string: "https://torbox.app/subscription?referral=\(referralCode)")!
     }
 
+    static let koFiURL = URL(string: "https://ko-fi.com/supermaniac")!
+    static let sponsorsURL = URL(string: "https://github.com/sponsors/maniac75")!
     static let repoURL = URL(string: "https://github.com/maniac75/t-box-for-torbox")!
 }
 

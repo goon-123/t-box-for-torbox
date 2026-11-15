@@ -9,8 +9,6 @@ struct SettingsView: View {
     @State private var notice: String?
     @State private var shareURL: URL?
     @State private var busy = false
-    @State private var pickFolder = false
-    @State private var folderName = AppSettings.destinationName
     @State private var unzip = AppSettings.unzipAfterDownload
     @State private var notificationsOn = Notifier.enabled
     @State private var ntfyTopic = AppSettings.ntfyTopic
@@ -47,24 +45,17 @@ struct SettingsView: View {
                     LabeledContent("Torrents", value: "\(state.torrents.count)")
                     LabeledContent("Descargas web", value: "\(state.webDownloads.count)")
                 } footer: {
-                    Text("Tocar un magnet en Safari abre la app. Para mandar enlaces desde Instagram, YouTube o Safari, crea un Atajo que abra tbox://add?url=[URL compartida] y actívalo en el menú Compartir.")
+                    Text("Para mandar enlaces desde Instagram, YouTube, Safari u otra app, usa Compartir › T-Box. Tocar un magnet en Safari también abre la app.")
                 }
 
                 Section {
-                    LabeledContent("Carpeta", value: folderName ?? L("T-Box (En mi iPhone)"))
-                    Button("Elegir carpeta…") { pickFolder = true }
-                    if folderName != nil {
-                        Button("Volver a la carpeta de T-Box", role: .destructive) {
-                            AppSettings.setDestination(nil)
-                            folderName = nil
-                        }
-                    }
+                    LabeledContent("Carpeta", value: L("Archivos › En mi iPhone › T-Box"))
                     Toggle("Descomprimir .zip al terminar", isOn: $unzip)
                         .onChange(of: unzip) { _, v in AppSettings.unzipAfterDownload = v }
                 } header: {
                     Text("Descargas")
                 } footer: {
-                    Text("Lo que bajes irá a esta carpeta, aunque la app esté cerrada. Puede ser iCloud Drive, En mi iPhone o un disco. Si una nube no acepta el archivo, queda en la carpeta de T-Box.")
+                    Text("Lo que bajes queda en la carpeta T-Box de la app Archivos, aunque la app esté cerrada. Para llevar un archivo a iCloud u otra carpeta: En el iPhone › desliza › Compartir › Guardar en Archivos.")
                 }
 
                 Section {
@@ -109,12 +100,20 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    Link(destination: AppConfig.koFiURL) {
+                        Label("Invítame un café", systemImage: "cup.and.saucer")
+                    }
+                    Link(destination: AppConfig.sponsorsURL) {
+                        Label("Patrocinar en GitHub", systemImage: "heart")
+                    }
                     Button { confirmReferral = true } label: {
                         Label("Agregar código de referido de T-Box", systemImage: "gift")
                     }
                     .disabled(busy)
+                } header: {
+                    Text("Apoyar T-Box")
                 } footer: {
-                    Text("Opcional. Asocia tu cuenta al código del autor de la app: ambos reciben días extra en tus próximas compras. Solo se envía si lo confirmas.")
+                    Text("T-Box es gratis y siempre lo será. Estas opciones son voluntarias. El código de referido no te cuesta nada: ambos reciben días extra en tus próximas compras, y solo se envía si lo confirmas.")
                 }
 
                 Section("Diagnóstico") {
@@ -149,18 +148,6 @@ struct SettingsView: View {
                 Button("Agregar código") { Task { await addReferral() } }
             } message: {
                 Text("TorBox decidirá si se puede aplicar a tu cuenta.")
-            }
-            .sheet(isPresented: $pickFolder) {
-                FolderPicker { url in
-                    pickFolder = false
-                    guard let url else { return }
-                    if AppSettings.setDestination(url) {
-                        folderName = AppSettings.destinationName
-                    } else {
-                        notice = L("No pude guardar el acceso a esa carpeta. Prueba con otra o deja la carpeta de T-Box.")
-                    }
-                }
-                .ignoresSafeArea()
             }
             .confirmationDialog("¿Activar avisos instantáneos?", isPresented: $confirmNtfy, titleVisibility: .visible) {
                 Button("Activar") { Task { await ntfyEnable() } }
@@ -239,32 +226,3 @@ struct SettingsView: View {
     }
 }
 
-
-/// Selector de carpetas con UIKit. El `.fileImporter` de SwiftUI a veces no responde al tocar "Abrir"
-/// cuando se elige una carpeta; UIDocumentPickerViewController es el camino estable.
-struct FolderPicker: UIViewControllerRepresentable {
-    let onPick: (URL?) -> Void
-
-    func makeCoordinator() -> Coordinator { Coordinator(onPick: onPick) }
-
-    func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.folder], asCopy: false)
-        picker.allowsMultipleSelection = false
-        picker.delegate = context.coordinator
-        return picker
-    }
-
-    func updateUIViewController(_ controller: UIDocumentPickerViewController, context: Context) {}
-
-    final class Coordinator: NSObject, UIDocumentPickerDelegate {
-        let onPick: (URL?) -> Void
-        init(onPick: @escaping (URL?) -> Void) { self.onPick = onPick }
-
-        func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-            Diagnostics.log("FOLDER picked \(urls.first?.lastPathComponent ?? "-")")
-            onPick(urls.first)
-        }
-
-        func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) { onPick(nil) }
-    }
-}

@@ -99,6 +99,14 @@ Si la extensión no te funciona, un Atajo de iOS hace lo mismo:
 2. Acción **Codificar URL** sobre la entrada del atajo.
 3. Acción **Abrir URL**: `tbox://add?text=` seguido del resultado codificado.
 
+## Apoyar el proyecto
+
+T-Box es gratis y siempre lo será. Si te sirve y quieres apoyarlo:
+
+- ☕ [Invítame un café en Ko-fi](https://ko-fi.com/supermaniac) (tarjeta o PayPal, sin cuenta)
+- ♥ [Patrocinar en GitHub](https://github.com/sponsors/maniac75)
+- 🎁 [Crear o mejorar tu cuenta de TorBox con el código de referido](https://torbox.app/subscription?referral=7b4a584a-00a5-430e-aa31-809aa4934cb0): no te cuesta nada y ambos reciben días extra.
+
 ## Privacidad
 
 - La API key se guarda en el **llavero del iPhone** y solo se envía a `api.torbox.app`.

@@ -3,6 +3,19 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Versiones: [SemVer](https://semver.org/lang/es/).
 Cada versión publicada trae su `T-Box.ipa` en [Releases](https://github.com/maniac75/t-box-for-torbox/releases).
 
+## [0.3.0] - 2026-11-15
+
+### Agregado
+- **Apoyar T-Box** en Cuenta: Ko-fi, GitHub Sponsors y el código de referido. Una tarjeta lo propone una sola vez, después de la décima descarga, y no vuelve a aparecer.
+- Botón ♥ Sponsor en el repositorio.
+
+### Cambiado
+- Las descargas quedan en **Archivos › En mi iPhone › T-Box**, que ahora es visible. Se quitó "Elegir carpeta…": el selector de carpetas de iOS no respondía. Para mover un archivo: desliza › Guardar en… (hoja Compartir › Guardar en Archivos).
+- Los cortes de red pasajeros del refresco automático ya no se muestran como error; solo si se repiten tres veces seguidas.
+
+### Corregido
+- Diagnóstico más detallado del llavero compartido de la extensión de Compartir.
+
 ## [0.2.3] - 2026-11-15
 
 ### Corregido
@@ -58,6 +71,7 @@ Cada versión publicada trae su `T-Box.ipa` en [Releases](https://github.com/man
 - Detección de sitios compatibles al pegar enlaces web.
 - Español e inglés, diagnóstico exportable con la API key censurada, enlace de referido opcional.
 
+[0.3.0]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.3.0
 [0.2.3]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.3
 [0.2.2]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.2
 [0.2.1]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.1

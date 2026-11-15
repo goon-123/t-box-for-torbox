@@ -43,6 +43,8 @@ struct TBoxApp: App {
 struct RootView: View {
     @EnvironmentObject private var state: AppState
     @Environment(\.scenePhase) private var scenePhase
+    @AppStorage("support.completed") private var completedDownloads = 0
+    @AppStorage("support.asked") private var supportAsked = false
 
     var body: some View {
         Group {
@@ -63,6 +65,12 @@ struct RootView: View {
                 .sheet(isPresented: $state.showAdd) {
                     AddView(initialText: state.incomingText, initialFile: state.incomingTorrentFile)
                 }
+                .sheet(isPresented: Binding(get: { completedDownloads >= 10 && !supportAsked && !state.showAdd },
+                                            set: { if !$0 { supportAsked = true } })) {
+                    SupportCard { supportAsked = true }
+                        .presentationDetents([.height(330)])
+                }
+                .onAppear { AppSettings.setDestination(nil) }
             } else {
                 LoginView()
             }

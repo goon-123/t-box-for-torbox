@@ -232,6 +232,16 @@
         }
       }
     },
+    "Apoyar T-Box": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Support T-Box"
+          }
+        }
+      }
+    },
     "Archivo .torrent": {
       "localizations": {
         "en": {
@@ -258,6 +268,16 @@
           "stringUnit": {
             "state": "translated",
             "value": ".torrent files"
+          }
+        }
+      }
+    },
+    "Archivos › En mi iPhone › T-Box": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files › On My iPhone › T-Box"
           }
         }
       }
@@ -1052,6 +1072,16 @@
         }
       }
     },
+    "Es gratis y siempre lo será. Si quieres apoyar el proyecto, cualquiera de estas opciones ayuda.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It's free and always will be. If you'd like to support the project, any of these helps."
+          }
+        }
+      }
+    },
     "Esa app no está instalada": {
       "localizations": {
         "en": {
@@ -1252,6 +1282,16 @@
         }
       }
     },
+    "Invítame un café": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy me a coffee"
+          }
+        }
+      }
+    },
     "La contraseña es para enlaces protegidos (por ejemplo, algunos de Mega).": {
       "localizations": {
         "en": {
@@ -1338,6 +1378,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Downloads go to this folder, even with the app closed. It can be iCloud Drive, On My iPhone or a drive. If a cloud provider rejects the file, it stays in the T-Box folder."
+          }
+        }
+      }
+    },
+    "Lo que bajes queda en la carpeta T-Box de la app Archivos, aunque la app esté cerrada. Para llevar un archivo a iCloud u otra carpeta: En el iPhone › desliza › Compartir › Guardar en Archivos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloads go to the T-Box folder in the Files app, even when the app is closed. To move a file to iCloud or another folder: On iPhone › swipe › Share › Save to Files."
           }
         }
       }
@@ -1482,6 +1532,16 @@
         }
       }
     },
+    "No, gracias": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No, thanks"
+          }
+        }
+      }
+    },
     "Notificaciones": {
       "localizations": {
         "en": {
@@ -1572,12 +1632,32 @@
         }
       }
     },
+    "Para mandar enlaces desde Instagram, YouTube, Safari u otra app, usa Compartir › T-Box. Tocar un magnet en Safari también abre la app.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To send links from Instagram, YouTube, Safari or any app, use Share › T-Box. Tapping a magnet in Safari also opens the app."
+          }
+        }
+      }
+    },
     "Pasa a un plan pagado": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Upgrade to a paid plan"
+          }
+        }
+      }
+    },
+    "Patrocinar en GitHub": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sponsor on GitHub"
           }
         }
       }
@@ -1862,6 +1942,16 @@
         }
       }
     },
+    "T-Box es gratis y siempre lo será. Estas opciones son voluntarias. El código de referido no te cuesta nada: ambos reciben días extra en tus próximas compras, y solo se envía si lo confirmas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "T-Box is free and always will be. These options are voluntary. The referral code costs you nothing: both of us get extra days on your next purchases, and it's only sent if you confirm."
+          }
+        }
+      }
+    },
     "Tema": {
       "localizations": {
         "en": {
@@ -2028,6 +2118,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "One per line, mixed if you like. Magnets go to Torrents and links to Web."
+          }
+        }
+      }
+    },
+    "Usar el código de referido en TorBox": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use the referral code on TorBox"
           }
         }
       }
@@ -2218,6 +2318,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Don't have a TorBox account?"
+          }
+        }
+      }
+    },
+    "¿T-Box te está sirviendo?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is T-Box working for you?"
           }
         }
       }

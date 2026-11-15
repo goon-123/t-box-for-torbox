@@ -36,6 +36,12 @@ final class TorBoxAPI: @unchecked Sendable {
     init(apiKey: String?) { self.apiKey = apiKey }
 
     /// Cancelar una petición no es un error que deba ver el usuario.
+    /// Errores de red pasajeros: se reintentan solos en el siguiente refresco.
+    static func isTransient(_ error: Error) -> Bool {
+        guard let e = error as? URLError else { return false }
+        return [.timedOut, .networkConnectionLost, .notConnectedToInternet, .cannotConnectToHost, .dnsLookupFailed].contains(e.code)
+    }
+
     static func isCancellation(_ error: Error) -> Bool {
         if error is CancellationError { return true }
         if let u = error as? URLError, u.code == .cancelled { return true }

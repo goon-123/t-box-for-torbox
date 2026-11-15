@@ -7,7 +7,6 @@ struct DownloadsView: View {
     @State private var playerURL: URL?
     @State private var previewURL: URL?
     @State private var shareURL: URL?
-    @State private var moveURL: URL?
     @State private var notice: String?
 
     var body: some View {
@@ -46,7 +45,7 @@ struct DownloadsView: View {
                                 Button(role: .destructive) { downloads.deleteLocal(url) } label: {
                                     Label("Borrar", systemImage: "trash")
                                 }
-                                Button { moveURL = url } label: { Label("Guardar en…", systemImage: "folder") }
+                                Button { shareURL = url } label: { Label("Guardar en…", systemImage: "folder") }
                                     .tint(.blue)
                             }
                             .swipeActions(edge: .leading) {
@@ -74,12 +73,6 @@ struct DownloadsView: View {
             .refreshable { downloads.reloadLocalFiles() }
             .onAppear { downloads.reloadLocalFiles() }
             .quickLookPreview($previewURL)
-            .fileMover(isPresented: Binding(get: { moveURL != nil }, set: { if !$0 { moveURL = nil } }),
-                       file: moveURL) { result in
-                if case .failure(let err) = result { notice = err.localizedDescription }
-                moveURL = nil
-                downloads.reloadLocalFiles()
-            }
             .alert(notice ?? "", isPresented: Binding(get: { notice != nil }, set: { if !$0 { notice = nil } })) {
                 Button("OK", role: .cancel) {}
             }

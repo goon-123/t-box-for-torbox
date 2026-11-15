@@ -11,6 +11,7 @@ final class AppState: ObservableObject {
     @Published var user: UserInfo?
     @Published var isLoading = false
     @Published var errorMessage: String?
+    private var transientFailures = 0
 
     /// Entradas desde Safari, Archivos o un Atajo; abren la hoja única de "Agregar".
     @Published var showAdd = false
@@ -112,15 +113,29 @@ final class AppState: ObservableObject {
         isLoading = true
         defer { isLoading = false }
         var errors: [String] = []
+        var transientOnly = true
         var loaded: Set<ItemKind> = []
         async let t = api.items(.torrent)
         async let w = api.items(.web)
         do { torrents = Self.sorted(try await t); loaded.insert(.torrent) }
-        catch where !TorBoxAPI.isCancellation(error) { errors.append("Torrents: " + error.localizedDescription) }
+        catch where !TorBoxAPI.isCancellation(error) {
+            errors.append("Torrents: " + error.localizedDescription)
+            if !TorBoxAPI.isTransient(error) { transientOnly = false }
+        }
         catch {}
         do { webDownloads = Self.sorted(try await w); loaded.insert(.web) }
-        catch where !TorBoxAPI.isCancellation(error) { errors.append("Web: " + error.localizedDescription) }
+        catch where !TorBoxAPI.isCancellation(error) {
+            errors.append("Web: " + error.localizedDescription)
+            if !TorBoxAPI.isTransient(error) { transientOnly = false }
+        }
         catch {}
+        // Un corte de red aislado (app en segundo plano, cambio de wifi) no se muestra: se reintenta en la siguiente vuelta.
+        if !errors.isEmpty && transientOnly {
+            transientFailures += 1
+            if transientFailures < 3 { errors.removeAll() }
+        } else if errors.isEmpty {
+            transientFailures = 0
+        }
         errorMessage = errors.isEmpty ? nil : errors.joined(separator: "\n")
         if !loaded.isEmpty {
             for item in tracker.process(torrents + webDownloads, kinds: loaded) {

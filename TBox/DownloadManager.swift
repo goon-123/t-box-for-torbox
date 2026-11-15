@@ -216,6 +216,7 @@ final class DownloadManager: NSObject, ObservableObject, URLSessionDownloadDeleg
             }
             let saved = Self.moveToChosenFolder(result)
             self.update(id) { $0.status = .done; $0.savedTo = saved }
+            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "support.completed") + 1, forKey: "support.completed")
             self.reloadLocalFiles()
             Notifier.announce(L("Descarga terminada"), detail: info.name, id: "dl-\(id)")
         }

@@ -65,7 +65,11 @@ enum SharedKeychain {
         }
         guard status == errSecSuccess, let attrs = result as? [String: Any],
               let group = attrs[kSecAttrAccessGroup as String] as? String,
-              let dot = group.firstIndex(of: ".") else { return nil }
+              let dot = group.firstIndex(of: ".") else {
+            Diagnostics.log("SHARE probe failed: status \(status)")
+            return nil
+        }
+        Diagnostics.log("SHARE default keychain group: \(group)")
         return String(group[..<dot])
     }
 
@@ -88,7 +92,9 @@ enum SharedKeychain {
         var add = q
         add[kSecValueData as String] = Data(value.utf8)
         add[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
-        return SecItemAdd(add as CFDictionary, nil) == errSecSuccess
+        let status = SecItemAdd(add as CFDictionary, nil)
+        if status != errSecSuccess { Diagnostics.log("SHARE save to \(group) failed: status \(status)") }
+        return status == errSecSuccess
     }
 
     static func load() -> String? {
