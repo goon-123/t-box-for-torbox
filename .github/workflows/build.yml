@@ -69,19 +69,22 @@ jobs:
             test.log
           if-no-files-found: ignore
 
-      - name: Publicar release "latest" (cada push a main)
+      - name: Publicar versión (cada push a main)
         if: github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           VER=$(grep -m1 MARKETING_VERSION project.yml | sed -E 's/.*"(.*)".*/\1/')
-          gh release delete latest --yes --cleanup-tag || true
-          gh release create latest T-Box.ipa --target "$GITHUB_SHA" \
-            --title "T-Box $VER (build ${{ github.run_number }})" \
-            --notes "Compilación automática de main (${GITHUB_SHA::7}). Fírmala con tu propio certificado antes de instalar. / Automatic build from main; sign it with your own certificate before installing."
-
-      - name: Publicar release (al etiquetar vX.Y.Z)
-        if: startsWith(github.ref, 'refs/tags/v')
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" T-Box.ipa --title "T-Box $GITHUB_REF_NAME" --generate-notes
+          TAG="v$VER"
+          # Notas: la sección de esta versión en CHANGELOG.md
+          awk -v v="$VER" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} /^\[[0-9]/ {f=0} f' CHANGELOG.md > notes.md
+          printf '\n---\nBuild %s · %s\n\nFírmala con tu propio certificado (Feather, ESign, SideStore…) antes de instalar.\n' "${{ github.run_number }}" "${GITHUB_SHA::7}" >> notes.md
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            # Misma versión, nueva compilación: se reemplaza el .ipa y se actualizan las notas.
+            gh release upload "$TAG" T-Box.ipa --clobber
+            gh release edit "$TAG" --notes-file notes.md --title "T-Box $VER"
+          else
+            gh release create "$TAG" T-Box.ipa --target "$GITHUB_SHA" --title "T-Box $VER" --notes-file notes.md --latest
+          fi
+          # La antigua publicación móvil "latest" ya no se usa.
+          gh release delete latest --yes --cleanup-tag 2>/dev/null || true
