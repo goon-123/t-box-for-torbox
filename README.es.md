@@ -19,6 +19,21 @@ Nativo, rápido, en español e inglés. Pensado para instalar por sideload.
 
 TorBox es un servicio en la nube que descarga torrents, archivos de sitios como Mega o Mediafire y videos de YouTube, Instagram o X, y te los entrega por un enlace rápido. Su web funciona en el iPhone, pero es incómoda. **T-Box** es una app nativa que habla directo con la API de TorBox: sin servidores intermedios, sin publicidad y sin rastreo.
 
+## Capturas
+
+<p align="center">
+  <img src="docs/screenshots/en-torrents.png" width="260" />
+  <img src="docs/screenshots/en-web.png" width="260" />
+  <img src="docs/screenshots/en-share-add.png" width="260" />
+</p>
+<p align="center">
+  <img src="docs/screenshots/es-detail.png" width="260" />
+  <img src="docs/screenshots/es-file-menu.png" width="260" />
+  <img src="docs/screenshots/es-account.png" width="260" />
+</p>
+
+*Torrents y descargas web con AirLock, un enlace de YouTube compartido a T-Box, el detalle de un ítem, acciones sobre un archivo y la pestaña Cuenta. Todo el contenido que se ve es libre o de dominio público.*
+
 ## Funciones
 
 ### Agregar
