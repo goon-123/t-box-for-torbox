@@ -47,6 +47,14 @@ final class DecodingTests: XCTestCase {
         XCTAssertTrue(list[0].files[0].canSaveToPhotos)
     }
 
+    func testAirlockedField() throws {
+        let on = try JSONDecoder().decode(Torrent.self, from: Data(#"{"id":1,"name":"a","airlocked":true,"download_present":true}"#.utf8))
+        let off = try JSONDecoder().decode(Torrent.self, from: Data(#"{"id":2,"name":"b"}"#.utf8))
+        XCTAssertTrue(on.airlocked)
+        XCTAssertFalse(off.airlocked)
+        XCTAssertEqual(ItemKind.web.editPath, "webdl/editwebdownload")
+    }
+
     func testFailureEnvelope() throws {
         let json = #"{"success":false,"error":"ITEM_NOT_FOUND","detail":"Expired","data":null}"#
         let env = try decoder.decode(APIEnvelope<JSONValue>.self, from: Data(json.utf8))

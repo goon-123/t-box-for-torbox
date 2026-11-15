@@ -38,6 +38,7 @@ TorBox is a cloud service that downloads torrents, files from hosts like Mega or
 - **Torrents** and **web downloads** with status, progress, speed and time left. Refreshes itself while something is in progress.
 - Floating **activity bar** with what's downloading in TorBox and to the iPhone. Delete stalled items or cancel downloads from there.
 - Search, filter (all, active, ready), delete and reannounce.
+- **AirLock** (paid plans): keep items out of TorBox's 30-day inactivity cleanup, with a 🔒 on protected items.
 
 ### Files
 - **Play** MP4/MOV with Picture in Picture and AirPlay. **Open in Infuse or VLC** for MKV and other formats.

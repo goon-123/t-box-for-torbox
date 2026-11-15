@@ -176,6 +176,21 @@ final class AppState: ObservableObject {
         } catch { errorMessage = error.localizedDescription }
     }
 
+    /// Activa o quita AirLock. Devuelve el error para mostrarlo junto al control.
+    @discardableResult
+    func setAirlock(_ t: Torrent, on: Bool) async -> String? {
+        do {
+            try await api.setAirlock(t.kind, id: t.id, on: on)
+            func update(_ list: inout [Torrent]) {
+                if let i = list.firstIndex(where: { $0.id == t.id }) { list[i].airlocked = on }
+            }
+            if t.kind == .torrent { update(&torrents) } else { update(&webDownloads) }
+            return nil
+        } catch {
+            return error.localizedDescription
+        }
+    }
+
     func reannounce(_ t: Torrent) async {
         guard t.kind == .torrent else { return }
         do { try await api.control(.torrent, id: t.id, operation: "reannounce"); await refresh() }

@@ -43,6 +43,19 @@ struct TorrentListView: View {
                         .swipeActions {
                             Button(role: .destructive) { toDelete = t } label: { Label("Eliminar", systemImage: "trash") }
                         }
+                        .swipeActions(edge: .leading) {
+                            if t.isReady && state.user?.isFree != true {
+                                Button {
+                                    Task {
+                                        if let e = await state.setAirlock(t, on: !t.airlocked) { state.errorMessage = e }
+                                    }
+                                } label: {
+                                    Label(t.airlocked ? L("Quitar AirLock") : L("AirLock"),
+                                          systemImage: t.airlocked ? "lock.open" : "lock.fill")
+                                }
+                                .tint(.indigo)
+                            }
+                        }
                 }
             }
             .listStyle(.insetGrouped)
@@ -106,6 +119,10 @@ struct TorrentRow: View {
                     if let eta = Fmt.eta(torrent.eta) { Text("· " + eta) }
                 }
                 Spacer()
+                if torrent.airlocked {
+                    Image(systemName: "lock.fill").foregroundStyle(.indigo)
+                        .accessibilityLabel(L("En AirLock"))
+                }
                 if torrent.isReady && torrent.files.count > 1 {
                     Text(String(format: L("%d archivos"), torrent.files.count))
                 }

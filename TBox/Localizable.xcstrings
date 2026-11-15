@@ -232,6 +232,26 @@
         }
       }
     },
+    "AirLock": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AirLock"
+          }
+        }
+      }
+    },
+    "AirLock requiere un plan pagado de TorBox.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AirLock requires a paid TorBox plan."
+          }
+        }
+      }
+    },
     "Apoyar T-Box": {
       "localizations": {
         "en": {
@@ -902,6 +922,16 @@
         }
       }
     },
+    "En AirLock": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In AirLock"
+          }
+        }
+      }
+    },
     "En TorBox": {
       "localizations": {
         "en": {
@@ -1228,6 +1258,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saving to Photos…"
+          }
+        }
+      }
+    },
+    "Guardar en AirLock": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep in AirLock"
           }
         }
       }
@@ -1782,6 +1822,16 @@
         }
       }
     },
+    "Quitar AirLock": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove AirLock"
+          }
+        }
+      }
+    },
     "Registro borrado": {
       "localizations": {
         "en": {
@@ -2108,6 +2158,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "TorBox sends an alert to ntfy as soon as something finishes, even with T-Box closed. Install the free ntfy app and subscribe to the topic shown here. The topic is random: anyone who doesn't know it can't see your alerts."
+          }
+        }
+      }
+    },
+    "TorBox no borra lo que está en AirLock en la limpieza de 30 días sin uso. Cuenta para el espacio de AirLock de tu plan.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TorBox doesn't delete AirLock items in its 30-day inactivity cleanup. It counts toward your plan's AirLock space."
           }
         }
       }

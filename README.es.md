@@ -33,6 +33,7 @@ TorBox es un servicio en la nube que descarga torrents, archivos de sitios como 
 - **Torrents** y **descargas web** con estado, progreso, velocidad y tiempo restante. Se refresca sola mientras hay algo en curso.
 - **Barra de actividad** flotante con lo que está bajando en TorBox y al iPhone. Desde ahí puedes eliminar lo detenido o cancelar descargas.
 - Buscar, filtrar (todos, en curso, listos), eliminar y buscar más peers.
+- **AirLock** (planes pagados): evita que TorBox borre ítems en su limpieza de 30 días sin uso, con un 🔒 en los protegidos.
 
 ### Archivos
 - **Reproducir** MP4/MOV con Picture in Picture y AirPlay. **Abrir en Infuse o VLC** para MKV y otros formatos.

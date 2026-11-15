@@ -175,6 +175,14 @@ final class TorBoxAPI: @unchecked Sendable {
         _ = try unwrap(JSONValue.self, from: data)
     }
 
+    /// PUT edittorrent / editwebdownload con solo el ID y "airlocked". El ítem debe estar listo (en caché).
+    func setAirlock(_ kind: ItemKind, id: Int, on: Bool) async throws {
+        let body = try JSONSerialization.data(withJSONObject: [kind.controlIDKey: id, "airlocked": on])
+        let req = try makeRequest(kind.editPath, method: "PUT", body: body, contentType: "application/json")
+        let data = try await send(req)
+        _ = try unwrap(JSONValue.self, from: data)
+    }
+
     /// Pide a TorBox el enlace CDN temporal (no expone la API key a apps externas).
     func downloadLink(_ kind: ItemKind, id: Int, fileID: Int?, zip: Bool = false) async throws -> URL {
         guard let key = apiKey else { throw APIError.noKey }

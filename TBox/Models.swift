@@ -148,6 +148,7 @@ enum ItemKind: String, Hashable, CaseIterable {
     var controlIDKey: String { self == .torrent ? "torrent_id" : "webdl_id" }
     var requestPath: String { self == .torrent ? "torrents/requestdl" : "webdl/requestdl" }
     var requestIDKey: String { self == .torrent ? "torrent_id" : "web_id" }
+    var editPath: String { self == .torrent ? "torrents/edittorrent" : "webdl/editwebdownload" }
     var title: String { self == .torrent ? "Torrents" : "Web" }
 }
 
@@ -177,11 +178,13 @@ struct Torrent: Decodable, Identifiable, Hashable {
     let createdAt: String?
     let errorText: String?
     let files: [TorrentFile]
+    /// En AirLock: TorBox no lo borra en la purga de 30 días sin actividad (planes pagados).
+    var airlocked: Bool
 
     var ref: ItemRef { ItemRef(kind: kind, id: id) }
 
     enum CodingKeys: String, CodingKey {
-        case id, hash, name, size, progress, eta, seeds, peers, active, files, error
+        case id, hash, name, size, progress, eta, seeds, peers, active, files, error, airlocked
         case download_speed, upload_speed, download_state, download_finished, download_present, created_at
     }
 
@@ -204,6 +207,7 @@ struct Torrent: Decodable, Identifiable, Hashable {
         active = c.flexBool(.active) ?? false
         createdAt = c.flexString(.created_at)
         errorText = c.flexString(.error)
+        airlocked = c.flexBool(.airlocked) ?? false
         files = (try? c.decodeIfPresent([TorrentFile].self, forKey: .files)) ?? []
     }
 

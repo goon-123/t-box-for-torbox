@@ -17,6 +17,8 @@ struct TorrentDetailView: View {
     @State private var confirmDelete = false
     @State private var previewURL: URL?
     @State private var workingText: String?
+    @State private var airlockBusy = false
+    @State private var airlockError: String?
 
     var body: some View {
         Group {
@@ -70,6 +72,26 @@ struct TorrentDetailView: View {
             }
 
             if t.isReady {
+                Section {
+                    Toggle(isOn: Binding(get: { t.airlocked }, set: { on in
+                        airlockBusy = true
+                        Task {
+                            airlockError = await state.setAirlock(t, on: on)
+                            airlockBusy = false
+                        }
+                    })) {
+                        Label("Guardar en AirLock", systemImage: t.airlocked ? "lock.fill" : "lock.open")
+                    }
+                    .disabled(airlockBusy || state.user?.isFree == true)
+                    if let e = airlockError {
+                        Text(e).font(.caption).foregroundStyle(.red)
+                    }
+                } footer: {
+                    Text(state.user?.isFree == true
+                         ? L("AirLock requiere un plan pagado de TorBox.")
+                         : L("TorBox no borra lo que está en AirLock en la limpieza de 30 días sin uso. Cuenta para el espacio de AirLock de tu plan."))
+                }
+
                 Section(String(format: L("Archivos (%d)"), t.files.count)) {
                     ForEach(t.sortedFiles) { f in
                         Button { selectedFile = f } label: { FileRow(file: f) }
