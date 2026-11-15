@@ -77,16 +77,11 @@ New versions appear in [Releases](https://github.com/maniac75/t-box-for-torbox/r
 
 ## Share from other apps
 
-**T-Box appears in the Share sheet** of Safari, Instagram, YouTube, X, Scribd and any app that shares links. What happens when you tap it depends on how you signed the app:
+**T-Box appears in the Share sheet** of Safari, Instagram, YouTube, X, Scribd and any app that shares links. Tapping it **opens T-Box with the Add sheet already filled in**: check what was detected and tap **Add**, like sharing to WhatsApp.
 
-| Your case | What "T-Box" does in the Share sheet |
-|---|---|
-| Your signing allows a keychain shared between the app and its extension | **Sends to TorBox right there**, without leaving the app you're in, and shows the result |
-| Your signing doesn't allow it | **Opens T-Box** with the link already filled in: one more tap |
-| T-Box doesn't appear in the Share sheet | Your signing app removed the extension: make sure **"Remove PlugIns / Remove extensions"** is off and sign again. Or use the Shortcut below |
+If T-Box doesn't appear in the Share sheet, your signing app removed the extension: make sure **"Remove PlugIns / Remove extensions"** is off and sign again, or use the Shortcut below.
 
 - The first time, T-Box may not be among the main icons: scroll the row to **More** and enable it.
-- To send directly, open T-Box once while signed in after installing.
 - With SideStore/AltStore and a free Apple ID, the extension uses one more of the 10 weekly app IDs Apple allows.
 
 ### Alternative: Shortcut

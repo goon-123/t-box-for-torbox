@@ -72,16 +72,11 @@ Las versiones nuevas aparecen en [Releases](https://github.com/maniac75/t-box-fo
 
 ## Compartir desde otras apps
 
-**T-Box aparece en el menú Compartir** de Safari, Instagram, YouTube, X, Scribd y cualquier app que comparta enlaces. Lo que pasa al tocarlo depende de cómo firmaste la app:
+**T-Box aparece en el menú Compartir** de Safari, Instagram, YouTube, X, Scribd y cualquier app que comparta enlaces. Al tocarlo **se abre T-Box con la hoja Agregar ya completada**: revisas lo detectado y tocas **Agregar**, como al compartir a WhatsApp.
 
-| Tu caso | Qué hace "T-Box" en Compartir |
-|---|---|
-| Tu firma permite compartir el llavero entre la app y su extensión | **Envía a TorBox ahí mismo**, sin salir de la app donde estás, y muestra el resultado |
-| Tu firma no lo permite | **Abre T-Box** con el enlace ya pegado: un toque más |
-| T-Box no aparece en Compartir | Tu app de firma quitó la extensión: revisa que **"Eliminar extensiones / Remove PlugIns"** esté desactivado y vuelve a firmar. O usa el Atajo de abajo |
+Si T-Box no aparece en Compartir, tu app de firma quitó la extensión: revisa que **"Eliminar extensiones / Remove PlugIns"** esté desactivado y vuelve a firmar, o usa el Atajo de abajo.
 
 - La primera vez, T-Box puede no estar entre los íconos principales: desliza la fila hasta **Más** y actívalo.
-- Para que envíe directo, abre T-Box una vez con tu sesión iniciada después de instalar.
 - Con SideStore/AltStore y Apple ID gratuito, la extensión ocupa un identificador más de los 10 semanales que permite Apple.
 
 ### Alternativa: Atajo

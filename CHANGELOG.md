@@ -16,6 +16,7 @@ Each release ships `T-Box-X.Y.Z.ipa` and `T-Box.ipa` in [Releases](https://githu
 - Downloads are saved to **Files › On My iPhone › T-Box**, which is now visible. "Choose folder…" was removed because the iOS folder picker didn't respond. To move a file elsewhere: swipe › Save to… (Share sheet › Save to Files).
 - Brief network drops during automatic refresh are no longer shown as errors, only if they happen three times in a row.
 - The repository is now in English, with a Spanish README.
+- **Share › T-Box opens T-Box right away** with the Add sheet filled in, so you review and confirm there (like sharing to WhatsApp). The extension's own screen only shows up if T-Box can't be opened.
 
 ### Fixed
 - **Share extension can send directly to TorBox** on certificates that sign with a wildcard keychain group (`TEAMID.*`, common with sideloading): the key is now stored in the group iOS actually assigns to the app, instead of a custom one that iOS rejected (error -34018).

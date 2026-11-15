@@ -84,6 +84,9 @@ final class ShareModel: ObservableObject {
             api = TorBoxAPI(apiKey: key)
             hasKey = true
         }
+        // Como compartir en WhatsApp: se abre T-Box con la hoja Agregar y el envío se confirma ahí.
+        // Esta pantalla solo queda visible si no se pudo abrir la app.
+        if !rows.isEmpty, openInTBox() { return }
         phase = .ready
     }
 
@@ -110,7 +113,8 @@ final class ShareModel: ObservableObject {
         phase = .done
     }
 
-    func openInTBox() {
+    @discardableResult
+    func openInTBox() -> Bool {
         let text = rows.map(\.link.original).joined(separator: "\n")
         var comps = URLComponents()
         comps.scheme = "tbox"
@@ -118,10 +122,11 @@ final class ShareModel: ObservableObject {
         comps.queryItems = [URLQueryItem(name: "text", value: text)]
         if let url = comps.url, openApp(url) {
             close()
-        } else {
-            UIPasteboard.general.string = text
-            message = L("No se pudo abrir T-Box. Copié el enlace: abre T-Box y toca +.")
+            return true
         }
+        UIPasteboard.general.string = text
+        message = L("No se pudo abrir T-Box. Copié el enlace: abre T-Box y toca +.")
+        return false
     }
 }
 
