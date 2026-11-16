@@ -33,6 +33,15 @@
       ],
       "versions": [
         {
+          "version": "0.3.1",
+          "buildVersion": "22",
+          "date": "2026-11-16",
+          "localizedDescription": "• Favorites: star items to keep them at the top\n• Search bar always visible\n• Privacy policy link in Account\n• Status label no longer splits in two lines",
+          "downloadURL": "https://github.com/maniac75/t-box-for-torbox/releases/download/v0.3.1/T-Box-0.3.1.ipa",
+          "size": 952817,
+          "minOSVersion": "17.0"
+        },
+        {
           "version": "0.3.0",
           "buildVersion": "20",
           "date": "2026-11-15",
@@ -48,11 +57,11 @@
           "NSPhotoLibraryAddUsageDescription": "To save images and videos you download from TorBox to Photos."
         }
       },
-      "version": "0.3.0",
-      "versionDate": "2026-11-15",
-      "versionDescription": "• AirLock: keep items from being auto-deleted\n• See and manage TorBox's queue\n• Share › T-Box opens the Add sheet directly\n• Rename items, copy your API key, share your referral code\n• Downloads now in Files › On My iPhone › T-Box",
-      "downloadURL": "https://github.com/maniac75/t-box-for-torbox/releases/download/v0.3.0/T-Box-0.3.0.ipa",
-      "size": 941353
+      "version": "0.3.1",
+      "versionDate": "2026-11-16",
+      "versionDescription": "• Favorites: star items to keep them at the top\n• Search bar always visible\n• Privacy policy link in Account\n• Status label no longer splits in two lines",
+      "downloadURL": "https://github.com/maniac75/t-box-for-torbox/releases/download/v0.3.1/T-Box-0.3.1.ipa",
+      "size": 952817
     }
   ],
   "news": []
