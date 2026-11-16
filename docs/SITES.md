@@ -1,7 +1,7 @@
 # Sites supported by web downloads
 
 Sites TorBox can download from (the **Web** tab in T-Box). *Sitios desde los que TorBox puede descargar (pestaña **Web**).*
-Updated automatically from the TorBox API: 2026-11-15.
+Updated automatically from the TorBox API: 2026-11-16.
 
 - ✅ available · ⚠️ having issues or down right now
 - **Daily limit**: links per day per account (— = no limit).
@@ -64,7 +64,7 @@ Updated automatically from the TorBox API: 2026-11-15.
 | Yandex Video | video.yandex.ru, yandex.ru, yandex.com | ✅ | 100 |  |
 | YouTube | youtube.com, youtu.be | ✅ | 100 |  |
 
-## File hosts (85)
+## File hosts (91)
 
 | Site | Domains | Status | Daily limit | Note |
 |---|---|:-:|:-:|---|
@@ -77,9 +77,10 @@ Updated automatically from the TorBox API: 2026-11-15.
 | APKAdmin | apkadmin.com | ✅ | 100 |  |
 | Archive.org | archive.org | ✅ | 100 | Links requiring login will not work. |
 | BlueSky | bsky.app | ✅ | 100 |  |
-| Buzzheavier | buzzheavier.com | ✅ | 100 |  |
+| Buzzheavier | buzzheavier.com, bzzhr.to, bzzhr.co | ✅ | 100 |  |
 | Castbox | castbox.fm | ✅ | 100 |  |
 | Catbox | catbox.moe | ✅ | 100 |  |
+| CivitAI | civitai.com, civitai.red, civitai.green | ✅ | 100 | Only SafeTensors model files are supported. |
 | ClicknUpload | clicknupload.click, clicknupload.com, clicknupload.org, clicknupload.cc | ⚠️ | 50 |  |
 | Cyberdrop | cyberdrop.cr | ✅ | 100 |  |
 | DailyUploads | dailyuploads.net, dailyuploads.im, dailyuploads.cc, dailyuploads.io | ⚠️ | 5 |  |
@@ -89,6 +90,7 @@ Updated automatically from the TorBox API: 2026-11-15.
 | DDownload | ddownload.com, ddl.to | ⚠️ | 10 |  |
 | DeviantArt | deviantart.com | ✅ | 100 |  |
 | Discord | cdn.discordapp.com | ✅ | 100 |  |
+| Docker Hub | hub.docker.com, docker.io | ✅ | 100 |  |
 | DriveSeed | driveseed.org | ✅ | 100 |  |
 | Dropapk | drop.download, dropapk.to, dropapk.com, fastclick.to | ✅ | 5 |  |
 | Dropbox | dropbox.com | ✅ | 100 | Only public files are supported. |
@@ -109,9 +111,11 @@ Updated automatically from the TorBox API: 2026-11-15.
 | Hitfile | hitfile.net, hitf.cc, htfl.net | ✅ | 10 |  |
 | HubCloud | hubcloud.foo, hubcloud.cx, hubcloud.ist | ✅ | 100 | Only accepts HubCloud share links. |
 | HubDrive | hubdrive.space, hubdrive.tips, hubdrive.pics | ✅ | 100 |  |
+| HuggingFace | huggingface.co | ✅ | 100 | Only public, non-gated models, datasets and kernels are supported. |
 | ImgBB | imgbb.com | ✅ | 100 |  |
 | Imgur | imgur.com | ✅ | 100 | Only public posts are supported. |
 | Isracloud | isra.cloud, isracloud.com | ✅ | 5 |  |
+| Kaggle | kaggle.com | ✅ | 100 | Only public datasets and models are supported. |
 | Katfile | katfile.com, katfile.cloud, katfile.online, katfile.biz | ⚠️ | 5 |  |
 | Kemono | kemono.party, kemono.su, kemono.cr | ✅ | 100 | Only posts are supported. |
 | Koofr | koofr.eu | ✅ | 100 |  |
@@ -122,8 +126,10 @@ Updated automatically from the TorBox API: 2026-11-15.
 | MegaDB | megadb.net, megadb.xyz | ⚠️ | 100 |  |
 | MegaUp | megaup.net | ✅ | 100 |  |
 | Mixdrop | mixdrop.ag, mixdrop.co, mixdrop.to, mixdrop.club | ✅ | 100 |  |
+| ModelScope | modelscope.cn, modelscope.ai | ✅ | 100 | Only public models and datasets are supported. |
 | NexusMods | nexusmods.com | ✅ | 100 |  |
 | Nitroflare | nitroflare.com, nitro.download | ⚠️ | 5 |  |
+| Ollama | ollama.com, ollama.ai | ✅ | 100 |  |
 | Pan Baidu | pan.baidu.com | ⚠️ | 5 | Does not show download status. |
 | PikPak | mypikpak.com | ⚠️ | 10 |  |
 | Pillowcase | pillowcase.su, pillows.su | ✅ | 100 |  |
