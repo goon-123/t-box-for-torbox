@@ -2,7 +2,7 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions before 0.3.0 are pre-releases.
 
-## [0.3.1] - unreleased
+## [0.3.1] - 2026-11-16
 
 ### Added
 - Favorites: star a torrent or web download to keep it at the top.
