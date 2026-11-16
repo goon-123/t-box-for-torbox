@@ -28,6 +28,10 @@ enum AppConfig {
     static let featureRequestURL = URL(string: "https://github.com/maniac75/t-box-for-torbox/issues/new?template=feature_request.yml")!
     static let discussionsURL = URL(string: "https://github.com/maniac75/t-box-for-torbox/discussions")!
     static let repoURL = URL(string: "https://github.com/maniac75/t-box-for-torbox")!
+    static var privacyURL: URL {
+        let es = Locale.current.language.languageCode?.identifier == "es"
+        return URL(string: "https://github.com/maniac75/t-box-for-torbox/blob/main/\(es ? "PRIVACY.es.md" : "PRIVACY.md")")!
+    }
 }
 
 /// Texto traducible (español base, inglés en Localizable.xcstrings).

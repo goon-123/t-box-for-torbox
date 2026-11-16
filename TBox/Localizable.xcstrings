@@ -1,6 +1,5 @@
 {
   "sourceLanguage": "es",
-  "version": "1.0",
   "strings": {
     "%@ de %@": {
       "localizations": {
@@ -208,6 +207,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Add %d"
+          }
+        }
+      }
+    },
+    "Agregar a favoritos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to favorites"
           }
         }
       }
@@ -1292,6 +1301,16 @@
         }
       }
     },
+    "Favorito": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favorite"
+          }
+        }
+      }
+    },
     "Filtro": {
       "localizations": {
         "en": {
@@ -1922,6 +1941,16 @@
         }
       }
     },
+    "Política de privacidad": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy policy"
+          }
+        }
+      }
+    },
     "Preguntas y comunidad": {
       "localizations": {
         "en": {
@@ -1988,6 +2017,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remove AirLock"
+          }
+        }
+      }
+    },
+    "Quitar de favoritos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove from favorites"
           }
         }
       }
@@ -2662,5 +2701,6 @@
         }
       }
     }
-  }
+  },
+  "version": "1.0"
 }

@@ -2,6 +2,15 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions before 0.3.0 are pre-releases.
 
+## [0.3.1] - unreleased
+
+### Added
+- Favorites: star a torrent or web download to keep it at the top.
+- Privacy policy link in Account.
+
+### Fixed
+- The status label no longer splits into two lines.
+
 ## [0.3.0] - 2026-11-15
 
 ### Added
@@ -59,6 +68,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions befor
 ### Added
 - First version: sign in, torrent and web lists, add magnets and .torrent files, play videos or open in Infuse/VLC, background downloads to Files and Photos. English and Spanish.
 
+[0.3.1]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.3.1
 [0.3.0]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.3.0
 [0.2.3]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.3
 [0.2.2]: https://github.com/maniac75/t-box-for-torbox/releases/tag/v0.2.2

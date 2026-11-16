@@ -114,6 +114,13 @@ struct TorrentDetailView: View {
         .refreshable { await state.refresh() }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
+                Button { state.toggleFavorite(t) } label: {
+                    Image(systemName: state.isFavorite(t) ? "star.fill" : "star")
+                        .foregroundStyle(state.isFavorite(t) ? .yellow : .accentColor)
+                }
+                .accessibilityLabel(state.isFavorite(t) ? L("Quitar de favoritos") : L("Agregar a favoritos"))
+            }
+            ToolbarItem(placement: .topBarTrailing) {
                 Menu {
                     if t.isReady && t.files.count > 1 {
                         Button { Task { await downloadZip(t) } } label: {

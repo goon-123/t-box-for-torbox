@@ -108,3 +108,15 @@ jobs:
         run: |
           VER=$(grep -m1 MARKETING_VERSION project.yml | sed -E 's/.*"(.*)".*/\1/')
           gh release edit "v$VER" --prerelease=false --latest
+      - name: Update Feather/AltStore source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VER=$(grep -m1 MARKETING_VERSION project.yml | sed -E 's/.*"(.*)".*/\1/')
+          SIZE=$(gh release view "v$VER" --json assets --jq ".assets[] | select(.name==\"T-Box-$VER.ipa\") | .size")
+          BUILD=$(gh release view "v$VER" --json body --jq '.body' | sed -nE 's/^Build ([0-9]+).*/\1/p' | head -1)
+          python3 tools/update_source.py "$VER" "${BUILD:-0}" "$(date -u +%F)" "$SIZE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/source.json
+          git diff --cached --quiet || { git commit -m "Source: T-Box $VER"; git push; }

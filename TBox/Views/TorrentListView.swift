@@ -13,14 +13,20 @@ struct TorrentListView: View {
     @State private var filter: Filter = .all
     @State private var toDelete: Torrent?
 
+    private func matches(_ t: Torrent) -> Bool {
+        let byFilter: Bool
+        switch filter {
+        case .all: byFilter = true
+        case .active: byFilter = !t.isReady
+        case .ready: byFilter = t.isReady
+        }
+        return byFilter && (search.isEmpty || t.name.localizedCaseInsensitiveContains(search))
+    }
+
     private var visible: [Torrent] {
-        state.items(kind).filter { t in
-            switch filter {
-            case .all: return true
-            case .active: return !t.isReady
-            case .ready: return t.isReady
-            }
-        }.filter { search.isEmpty || $0.name.localizedCaseInsensitiveContains(search) }
+        // Favoritos arriba, sin cambiar el orden dentro de cada grupo.
+        let all = state.items(kind).filter(matches)
+        return all.filter { state.isFavorite($0) } + all.filter { !state.isFavorite($0) }
     }
 
     var body: some View {
@@ -67,11 +73,16 @@ struct TorrentListView: View {
                 }
 
                 ForEach(visible) { t in
-                    NavigationLink(value: t.ref) { TorrentRow(torrent: t) }
+                    NavigationLink(value: t.ref) { TorrentRow(torrent: t, favorite: state.isFavorite(t)) }
                         .swipeActions {
                             Button(role: .destructive) { toDelete = t } label: { Label("Eliminar", systemImage: "trash") }
                         }
                         .swipeActions(edge: .leading) {
+                            Button { state.toggleFavorite(t) } label: {
+                                Label(state.isFavorite(t) ? L("Quitar de favoritos") : L("Favorito"),
+                                      systemImage: state.isFavorite(t) ? "star.slash" : "star.fill")
+                            }
+                            .tint(.yellow)
                             if t.isReady && state.user?.isFree != true {
                                 Button {
                                     Task {
@@ -128,12 +139,19 @@ struct TorrentListView: View {
 
 struct TorrentRow: View {
     let torrent: Torrent
+    var favorite = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(torrent.name)
-                .font(.subheadline.weight(.semibold))
-                .lineLimit(2)
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                if favorite {
+                    Image(systemName: "star.fill").font(.caption).foregroundStyle(.yellow)
+                        .accessibilityLabel(L("Favorito"))
+                }
+                Text(torrent.name)
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(2)
+            }
             if let err = torrent.errorText, !torrent.isReady {
                 Text(err).font(.caption).foregroundStyle(.red).lineLimit(2)
             } else if !torrent.isReady {
@@ -172,6 +190,8 @@ struct StateBadge: View {
         let color: Color = ready ? .green : (failed ? .red : (stalled ? .orange : .blue))
         Text(ready ? L("Listo") : (failed ? L("Error") : Fmt.state(torrent.downloadState) + " \(Int(torrent.progress * 100))%"))
             .font(.caption2.weight(.bold))
+            .lineLimit(1)
+            .fixedSize()
             .padding(.horizontal, 6).padding(.vertical, 2)
             .background(color.opacity(0.18), in: Capsule())
             .foregroundStyle(color)

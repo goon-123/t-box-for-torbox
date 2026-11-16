@@ -166,6 +166,9 @@ struct SettingsView: View {
                     Link(destination: AppConfig.repoURL) {
                         Label("Código fuente en GitHub", systemImage: "chevron.left.forwardslash.chevron.right")
                     }
+                    Link(destination: AppConfig.privacyURL) {
+                        Label("Política de privacidad", systemImage: "hand.raised")
+                    }
                     Button("Cerrar sesión", role: .destructive) { confirmLogout = true }
                 } footer: {
                     Text("\(AppConfig.displayName) \(appVersion) · " + L("Cliente no oficial para TorBox, sin relación con TorBox. Si vuelves a firmar la app con otro certificado, puede que tengas que iniciar sesión de nuevo."))

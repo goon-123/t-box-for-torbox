@@ -14,6 +14,9 @@ final class AppState: ObservableObject {
     @Published var queuedTorrents: [QueuedItem] = []
     @Published var queuedWeb: [QueuedItem] = []
     @Published var referral: ReferralInfo?
+    /// Favoritos: se guardan solo en el iPhone ("torrent-123", "web-45").
+    @Published private(set) var favorites: Set<String> =
+        Set(UserDefaults.standard.stringArray(forKey: "favorites") ?? [])
 
     func queued(_ kind: ItemKind) -> [QueuedItem] { kind == .torrent ? queuedTorrents : queuedWeb }
     private var transientFailures = 0
@@ -89,6 +92,16 @@ final class AppState: ObservableObject {
 
     func items(_ kind: ItemKind) -> [Torrent] {
         kind == .torrent ? torrents : webDownloads
+    }
+
+    private func favKey(_ t: Torrent) -> String { "\(t.kind.rawValue)-\(t.id)" }
+
+    func isFavorite(_ t: Torrent) -> Bool { favorites.contains(favKey(t)) }
+
+    func toggleFavorite(_ t: Torrent) {
+        let k = favKey(t)
+        if favorites.contains(k) { favorites.remove(k) } else { favorites.insert(k) }
+        UserDefaults.standard.set(Array(favorites), forKey: "favorites")
     }
 
     func item(_ ref: ItemRef) -> Torrent? {
