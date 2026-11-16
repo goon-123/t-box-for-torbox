@@ -1,3 +1,4 @@
 • Favorites: star items to keep them at the top
+• Search bar always visible
 • Privacy policy link in Account
 • Status label no longer splits in two lines

@@ -8,6 +8,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions befor
 - Favorites: star a torrent or web download to keep it at the top.
 - Privacy policy link in Account.
 
+### Changed
+- The search bar is always visible in Torrents and Web.
+
 ### Fixed
 - The status label no longer splits into two lines.
 

@@ -111,7 +111,7 @@ struct TorrentListView: View {
             }
             .navigationTitle(kind.title)
             .navigationDestination(for: ItemRef.self) { ref in TorrentDetailView(ref: ref) }
-            .searchable(text: $search, prompt: "Buscar")
+            .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Buscar")
             .refreshable { await state.refresh() }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
