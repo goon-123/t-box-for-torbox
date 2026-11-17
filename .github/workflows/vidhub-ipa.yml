@@ -1,0 +1,124 @@
+name: Build VidHub IPA
+
+on:
+  push:
+    branches: [build/vidhub-ipa]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  BUILD_NUMBER: ${{ github.run_number }}
+
+jobs:
+  build:
+    if: github.repository == 'goon-123/t-box-for-torbox'
+    runs-on: macos-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install build tools
+        run: |
+          brew install xcodegen
+          xcodebuild -version
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Run simulator tests
+        run: |
+          set -euo pipefail
+          UDID=$(xcrun simctl list devices available -j | python3 -c "
+          import json,sys
+          devices=json.load(sys.stdin)['devices']
+          phones=[x for runtime,items in devices.items() if 'iOS' in runtime for x in items if x['name'].startswith('iPhone')]
+          print(phones[-1]['udid'] if phones else '')")
+          test -n "$UDID"
+          xcodebuild test -project TBox.xcodeproj -scheme TBox \
+            -destination "id=$UDID" -derivedDataPath build-test \
+            CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log
+
+      - name: Build unsigned iPhone app
+        run: |
+          set -euo pipefail
+          xcodebuild -project TBox.xcodeproj -scheme TBox -configuration Release \
+            -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
+            build 2>&1 | tee build.log
+          test -d build/Build/Products/Release-iphoneos/TBox.app
+
+      - name: Package and verify VidHub IPA
+        run: |
+          set -euo pipefail
+          APP=build/Build/Products/Release-iphoneos/TBox.app
+          VERSION=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Info.plist")
+          IPA_NAME="T-Box-VidHub-$VERSION-build$BUILD_NUMBER-unsigned.ipa"
+          mkdir -p package/Payload artifacts
+          cp -R "$APP" package/Payload/
+          (cd package && zip -qry "../artifacts/$IPA_NAME" Payload)
+          python3 <<'PY'
+          import json, os, pathlib, plistlib, zipfile
+          folder = pathlib.Path("artifacts")
+          ipa, = folder.glob("*.ipa")
+          with zipfile.ZipFile(ipa) as archive:
+              assert archive.testzip() is None, "IPA ZIP integrity check failed"
+              info = plistlib.loads(archive.read("Payload/TBox.app/Info.plist"))
+              assert "open-vidhub" in info.get("LSApplicationQueriesSchemes", []), "VidHub scheme is missing"
+              for name in ("Payload/TBox.app/TBox", "Payload/TBox.app/PlugIns/TBoxShare.appex/TBoxShare"):
+                  assert archive.getinfo(name).file_size > 0, "Missing app or share-extension executable"
+          provenance = {
+              "repository": os.environ["GITHUB_REPOSITORY"],
+              "source_commit": os.environ["GITHUB_SHA"],
+              "vidhub_feature_commit": "421af6eeb9e1a67c26b1fc350fb02e7dfccdb7d4",
+              "version": info["CFBundleShortVersionString"],
+              "build": info["CFBundleVersion"],
+              "unsigned": True,
+              "simulator_tests": "passed",
+              "ipa": ipa.name
+          }
+          (folder / "build-info.json").write_text(json.dumps(provenance, indent=2) + "\n")
+          (folder / "release-notes.md").write_text(
+              "Unsigned T-Box test build with Open in VidHub support.\n\n"
+              "Simulator tests and iPhone Release build passed. IPA contents verified, including the share extension.\n\n"
+              "Source commit: " + os.environ["GITHUB_SHA"] + "\n\n"
+              "Sign the IPA with your own certificate before installing.\n"
+          )
+          print(json.dumps(provenance, indent=2))
+          PY
+
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: T-Box-VidHub-ipa
+          path: |
+            artifacts/*.ipa
+            artifacts/build-info.json
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: T-Box-VidHub-logs
+          path: |
+            test.log
+            build.log
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Publish test IPA on this fork
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="vidhub-build-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          gh release create "$TAG" artifacts/*.ipa artifacts/build-info.json \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "T-Box VidHub build $BUILD_NUMBER" \
+            --notes-file artifacts/release-notes.md --prerelease
